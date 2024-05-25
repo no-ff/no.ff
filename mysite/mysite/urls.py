@@ -19,6 +19,7 @@ from django.urls import include, path
 
 # URLconf - url configuration
 urlpatterns = [
+    path("", include("prediction.urls")),
     path("polls/", include("polls.urls")),
     path('admin/', admin.site.urls),
 ]
