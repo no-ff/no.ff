@@ -4,13 +4,42 @@
     <title>String Input Form</title>
 </head>
 <body>
-    <h1>Enter Your League ID</h1>
+    <!-- Provide prediction for live game. -->
+    <h1>Enter Your League ID.</h1>
     <form method="post" action="{% url 'process_id' %}">
+        <!-- NOTE: action="{% url 'process_id' %} generates the URL that contains the view named 'process_id'. -->
+        <!-- Make sure all generated URLs are unique (don't always use "" in the url pattern) or else Django will only take the first one it finds. -->
         {% csrf_token %}
         <label for="GameID">GameID:</label>
         <input type="text" id="GameID" name="GameID" required><br><br>
         <label for="Tagline">Tagline:</label>
         <input type="text" id="Tagline" name="Tagline" required><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <!-- Provide prediction manually. -->
+    <h1>Enter a composition.</h1>
+    <form method="post" action="{% url 'process_manual' %}">
+        {% csrf_token %}
+        <label for="top1">Team 1 Top:</label>
+        <input type="text" id="top1" name="top1" required><br><br>
+        <label for="jungle1">Team 1 Jungle:</label>
+        <input type="text" id="jungle1" name="jungle1" required><br><br>
+        <label for="mid1">Team 1 Mid:</label>
+        <input type="text" id="mid1" name="mid1" required><br><br>
+        <label for="bot1">Team 1 Bot:</label>
+        <input type="text" id="bot1" name="bot1" required><br><br>
+        <label for="supp1">Team 1 Supp:</label>
+        <input type="text" id="supp1" name="supp1" required><br><br>
+        <label for="top2">Team 2 Top:</label>
+        <input type="text" id="top2" name="top2" required><br><br>
+        <label for="jungle2">Team 2 Jungle:</label>
+        <input type="text" id="jungle2" name="jungle2" required><br><br>
+        <label for="mid2">Team 2 Mid:</label>
+        <input type="text" id="mid2" name="mid2" required><br><br>
+        <label for="bot2">Team 2 Bot:</label>
+        <input type="text" id="bot2" name="bot2" required><br><br>
+        <label for="supp2">Team 2 Supp:</label>
+        <input type="text" id="supp2" name="supp2" required><br><br>
         <button type="submit">Submit</button>
     </form>
 </body>
