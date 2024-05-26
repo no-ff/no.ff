@@ -9,7 +9,7 @@ function Champ() {
   return (
     <div className="image_box">
       <figure>
-      <img className='champ_img' src={"images/"+champName+".jpg"} alt={"Select champ"} id='champImg' />
+      <img className='champ_img' src={"champ_image/"+champName+"_0.jpg"} alt={"Select champ"} />
       </figure>
       <SearchBar champCall={setChamp}/>
 

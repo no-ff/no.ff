@@ -1,9 +1,11 @@
 import './App.css';
-import Champ from './components/Champ.js';
+import Teams from './components/Teams';
 import React from 'react';
 function App() {
   return (
-    <Champ/>
+    <div>
+    <Teams/>
+    </div> 
   );
 }
 

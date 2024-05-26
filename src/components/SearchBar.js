@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-var data = require('./SearchData.json');
+var data = require('./champ_data.json');
 function SearchBar(props) {
 
     
@@ -31,11 +31,11 @@ function SearchBar(props) {
         <div className="drop-down">
             {data.filter(item => {
                 const searchItem = value.toLowerCase();
-                const fullName = item.hi.toLowerCase();
+                const fullName = item.champName.toLowerCase();
                 return searchItem && fullName.startsWith(searchItem) && fullName !== searchItem;
             })
-            .map((item)=> (<div onClick={()=>onSearch(item.hi)}className='drop-down-item' key={item.hi}> 
-                {item.hi}
+            .map((item)=> (<div onClick={()=>onSearch(item.champName)}className='drop-down-item' key={item.champName}> 
+                {item.champName }
                 </div>))}
         </div>
 
