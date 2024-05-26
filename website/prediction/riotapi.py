@@ -1,46 +1,5 @@
 import requests, json
 
-VERSION_URL = 'https://ddragon.leagueoflegends.com/api/versions.json'
-CHAMPION_URL_TEMPLATE = 'https://ddragon.leagueoflegends.com/cdn/{version}/data/en_US/champion.json'
-
-def get_latest_version():
-    response = requests.get(VERSION_URL)
-    if response.status_code == 200:
-        versions = response.json()
-        return versions[0]
-    else:
-        print(f"Failed to fetch versions: {response.status_code}")
-        return None
-
-def get_champion_data(version):
-    champion_url = CHAMPION_URL_TEMPLATE.format(version=version)
-    response = requests.get(champion_url)
-    if response.status_code == 200:
-        return response.json()['data']
-    else:
-        return {}
-
-def map_champion_id_to_name(champion_data):
-    id_to_name = {}
-    for champ_name, champ_info in champion_data.items():
-        champ_id = champ_info['key']
-        champ_full_name = champ_name
-        id_to_name[champ_id] = champ_full_name
-    return id_to_name
-
-def write_to_json(data, filename):
-    with open(filename, 'w') as f:
-        json.dump(data, f, indent=4)
-
-def run_conversion():
-    latest_version = get_latest_version()
-    if latest_version:
-        champion_data = get_champion_data(latest_version)
-        id_to_name = map_champion_id_to_name(champion_data)
-        write_to_json(id_to_name, 'champion_id_to_name.json')
-    else:
-        print("it did not work")
-
 Champ_data = {
     "266": "Aatrox",
     "103": "Ahri",
@@ -212,25 +171,23 @@ Champ_data = {
 }
 def id_to_live_match_comp(GameID:str, Tagline: str)->list[str]:
     API_KEY = "RGAPI-9803c7a9-31c0-4283-82cb-40dc18f70041"
-    puuid = requests.get("https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/%s/%s?api_key=%s" %(GameID, Tagline, API_KEY)) 
+    puuid = requests.get(f"https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{GameID}/{Tagline}?api_key={API_KEY}") 
     if puuid.status_code != 200:
         print("something has been unsuccessful")
-        return "No Account Found"
-
+        return "No account found"
     PUUID = puuid.json()['puuid']
-    print(PUUID)
-    live_match = requests.get("https://na1.api.riotgames.com/lol/spectator/v5/active-games/by-summoner/%s?api_key=%s"%(PUUID, API_KEY)) 
+
+    live_match = requests.get(f"https://na1.api.riotgames.com/lol/spectator/v5/active-games/by-summoner/{PUUID}?api_key={API_KEY}") 
     if live_match.status_code != 200:
         print(live_match.status_code)
         print("something been unsuccessful, please try again later")
         return "No game found"
     participants = live_match.json()["participants"]
+
     Comp = []
     for champ in participants:
         Comp.append(Champ_data[str(champ["championId"])])
-    result = ",".join(Comp)
-    print(result)
-    return requests.get("http://142.198.94.28:5000/%s" %(result)).json()
+    return Comp
 
 def get_prediction(query: str):
     """
@@ -245,3 +202,49 @@ def get_prediction(query: str):
     """
     url = f"http://142.198.94.28:5000/{query}"
     return requests.get(url).json()
+
+
+
+
+"""
+VERSION_URL = 'https://ddragon.leagueoflegends.com/api/versions.json'
+CHAMPION_URL_TEMPLATE = 'https://ddragon.leagueoflegends.com/cdn/{version}/data/en_US/champion.json'
+
+def get_latest_version():
+    response = requests.get(VERSION_URL)
+    if response.status_code == 200:
+        versions = response.json()
+        return versions[0]
+    else:
+        print(f"Failed to fetch versions: {response.status_code}")
+        return None
+
+def get_champion_data(version):
+    champion_url = CHAMPION_URL_TEMPLATE.format(version=version)
+    response = requests.get(champion_url)
+    if response.status_code == 200:
+        return response.json()['data']
+    else:
+        return {}
+
+def map_champion_id_to_name(champion_data):
+    id_to_name = {}
+    for champ_name, champ_info in champion_data.items():
+        champ_id = champ_info['key']
+        champ_full_name = champ_name
+        id_to_name[champ_id] = champ_full_name
+    return id_to_name
+
+def write_to_json(data, filename):
+    with open(filename, 'w') as f:
+        json.dump(data, f, indent=4)
+
+def run_conversion():
+    latest_version = get_latest_version()
+    if latest_version:
+        champion_data = get_champion_data(latest_version)
+        id_to_name = map_champion_id_to_name(champion_data)
+        write_to_json(id_to_name, 'champion_id_to_name.json')
+    else:
+        print("it did not work")
+"""

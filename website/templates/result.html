@@ -1,11 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>String Processing Result</title>
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 2px solid #000;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        td {
+            background-color: #fff;
+        }
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
-    <h1>Processed Result</h1>
-    <p>{{ result }}</p>
-    <a href="{% url 'process_id' %}">Back to form</a>
+    <h1>Prediction Result</h1>
+    <table>
+        <tr>
+            <th>Team</th>
+            <th>Top</th>
+            <th>Jungle</th>
+            <th>Mid</th>
+            <th>Bottom</th>
+            <th>Support</th>
+            <th>Winning Percentage</th>
+        </tr>
+        <tr>
+            <td>Team 1</td>
+            <td>{{ t1c1 }}</td>
+            <td>{{ t1c2 }}</td>
+            <td>{{ t1c3 }}</td>
+            <td>{{ t1c4 }}</td>
+            <td>{{ t1c5 }}</td>
+            <td>{{ result }}%</td>
+        </tr>
+        <tr>
+            <td>Team 2</td>
+            <td>{{ t2c1 }}</td>
+            <td>{{ t2c2 }}</td>
+            <td>{{ t2c3 }}</td>
+            <td>{{ t2c4 }}</td>
+            <td>{{ t2c5 }}</td>
+            <td>{{ result2 }}%</td>
+        </tr>
+    </table>
+
+    <a href="{% url 'display_html' %}">Back to form</a>
+
+
+
+    Designs should be improved(optimally using flexbox to put more emphasis on the champions)
 </body>
 </html>
