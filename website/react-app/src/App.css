@@ -1,0 +1,65 @@
+
+/* App.css */
+.App {
+    text-align: center;
+  }
+  
+  .search-container {
+    position: relative;
+  }
+  
+  .drop-down {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+  
+  .drop-down-item {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .drop-down-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    box-sizing: border-box;
+  }
+  
+  form > div {
+    margin-bottom: 16px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+th, td {
+    border: 2px solid #000;
+    padding: 10px;
+    text-align: center;
+}
+th {
+    background-color: #f2f2f2;
+}
+td {
+    background-color: #fff;
+}
+tr:nth-child(even) td {
+    background-color: #f9f9f9;
+}
