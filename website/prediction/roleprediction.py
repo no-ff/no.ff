@@ -4,8 +4,9 @@ from prediction.models import RoleDistribution
 def initialize(champ_data):
     RoleDistribution.objects.all().delete()
     for champ_id, champ_name in champ_data.items():
-        RoleDistribution.objects.create(championName=champ_name, championId=champ_id, Top=0, Jungle=0, Mid=0, Adc=0, Support=0, Total=0)
-  
+        RoleDistribution.objects.create(
+            championName=champ_name, championId=champ_id, Top=0, Jungle=0, Mid=0, Adc=0, Support=0, Total=0)
+
 
 def enter_row(row):
     champs = row.split(',')[:10]
@@ -24,9 +25,11 @@ def enter_row(row):
         elif i % 5 == 3:
             ro.Adc += 1
         elif i % 5 == 4:
-            ro.Support += 1 
+            ro.Support += 1
         ro.Total += 1
         ro.save()
+
+
 """
 initialize(Champ_data)
 data = open("prediction/matches.csv", "r")     
@@ -75,7 +78,7 @@ def predict_role(champs):
                 if ro.Mid/ro.Total > max:
                     max = ro.Mid/ro.Total
                     max_champ = champ
-            result.append(max_champ)            
+            result.append(max_champ)
             champs.remove(max_champ)
             print(f"Mid: {max_champ}")
         elif role == 3:
@@ -105,5 +108,6 @@ def predict_role(champs):
             champs.remove(max_champ)
             print(f"Support: {max_champ}")
     return result
+
 
 print(predict_role(['Akali', 'Nocturne', 'Volibear', 'Alistar', 'Ezreal']))
