@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
-import data from '../champ_data.json';
 
-const SearchInput = ({ label, name, value, onChange }) => {
-  const [filteredData, setFilteredData] = useState([]);
+const LiveSearchInput = ({ label, name, value, onChange }) => {
+  const [filteredHistory, setFilteredHistory] = useState([]);
 
   const handleSearch = (e) => {
     const searchValue = e.target.value;
     // Call onChange that was passed in. The actual event handler is defined in input.js.
     onChange(e);
-
-    const filtered = data.filter(item => {
-      const searchItem = searchValue.toLowerCase();
-      const fullName = item.champName.toLowerCase();
-      return searchItem && fullName.startsWith(searchItem) && fullName !== searchItem;
-    });
-
-    setFilteredData(filtered);
+    const history = localStorage.getItem('searchHistory');
+    if (history) {
+      const filtered = history.filter(item => {
+        const s = searchValue.toLowerCase();
+        const t = item.toLowerCase();
+        return s && t.startsWith(s) && s !== t;
+      });
+      setFilteredHistory(filtered);
+    }
   };
 
   const handleSelect = (item) => {
     onChange({ target: { name, value: item.champName } });
-    setFilteredData([]);
+    setFilteredHistory([]);
   };
 
   return (
-    // A simple container that contains the input field and the drop-down.
+    // A container that contains the input field and drop-down.
     <div className="search-container">
       <label htmlFor={name}>{label}</label>
       <input
@@ -37,24 +37,24 @@ const SearchInput = ({ label, name, value, onChange }) => {
         onChange={handleSearch}
         required
       />
-      {filteredData.length > 0 && (
+      {filteredHistory.length > 0 && (
         <div className="drop-down">
-          {/* filteredData array is mapped over and each a div is created for each item. */}
+          {/* filteredHistory array is mapped over and each a div is created for each item. */}
           {/* Each div has an onClick event handler that called handleSelect(), passing in the item (champion name). */}
-          {filteredData.map((item) => (
+          {filteredHistory.map((item) => (
             <div
               onClick={() => handleSelect(item)}
-              className='drop-down-item'
-              key={item.champName}
+              className="drop-down-item"
+              key={item}
             >
-              {/* Content of the div will be champion name. */}
-              {item.champName} 
+              {/* Content of the div will be a Riot ID. */}
+              {item}
             </div>
           ))}
         </div>
       )}
     </div>
   );
-};
+};  
 
-export default SearchInput;
+export default LiveSearchInput;

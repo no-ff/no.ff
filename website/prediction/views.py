@@ -9,13 +9,13 @@ from rest_framework.response import Response
 from rest_framework import status
 import random
 
+
 def percentage_predict(champions):
     if champions == "No account found" or champions == "No game found" or champions == 'Error in the prediction model':
         return "error"
     print(champions)
     result = round(float(get_prediction(champions)),2)
     return [str(result), str(100 - result)]
-
 
 
 @api_view(['POST'])
@@ -31,18 +31,17 @@ def react_process_manual(request):
     mid2 = form_data.get('mid2')
     bot2 = form_data.get('bot2')
     supp2 = form_data.get('supp2')
-    
     champions = [top1, jungle1, mid1, bot1, supp1, top2, jungle2, mid2, bot2, supp2]
-    
-    return Response({"message": "Form processed successfully", "data": champions+ percentage_predict(champions)}, status=status.HTTP_200_OK)
+    return Response({"message": "Form processed successfully", "data": champions + percentage_predict(champions)}, status=status.HTTP_200_OK)
+
 
 @api_view(['POST'])
 def react_process_id(request):
     form_data = request.data
-    GameID = form_data.get('GameID')
-    Tagline = form_data.get('Tagline')
-    result = id_to_live_match_comp(GameID, Tagline)
-    return Response({"message": "Check data if game not found or account not found", "data": result}, status=status.HTTP_200_OK)
+    gameName = form_data.get('gameName')
+    tagline = form_data.get('tagline')
+    champions = id_to_live_match_comp(gameName, tagline)
+    return Response({"message": "Check data if game not found or account not found", "data": champions + percentage_predict(champions)}, status=status.HTTP_200_OK)
 
 
 def display_html(request):
@@ -60,7 +59,6 @@ def process_id(request):
         # Process the strings here (for example, concatenation)
         result = str(id_to_live_match_comp(GameID, Tagline))
         return render(request, 'result.html', {'result': result})
-
 
 
 def process_manual(request):
@@ -103,10 +101,6 @@ def percentage_display(request, champions):
                                             "t2c3": champions[7],
                                             "t2c4": champions[8],
                                             "t2c5": champions[9]})
-
-
-
-
 
 def react(request):
     return render(request, "index.html")
