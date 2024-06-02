@@ -6,6 +6,7 @@ const SearchInput = ({ label, name, value, onChange }) => {
 
   const handleSearch = (e) => {
     const searchValue = e.target.value;
+    // Call onChange that was passed in. The actual event handler is defined in input.js.
     onChange(e);
 
     const filtered = data.filter(item => {
@@ -23,6 +24,7 @@ const SearchInput = ({ label, name, value, onChange }) => {
   };
 
   return (
+    // A simple container that contains the input field and the drop-down.
     <div className="search-container">
       <label htmlFor={name}>{label}</label>
       <input
@@ -30,18 +32,23 @@ const SearchInput = ({ label, name, value, onChange }) => {
         id={name}
         name={name}
         value={value}
+        // Typing into the input field will call handleSearch.
+        // When the handleSearch is called the event object's target will be this input element.
         onChange={handleSearch}
         required
       />
       {filteredData.length > 0 && (
         <div className="drop-down">
+          {/* filteredData array is mapped over and each a div is created for each item. */}
+          {/* Each div has an onClick event handler that called handleSelect(), passing in the item (champion name). */}
           {filteredData.map((item) => (
             <div
               onClick={() => handleSelect(item)}
               className='drop-down-item'
               key={item.champName}
             >
-              {item.champName}
+              {/* Content of the div will be champion name. */}
+              {item.champName} 
             </div>
           ))}
         </div>

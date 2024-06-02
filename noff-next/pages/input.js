@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import SearchInput from './components/searchInput';  // Import the SearchInput component
+import SearchInput from './components/SearchInput';  // Import the SearchInput component
 
 function App() {
+  // useState() is a hook that takes in the initial state and returns an array with two elements.
+  // The first element is the current state value and the second element is a function that allows you to update the state.
   const [formData, setFormData] = useState({
     top1: '',
     jungle1: '',
@@ -20,9 +22,13 @@ function App() {
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
+    // Pull name and value fields from the event target, which is the html <input> element. 
     const { name, value } = e.target;
     setFormData({
+      // Spread the existing formData into the new object.
       ...formData,
+      // [] computes the value of the name variable and sets it as a key in the object.
+      // Ex. if name is 'top1' and value is 'Darius', the object will look like this: { top1: 'Darius' }.
       [name]: value
     });
   };
@@ -43,6 +49,8 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Submit Live Game</h1>
+      
       <h1>Submit Team Data</h1>
       <form onSubmit={handleSubmit}>
         <SearchInput

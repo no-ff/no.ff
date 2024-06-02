@@ -2,8 +2,6 @@ import React from 'react'
 import { useState } from 'react'
 var data = require('./champ_data.json');
 function SearchBar(props) {
-
-    
     const [value, setValue] = useState("");
     const [lock, setLock] = useState(false);
     const onChange = (event) => {
