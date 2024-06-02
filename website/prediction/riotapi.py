@@ -1,4 +1,5 @@
 import requests, json
+from prediction.roleprediction import predict_role
 
 Champ_data = {
     "266": "Aatrox",
@@ -14,7 +15,7 @@ Champ_data = {
     "136": "AurelionSol",
     "268": "Azir",
     "432": "Bard",
-    "200": "BelVeth",
+    "200": "Belveth",
     "53": "Blitzcrank",
     "63": "Brand",
     "201": "Braum",
@@ -22,7 +23,7 @@ Champ_data = {
     "51": "Caitlyn",
     "164": "Camille",
     "69": "Cassiopeia",
-    "31": "Cho'Gath",
+    "31": "Chogath",
     "42": "Corki",
     "122": "Darius",
     "131": "Diana",
@@ -32,7 +33,7 @@ Champ_data = {
     "60": "Elise",
     "28": "Evelynn",
     "81": "Ezreal",
-    "9": "Fiddlesticks",
+    "9": "FiddleSticks",
     "114": "Fiora",
     "105": "Fizz",
     "3": "Galio",
@@ -54,7 +55,7 @@ Champ_data = {
     "126": "Jayce",
     "202": "Jhin",
     "222": "Jinx",
-    "145": "Kai'Sa",
+    "145": "Kaisa",
     "429": "Kalista",
     "43": "Karma",
     "30": "Karthus",
@@ -63,12 +64,12 @@ Champ_data = {
     "10": "Kayle",
     "141": "Kayn",
     "85": "Kennen",
-    "121": "Kha'Zix",
+    "121": "Khazix",
     "203": "Kindred",
     "240": "Kled",
     "96": "KogMaw",
     "897": "KSante",
-    "7": "LeBlanc",
+    "7": "Leblanc",
     "64": "LeeSin",
     "89": "Leona",
     "876": "Lillia",
@@ -104,9 +105,9 @@ Champ_data = {
     "133": "Quinn",
     "497": "Rakan",
     "33": "Rammus",
-    "421": "Rek'Sai",
+    "421": "RekSai",
     "526": "Rell",
-    "888": "Renata Glasc",
+    "888": "Renata",
     "58": "Renekton",
     "107": "Rengar",
     "92": "Riven",
@@ -146,7 +147,7 @@ Champ_data = {
     "110": "Varus",
     "67": "Vayne",
     "45": "Veigar",
-    "161": "VelKoz",
+    "161": "Velkoz",
     "711": "Vex",
     "254": "Vi",
     "234": "Viego",
@@ -187,21 +188,11 @@ def id_to_live_match_comp(GameID:str, Tagline: str)->list[str]:
     Comp = []
     for champ in participants:
         Comp.append(Champ_data[str(champ["championId"])])
-    return Comp
+    result = role_prediction.predict_role(Comp[:5])
+    result += role_prediction.predict_role(Comp[5:])
 
-def get_prediction(query: str):
-    """
-    Get the prediction for a given query.
-    Used for the manual input of 10 champions.
+    return result
 
-    Parameters:
-        query (str): The query for which to get the prediction.
-
-    Returns:
-        str: The prediction for the given query.
-    """
-    url = f"http://142.198.94.28:5000/{query}"
-    return requests.get(url).json()
 
 
 

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from prediction.riotapi import id_to_live_match_comp
-from prediction.riotapi import get_prediction
+from prediction.prediction_model.predictions import get_prediction
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -10,17 +10,14 @@ from rest_framework import status
 import random
 
 def percentage_predict(champions):
-    temp = random.randint(0,100)
-    return [str(temp), str(100-temp)]
-    if champions == "No account found" or champions == "No game found":
+    if champions == "No account found" or champions == "No game found" or champions == 'Error in the prediction model':
         return "error"
-    query = f"{champions[0]},{champions[1]},{champions[2]},{champions[3]},{champions[4]},{champions[5]},{champions[6]},{champions[7]},{champions[8]},{champions[9]}"
-    result = round(get_prediction(query),2)
+    result = round(float(get_prediction(champions)),2)
     return [str(result), str(100 - result)]
 
 
 
-@api_view(['POST', 'GET'])
+@api_view(['POST'])
 def react_process_manual(request):
     form_data = request.data
     top1 = form_data.get('top1')
@@ -38,6 +35,15 @@ def react_process_manual(request):
     
     return Response({"message": "Form processed successfully", "data": champions+ percentage_predict(champions)}, status=status.HTTP_200_OK)
 
+@api_view(['POST'])
+def react_process_id(request):
+    form_data = request.data
+    GameID = form_data.get('GameID')
+    Tagline = form_data.get('Tagline')
+    result = id_to_live_match_comp(GameID, Tagline)
+    return Response({"message": "Check data if game not found or account not found", "data": result}, status=status.HTTP_200_OK)
+
+
 def display_html(request):
     return render(request, 'input.html')
 
@@ -53,8 +59,6 @@ def process_id(request):
         # Process the strings here (for example, concatenation)
         result = str(id_to_live_match_comp(GameID, Tagline))
         return render(request, 'result.html', {'result': result})
-
-
 
 
 
@@ -75,8 +79,6 @@ def process_manual(request):
         supp2 = request.POST.get('supp2')
         champions = [top1, jungle1, mid1, bot1, supp1, top2, jungle2, mid2, bot2, supp2]
         return percentage_display(request, champions )
-
-
 
 
 def percentage_display(request, champions):
