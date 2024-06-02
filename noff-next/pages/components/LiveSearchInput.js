@@ -5,21 +5,19 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
 
   const handleSearch = (e) => {
     const searchValue = e.target.value;
-    // Call onChange that was passed in. The actual event handler is defined in input.js.
+    // Call onChange that was passed in.
     onChange(e);
-    const history = localStorage.getItem('searchHistory');
-    if (history) {
-      const filtered = history.filter(item => {
-        const s = searchValue.toLowerCase();
-        const t = item.toLowerCase();
-        return s && t.startsWith(s) && s !== t;
-      });
-      setFilteredHistory(filtered);
-    }
-  };
+    const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    const filtered = history.filter(item => {
+      const s = searchValue.toLowerCase();
+      const t = item.toLowerCase();
+      return s && t.startsWith(s) && s !== t;
+    });
+    setFilteredHistory(filtered);
+  }
 
   const handleSelect = (item) => {
-    onChange({ target: { name, value: item.champName } });
+    onChange({ target: { name, value: item } });
     setFilteredHistory([]);
   };
 
@@ -39,8 +37,8 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
       />
       {filteredHistory.length > 0 && (
         <div className="drop-down">
-          {/* filteredHistory array is mapped over and each a div is created for each item. */}
-          {/* Each div has an onClick event handler that called handleSelect(), passing in the item (champion name). */}
+          {/* filteredHistory array is mapped over and a div is created for each item. */}
+          {/* Each div has an onClick event handler called handleSelect(), passing in the item (champion name). */}
           {filteredHistory.map((item) => (
             <div
               onClick={() => handleSelect(item)}
@@ -55,6 +53,6 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
       )}
     </div>
   );
-};  
+};
 
 export default LiveSearchInput;

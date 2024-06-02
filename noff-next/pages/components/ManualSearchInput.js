@@ -6,15 +6,13 @@ const ManualSearchInput = ({ label, name, value, onChange }) => {
 
   const handleSearch = (e) => {
     const searchValue = e.target.value;
-    // Call onChange that was passed in. The actual event handler is defined in input.js.
+    // Call onChange that was passed in.
     onChange(e);
-
     const filtered = data.filter(item => {
       const searchItem = searchValue.toLowerCase();
       const fullName = item.champName.toLowerCase();
       return searchItem && fullName.startsWith(searchItem) && fullName !== searchItem;
     });
-
     setFilteredData(filtered);
   };
 

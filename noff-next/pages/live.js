@@ -34,15 +34,30 @@ function App() {
         id: value,
       })
     }
-    console.log(formData);
   };
+
+  
+  /**
+   * Remove duplicates from history. Use once in a while if necessary.
+   *
+   * @returns {void}
+   */
+  const cleanHistory = () => {
+    const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    const uniqueHistory = [...new Set(history)];
+    localStorage.setItem('searchHistory', JSON.stringify(uniqueHistory));
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('http://127.0.0.1:8000/api/process-id/', formData)
       .then(response => {
         alert('Form submitted successfully');
-        // In this case processedData will just be the percentage.
+        const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
+        if (!history.includes(formData.id)) {
+          history.push(formData.id);
+        }
+        localStorage.setItem('searchHistory', JSON.stringify(history));
         setProcessedData(response.data.data);
         setError('');
       })
