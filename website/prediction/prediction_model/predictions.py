@@ -82,19 +82,15 @@ def test_model(input):
 
     except Exception as E:
         return 'NONO'
-
-def get_prediction(input: str):
+    
+    
+def get_prediction(input):
     try:
         print(input)
         # example: "Irelia,Darius,Xerath,Anivia,Sejuani,Diana,Jayce,Maokai,Neeko,Kaisa"
         predictions = model_predict(input)
         print(predictions[0])
         return float((predictions[0] + 1) / 2 * 100)
-        # sum = 0
-        # for i in range(10):
-        #     sum += test()
-        # print(f"Average accuracy: {sum / 10:.2f}%")
-
     except Exception as E:
         return 'Error in the prediction model'
     

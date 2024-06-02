@@ -12,6 +12,7 @@ import random
 def percentage_predict(champions):
     if champions == "No account found" or champions == "No game found" or champions == 'Error in the prediction model':
         return "error"
+    print(champions)
     result = round(float(get_prediction(champions)),2)
     return [str(result), str(100 - result)]
 
