@@ -5,8 +5,7 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
 
   const handleSearch = (e) => {
     const searchValue = e.target.value;
-    // Call onChange that was passed in.
-    onChange(e);
+    onChange(e); // Call onChange that was passed in.
     const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
     const filtered = history.filter(item => {
       const s = searchValue.toLowerCase();

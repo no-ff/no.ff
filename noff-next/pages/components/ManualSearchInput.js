@@ -5,8 +5,7 @@ const ManualSearchInput = ({ label, name, value, onChange }) => {
 
   const handleSearch = (e) => {
     const searchValue = e.target.value;
-    // Call onChange that was passed in.
-    onChange(e);
+    onChange(e); // Call onChange that was passed in.
     const filtered = data.filter(item => {
       const searchItem = searchValue.toLowerCase();
       const fullName = item.champName.toLowerCase();
