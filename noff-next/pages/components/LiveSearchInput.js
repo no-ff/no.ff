@@ -15,7 +15,15 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
     setFilteredHistory(filtered);
   }
 
-  const handleSelect = (item) => {
+  const handleSelect = (e) => {
+    const searchValue = e.target.value;
+    if (!value) { // If nothing has been typed.
+      const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
+      setFilteredHistory(history);
+    }
+  }
+
+  const handleClick = (item) => {
     onChange({ target: { name, value: item } });
     setFilteredHistory([]);
   };
@@ -32,6 +40,7 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
         // Typing into the input field will call handleSearch.
         // When the handleSearch is called the event object's target will be this input element.
         onChange={handleSearch}
+        onSelect={handleSelect}
         required
       />
       {filteredHistory.length > 0 && (
@@ -39,7 +48,7 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
           {/* filteredHistory array is mapped over and a div is created for each item. */}
           {filteredHistory.map((item) => (
             <div
-              onClick={() => handleSelect(item)}
+              onClick={() => handleClick(item)}
               className="drop-down-item"
               key={item}
             >
