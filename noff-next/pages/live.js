@@ -1,47 +1,53 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import SearchInput from './components/SearchInput';  // Import the SearchInput component
+import LiveSearchInput from './components/LiveSearchInput';
 
 function App() {
   // useState() is a hook that takes in the initial state and returns an array with two elements.
   // The first element is the current state value and the second element is a function that allows you to update the state.
   const [formData, setFormData] = useState({
-    top1: '',
-    jungle1: '',
-    mid1: '',
-    bot1: '',
-    supp1: '',
-    top2: '',
-    jungle2: '',
-    mid2: '',
-    bot2: '',
-    supp2: '',
+    gameName: '',
+    tagline: '',
+    id: '',
   });
-
   const [processedData, setProcessedData] = useState([]);
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
     // Pull name and value fields from the event target, which is the html <input> element. 
     const { name, value } = e.target;
-    setFormData({
-      // Spread the existing formData into the new object.
-      ...formData,
-      // [] computes the value of the name variable and sets it as a key in the object.
-      // Ex. if name is 'top1' and value is 'Darius', the object will look like this: { top1: 'Darius' }.
-      [name]: value
-    });
+    const findUntil = '#';
+    const index = value.indexOf(findUntil);
+    if (index !== -1) {
+      const gameName = value.substring(0, index);
+      const tagline = value.substring(index + 1);
+      setFormData({
+        gameName: gameName,
+        tagline: tagline,
+        id: `${gameName}#${tagline}`,
+      });
+    }
+    else {
+      setFormData({
+        gameName: value,
+        tagline: '',
+        id: value,
+      })
+    }
+    console.log(formData);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://127.0.0.1:8000/api/process-manual/', formData)
+    axios.post('http://127.0.0.1:8000/api/process-id/', formData)
       .then(response => {
         alert('Form submitted successfully');
+        // In this case processedData will just be the percentage.
         setProcessedData(response.data.data);
         setError('');
       })
       .catch(error => {
+        alert('Unsuccessful submission');
         console.error('There was an error submitting the form!', error);
         setError('There was an error submitting the form!');
       });
@@ -49,68 +55,12 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Submit Live Game</h1>
-      
-      <h1>Submit Team Data</h1>
+      <h1>Submit Riot ID for Live Game</h1>
       <form onSubmit={handleSubmit}>
-        <SearchInput
-          label="Team 1 Top:"
-          name="top1"
-          value={formData.top1}
-          onChange={handleChange}
-        />
-        <SearchInput
-          label="Team 1 Jungle:"
-          name="jungle1"
-          value={formData.jungle1}
-          onChange={handleChange}
-        />
-        <SearchInput
-          label="Team 1 Mid:"
-          name="mid1"
-          value={formData.mid1}
-          onChange={handleChange}
-        />
-        <SearchInput
-          label="Team 1 Bot:"
-          name="bot1"
-          value={formData.bot1}
-          onChange={handleChange}
-        />
-        <SearchInput
-          label="Team 1 Supp:"
-          name="supp1"
-          value={formData.supp1}
-          onChange={handleChange}
-        />
-        <SearchInput
-          label="Team 2 Top:"
-          name="top2"
-          value={formData.top2}
-          onChange={handleChange}
-        />
-        <SearchInput
-          label="Team 2 Jungle:"
-          name="jungle2"
-          value={formData.jungle2}
-          onChange={handleChange}
-        />
-        <SearchInput
-          label="Team 2 Mid:"
-          name="mid2"
-          value={formData.mid2}
-          onChange={handleChange}
-        />
-        <SearchInput
-          label="Team 2 Bot:"
-          name="bot2"
-          value={formData.bot2}
-          onChange={handleChange}
-        />
-        <SearchInput
-          label="Team 2 Supp:"
-          name="supp2"
-          value={formData.supp2}
+        <LiveSearchInput
+          label="Riot ID:"
+          name="riotId"
+          value={formData.id}
           onChange={handleChange}
         />
         <button type="submit">Submit</button>

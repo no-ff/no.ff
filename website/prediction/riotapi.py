@@ -1,4 +1,5 @@
-import requests, json
+import requests
+import json
 from prediction.roleprediction import predict_role
 
 Champ_data = {
@@ -170,15 +171,19 @@ Champ_data = {
     "142": "Zoe",
     "143": "Zyra"
 }
-def id_to_live_match_comp(GameID:str, Tagline: str)->list[str]:
-    API_KEY = "RGAPI-9803c7a9-31c0-4283-82cb-40dc18f70041"
-    puuid = requests.get(f"https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{GameID}/{Tagline}?api_key={API_KEY}") 
+
+
+def id_to_live_match_comp(GameID: str, Tagline: str) -> list[str]:
+    API_KEY = "RGAPI-ca845b45-3c57-4be3-9f2e-7003059a54ac"
+    puuid = requests.get(
+        f"https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{GameID}/{Tagline}?api_key={API_KEY}")
     if puuid.status_code != 200:
         print("something has been unsuccessful")
         return "No account found"
     PUUID = puuid.json()['puuid']
 
-    live_match = requests.get(f"https://na1.api.riotgames.com/lol/spectator/v5/active-games/by-summoner/{PUUID}?api_key={API_KEY}") 
+    live_match = requests.get(
+        f"https://na1.api.riotgames.com/lol/spectator/v5/active-games/by-summoner/{PUUID}?api_key={API_KEY}")
     if live_match.status_code != 200:
         print(live_match.status_code)
         print("something been unsuccessful, please try again later")
@@ -188,13 +193,10 @@ def id_to_live_match_comp(GameID:str, Tagline: str)->list[str]:
     Comp = []
     for champ in participants:
         Comp.append(Champ_data[str(champ["championId"])])
-    result = role_prediction.predict_role(Comp[:5])
-    result += role_prediction.predict_role(Comp[5:])
+    result = predict_role(Comp[:5])
+    result += predict_role(Comp[5:])
 
     return result
-
-
-
 
 
 """
