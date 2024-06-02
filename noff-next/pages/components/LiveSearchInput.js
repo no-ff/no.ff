@@ -38,14 +38,13 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
       {filteredHistory.length > 0 && (
         <div className="drop-down">
           {/* filteredHistory array is mapped over and a div is created for each item. */}
-          {/* Each div has an onClick event handler called handleSelect(), passing in the item (champion name). */}
           {filteredHistory.map((item) => (
             <div
               onClick={() => handleSelect(item)}
               className="drop-down-item"
               key={item}
             >
-              {/* Content of the div will be a Riot ID. */}
+              {/* Content of the div will be past searched Riot ID. */}
               {item}
             </div>
           ))}

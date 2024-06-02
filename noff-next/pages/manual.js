@@ -21,7 +21,6 @@ function App() {
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
-    // Pull name and value fields from the event target, which is the html <input> element. 
     const { name, value } = e.target;
     setFormData({
       // Spread the existing formData into the new object.

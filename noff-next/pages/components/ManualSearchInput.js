@@ -37,7 +37,6 @@ const ManualSearchInput = ({ label, name, value, onChange }) => {
       {filteredData.length > 0 && (
         <div className="drop-down">
           {/* filteredData array is mapped over and each a div is created for each item. */}
-          {/* Each div has an onClick event handler that called handleSelect(), passing in the item (champion name). */}
           {filteredData.map((item) => (
             <div
               onClick={() => handleSelect(item)}
