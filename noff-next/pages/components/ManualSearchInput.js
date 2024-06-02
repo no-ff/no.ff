@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import data from '../champ_data.json';
-
+var data = require('./champ_data.json');
 const ManualSearchInput = ({ label, name, value, onChange }) => {
   const [filteredData, setFilteredData] = useState([]);
 

@@ -6,7 +6,8 @@ function Navbar() {
     <div className='navbar'> 
     <ul className="links">
         <li onClick={() => router.push('/')}> Home </li>
-        <li onClick={() => router.push('/input')}> Input </li>
+        <li onClick={() => router.push('/manual')}> Model Input </li>
+        <li onClick={() => router.push('/live')}> Live Input </li>
     </ul>
     </div>
   )
