@@ -108,6 +108,3 @@ def predict_role(champs):
             champs.remove(max_champ)
             print(f"Support: {max_champ}")
     return result
-
-
-print(predict_role(['Akali', 'Nocturne', 'Volibear', 'Alistar', 'Ezreal']))
