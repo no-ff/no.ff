@@ -23,6 +23,10 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
     }
   }
 
+  const handleBlur = (e) => {
+    setFilteredHistory([]);
+  }
+
   const handleClick = (item) => {
     onChange({ target: { name, value: item } });
     setFilteredHistory([]);
@@ -41,6 +45,7 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
         // When the handleSearch is called the event object's target will be this input element.
         onChange={handleSearch}
         onSelect={handleSelect}
+        onBlur={handleBlur}
         required
       />
       {filteredHistory.length > 0 && (
