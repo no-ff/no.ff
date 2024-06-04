@@ -2,12 +2,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ManualApp from './manual'
 import LiveApp from './live'
-import Navbar from './components/Navbar';
 import { motion } from 'framer-motion'
 export default function Home() {
-  // const liveAppRef = useRef(null);
-  // let top = 0;
-
   const scrollToLiveApp = () => {
     document.getElementById("liveApp").scrollIntoView({ behavior: "smooth" });
   };
@@ -15,14 +11,6 @@ export default function Home() {
   const scrollToManualApp = () => {
     document.getElementById("manualApp").scrollIntoView({ behavior: "smooth" });
   };
-
-  // useEffect(() => {
-  //   if (liveAppRef.current) {
-  //     const rect = liveAppRef.current.getBoundingClientRect();
-  //     top = rect.top;
-  //     console.log(top);
-  //   }
-  // }, []);
 
   return (
     <div>
