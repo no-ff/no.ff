@@ -39,8 +39,8 @@ def react_process_manual(request):
 @api_view(['POST'])
 def react_process_id(request):
     form_data = request.data
-    gameName = form_data.get('gameName')
-    tagline = form_data.get('tagline')
+    gameName = form_data.get('gameName').strip()
+    tagline = form_data.get('tagline').strip()
     champions = id_to_live_match_comp(gameName, tagline)
     return Response({"message": "Check data if game not found or account not found", "data": champions + percentage_predict(champions)}, status=status.HTTP_200_OK)
 

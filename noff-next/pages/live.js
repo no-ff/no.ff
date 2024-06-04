@@ -20,6 +20,7 @@ function LiveApp() {
     if (index !== -1) {
       const gameName = value.substring(0, index);
       const tagline = value.substring(index + 1);
+      console.log(gameName, tagline);
       setFormData({
         gameName: gameName,
         tagline: tagline,

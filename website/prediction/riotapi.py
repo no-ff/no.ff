@@ -174,18 +174,18 @@ Champ_data = {
 
 
 def id_to_live_match_comp(GameID: str, Tagline: str) -> list[str]:
-    API_KEY = "RGAPI-ca845b45-3c57-4be3-9f2e-7003059a54ac"
+    API_KEY = "RGAPI-59b64510-5b30-4d10-8bc1-3fb1cb1447d0"
     puuid = requests.get(
         f"https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{GameID}/{Tagline}?api_key={API_KEY}")
     if puuid.status_code != 200:
         print("something has been unsuccessful")
         return "No account found"
     PUUID = puuid.json()['puuid']
-
     live_match = requests.get(
         f"https://na1.api.riotgames.com/lol/spectator/v5/active-games/by-summoner/{PUUID}?api_key={API_KEY}")
     if live_match.status_code != 200:
         print(live_match.status_code)
+        print(PUUID)
         print("something been unsuccessful, please try again later")
         return "No game found"
     participants = live_match.json()["participants"]
@@ -195,7 +195,7 @@ def id_to_live_match_comp(GameID: str, Tagline: str) -> list[str]:
         Comp.append(Champ_data[str(champ["championId"])])
     result = predict_role(Comp[:5])
     result += predict_role(Comp[5:])
-
+    print(result)
     return result
 
 
