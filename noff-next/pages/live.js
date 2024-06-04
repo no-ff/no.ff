@@ -14,7 +14,7 @@ function LiveApp() {
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     const findUntil = '#';
     const index = value.indexOf(findUntil);
     if (index !== -1) {

@@ -17,17 +17,21 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
 
   const handleSelect = (e) => {
     const searchValue = e.target.value;
-    if (!value) { // If nothing has been typed.
+    if (!searchValue) { // If nothing has been typed.
       const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
       setFilteredHistory(history);
     }
+    else {
+      handleSearch(e);
+    }
   }
 
-  const handleBlur = (e) => {
+  const handleBlur = () => {
     setFilteredHistory([]);
   }
 
   const handleClick = (item) => {
+    console.log("called");
     onChange({ target: { name, value: item } });
     setFilteredHistory([]);
   };
@@ -53,7 +57,7 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
           {/* filteredHistory array is mapped over and a div is created for each item. */}
           {filteredHistory.map((item) => (
             <div
-              onClick={() => handleClick(item)}
+              onMouseDown={() => handleClick(item)}
               className="drop-down-item"
               key={item}
             >
