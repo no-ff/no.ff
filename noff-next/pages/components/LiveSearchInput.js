@@ -53,7 +53,6 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
         onChange={handleSearch}
         onSelect={handleSelect}
         onBlur={handleBlur}
-        autoComplete='false'
         required
         className="p-1 border rounded"
       />

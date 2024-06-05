@@ -45,6 +45,11 @@ const ManualSearchInput = ({ label, name, value, onChange }) => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => handleSelect(item)}
+              onKeyDown={event => {
+                if (event.key === 'Enter') {
+                  handleSelect(item);
+                }
+              }}
               className='drop-down-item border rounded'
               key={item.champName}
             >

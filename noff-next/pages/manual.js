@@ -51,7 +51,7 @@ function ManualApp() {
   return (
     <div className="App p-4">
       <h1 className="text-2xl font-bold mb-3">Submit Team Data</h1>
-      <form onSubmit={handleSubmit}>
+      <form autocomplete="off" onSubmit={handleSubmit}>
         <div className="flex space-x-4">
           <div className="w-1/2">
             <h2 className="text-xl font-semibold mb-2">Team 1</h2>
