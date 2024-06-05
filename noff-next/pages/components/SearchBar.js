@@ -22,17 +22,13 @@ function SearchBar(props) {
         <button onClick={btnClick} className="cancel"> Cancel</button>
          </div> :
     <div className="search-container">
-        <div className="search-input">
-            <input type="text" value={value} onChange={onChange}/>
-            <button onClick={btnClick}> Lock in</button>
-        </div>
         <div className="drop-down">
             {data.filter(item => {
                 const searchItem = value.toLowerCase();
                 const fullName = item.champName.toLowerCase();
                 return searchItem && fullName.startsWith(searchItem) && fullName !== searchItem;
             })
-            .map((item)=> (<div onClick={()=>onSearch(item.champName)}className='drop-down-item' key={item.champName}> 
+            .map((item)=> (<div onClick={()=>onSearch(item.champName)}className='drop-down-item' key={item.champName}>
                 {item.champName }
                 </div>))}
         </div>

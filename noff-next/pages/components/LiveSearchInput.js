@@ -39,7 +39,7 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
   return (
     // A container that contains the input field and drop-down.
     <div className="search-container">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name} className="mr-3">{label}</label>
       <input
         type="text"
         id={name}
@@ -51,6 +51,7 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
         onSelect={handleSelect}
         onBlur={handleBlur}
         required
+        className="p-1 border rounded"
       />
       {filteredHistory.length > 0 && (
         <div className="drop-down">

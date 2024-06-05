@@ -5,7 +5,7 @@ import LiveApp from './live'
 import { motion } from 'framer-motion'
 export default function Home() {
 
-  
+
 
   const onScrollStop = callback => {
     let isScrolling;
@@ -19,7 +19,7 @@ export default function Home() {
       );
     }
   };
-  
+
   onScrollStop(() => {
     console.log('The user has stopped scrolling');
     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
@@ -39,7 +39,7 @@ export default function Home() {
           document.getElementById("manualApp").scrollIntoView({ behavior: "smooth" });
       }
     }
-  }); 
+  });
 
 // Set an interval to check the scroll position every 150 milliseconds
 
@@ -57,18 +57,18 @@ export default function Home() {
     <div >
       <div id="liveApp" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
         <LiveApp />
-        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToManualApp} style={{ marginTop: '100px' }}>
+        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToManualApp} style={{ marginTop: '100px' }} className="bg-gray-600 p-1 border rounded">
           Go to Manual Input
         </motion.button>
       </div>
 
       <div id="manualApp" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
-        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToLiveApp} style={{ marginBottom: '100px' }}>
+        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToLiveApp} style={{ marginBottom: '100px' }} className="bg-gray-600 p-1 border rounded">
           Go to Live Input
         </motion.button>
         <ManualApp/>
       </div>
     </div>
   );
-  
+
 }

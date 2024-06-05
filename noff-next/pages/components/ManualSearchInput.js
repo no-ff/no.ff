@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Champ from './Champ';
 var data = require('./champ_data.json');
 const ManualSearchInput = ({ label, name, value, onChange }) => {
   const [filteredData, setFilteredData] = useState([]);
@@ -21,8 +22,8 @@ const ManualSearchInput = ({ label, name, value, onChange }) => {
 
   return (
     // A container that contains the input field and drop-down.
-    <div className="search-container">
-      <label htmlFor={name}>{label}</label>
+    <div className="search-container mb-4">
+      <label htmlFor={name} className="mr-1">{label}</label>
       <input
         type="text"
         id={name}
@@ -32,6 +33,7 @@ const ManualSearchInput = ({ label, name, value, onChange }) => {
         // When the handleSearch is called the event object's target will be this input element.
         onChange={handleSearch}
         required
+        className="p-1 border rounded"
       />
       {filteredData.length > 0 && (
         <div className="drop-down">
@@ -43,7 +45,7 @@ const ManualSearchInput = ({ label, name, value, onChange }) => {
               key={item.champName}
             >
               {/* Content of the div will be champion name. */}
-              {item.champName} 
+              <Champ name={item.champName}/>
             </div>
           ))}
         </div>

@@ -36,7 +36,7 @@ function LiveApp() {
     }
   };
 
-  
+
   /**
    * Remove duplicates from history. Use once in a while if necessary.
    *
@@ -70,7 +70,7 @@ function LiveApp() {
 
   return (
     <div className="App">
-      <h1>Submit Riot ID for Live Game</h1>
+      <h1 className="mb-4">Submit Riot ID for Live Game</h1>
       <form onSubmit={handleSubmit}>
         <LiveSearchInput
           label="Riot ID:"
@@ -78,7 +78,7 @@ function LiveApp() {
           value={formData.id}
           onChange={handleChange}
         />
-        <button type="submit">Submit</button>
+        <button type="submit" className="mt-4 bg-blue-400 px-3 py-1 rounded">Submit</button>
       </form>
 
       {processedData.length > 0 && (
