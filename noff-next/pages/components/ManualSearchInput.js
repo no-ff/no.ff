@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Champ from './Champ';
+import { motion } from 'framer-motion'
+
 var data = require('./champ_data.json');
 const ManualSearchInput = ({ label, name, value, onChange }) => {
   const [filteredData, setFilteredData] = useState([]);
@@ -39,14 +41,16 @@ const ManualSearchInput = ({ label, name, value, onChange }) => {
         <div className="drop-down">
           {/* filteredData array is mapped over and each a div is created for each item. */}
           {filteredData.map((item) => (
-            <div
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               onClick={() => handleSelect(item)}
-              className='drop-down-item'
+              className='drop-down-item p-1 border rounded'
               key={item.champName}
             >
               {/* Content of the div will be champion name. */}
               <Champ name={item.champName}/>
-            </div>
+            </motion.div>
           ))}
         </div>
       )}
