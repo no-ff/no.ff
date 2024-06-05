@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const LiveSearchInput = ({ label, name, value, onChange }) => {
   const [filteredHistory, setFilteredHistory] = useState([]);
@@ -41,6 +42,8 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
     <div className="search-container mb-5">
       <label htmlFor={name} className="mr-3">{label}</label>
       <input
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
         type="text"
         id={name}
         name={name}
@@ -50,6 +53,7 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
         onChange={handleSearch}
         onSelect={handleSelect}
         onBlur={handleBlur}
+        autoComplete='false'
         required
         className="p-1 border rounded"
       />
@@ -57,14 +61,16 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
         <div className="drop-down">
           {/* filteredHistory array is mapped over and a div is created for each item. */}
           {filteredHistory.map((item) => (
-            <div
+            <motion.span
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               onMouseDown={() => handleClick(item)}
-              className="drop-down-item"
+              className="border rounded p-1 m-3"
               key={item}
             >
               {/* Content of the div will be past searched Riot ID. */}
               {item}
-            </div>
+            </motion.span>
           ))}
         </div>
       )}

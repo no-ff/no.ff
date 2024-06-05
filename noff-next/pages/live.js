@@ -71,8 +71,10 @@ function LiveApp() {
   return (
     <div className="App">
       <h1 className="mb-4">Submit Riot ID for Live Game</h1>
-      <form onSubmit={handleSubmit}>
+      <form autocomplete="off" onSubmit={handleSubmit}>
         <LiveSearchInput
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           label="Riot ID:"
           name="riotId"
           value={formData.id}
