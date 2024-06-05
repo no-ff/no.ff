@@ -41,10 +41,6 @@ export default function Home() {
     }
   }); 
 
-// Set an interval to check the scroll position every 150 milliseconds
-
-
-
   const scrollToLiveApp = () => {
     document.getElementById("liveApp").scrollIntoView({ behavior: "smooth" });
   };
