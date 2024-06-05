@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from prediction.riotapi import id_to_live_match_comp
+from prediction.riotapi import id_to_live_match_comp, Champ_data
 from prediction.prediction_model.predictions import get_prediction
 
 from rest_framework.decorators import api_view
@@ -33,6 +33,11 @@ def react_process_manual(request):
     supp2 = form_data.get('supp2')
     champions = [top1, jungle1, mid1, bot1,
                  supp1, top2, jungle2, mid2, bot2, supp2]
+    
+    for champion in champions:
+            if (champion not in Champ_data.values()):
+                return Response({"message": "Invalid Champion Names"}, 
+                                status=status.HTTP_400_BAD_REQUEST)
     return Response({"message": "Form processed successfully", "data": champions + percentage_predict(champions)}, status=status.HTTP_200_OK)
 
 
@@ -79,6 +84,9 @@ def process_manual(request):
         supp2 = request.POST.get('supp2')
         champions = [top1, jungle1, mid1, bot1,
                      supp1, top2, jungle2, mid2, bot2, supp2]
+        
+
+
         return percentage_display(request, champions)
 
 

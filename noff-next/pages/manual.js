@@ -43,6 +43,7 @@ function ManualApp() {
       })
       .catch(error => {
         console.error('There was an error submitting the form!', error);
+        alert(error.message);
         setError('There was an error submitting the form!');
       });
   };
@@ -115,7 +116,7 @@ function ManualApp() {
               className="mb-2"
             />
             <ManualSearchInput
-              label="Team 2 Bot:"
+                label="Team 2 Bot:"
               name="bot2"
               value={formData.bot2}
               onChange={handleChange}
@@ -132,6 +133,10 @@ function ManualApp() {
         </div>
         <button type="submit" className="mt-4 bg-blue-400 px-3 py-1 rounded">Submit</button>
       </form>
+
+
+      {}
+
 
       {processedData.length > 0 && (
         <div>
