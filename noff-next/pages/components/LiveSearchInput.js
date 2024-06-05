@@ -38,7 +38,7 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
 
   return (
     // A container that contains the input field and drop-down.
-    <div className="search-container">
+    <div className="search-container mb-5">
       <label htmlFor={name} className="mr-3">{label}</label>
       <input
         type="text"

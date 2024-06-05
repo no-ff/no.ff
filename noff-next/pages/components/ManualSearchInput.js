@@ -45,7 +45,7 @@ const ManualSearchInput = ({ label, name, value, onChange }) => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => handleSelect(item)}
-              className='drop-down-item p-1 border rounded'
+              className='drop-down-item border rounded'
               key={item.champName}
             >
               {/* Content of the div will be champion name. */}
