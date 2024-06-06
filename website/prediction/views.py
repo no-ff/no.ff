@@ -47,7 +47,7 @@ def react_process_id(request):
     gameName = form_data.get('gameName').strip()
     tagline = form_data.get('tagline').strip()
     champions = id_to_live_match_comp(gameName, tagline)
-    if champions == 'No account found'：
+    if champions == 'No account found':
         return Response({"message": "No RiotID found"}, 
                             status=status.HTTP_400_BAD_REQUEST)
     return Response({"message": "Check data if game not found or account not found", "data": champions + percentage_predict(champions)}, status=status.HTTP_200_OK)

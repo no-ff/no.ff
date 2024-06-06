@@ -6,6 +6,12 @@ import { useState } from 'react'
 function Champ({ name }) {
   const [champName, setChampName] = useState(name);
   const setChamp = (name) => {
+    if (name == 'FiddleSticks') {
+      name = 'Fiddlesticks';
+    }
+    if (name == 'MonkeyKing') {
+      name == 'Wukong';
+    }
     setChampName(name);
   }
   return (
