@@ -101,20 +101,22 @@ def convert_match_to_player_data(match_id, key):
     match_data = get_match_data(match_id, key)
     game_length = match_data['info']['gameDuration']
     players=(match_data['info']['participants'])
+    # game_mode = match_data['info']['queueType']
     player_data = []
     for player in players:
         player_data.append(get_match_player_data(player, game_length))
-    return {match_id: player_data}
+    return {match_id: player_data, "game_length": game_length, "game_mode": 420}
 
 
 def insert_matchdata_to_database(match_id, api_key):
     to_insert = convert_match_to_player_data(match_id, api_key)
+    print(to_insert)
     # insert to database
     MatchData.objects.create(
             match_id = match_id, \
             player_data = to_insert, \
-            game_length = to_insert['match_id']['info']['gameDuration'], \
-            game_mode = to_insert['match_id']['info']['queueType'])
+            game_length = to_insert['game_length'], \
+            game_mode = to_insert['game_mode'])
 
 
 

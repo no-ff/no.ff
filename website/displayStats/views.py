@@ -42,7 +42,7 @@ def load_new_match_data(request, api_key = 'RGAPI-f0816f16-3444-43d2-80d2-166c6e
             #this is extremely annoying
             pass
         matches = matches.json()
-        database_matches = json.loads(Accounts.objects.get(puuid=puuid).past_matches)
+        database_matches = Accounts.objects.get(puuid=puuid).past_matches
         if not database_matches:
             database_matches = []
         for match in matches:

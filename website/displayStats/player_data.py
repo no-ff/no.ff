@@ -34,11 +34,13 @@ def get_player_data(summ_id, key):
 
 def write_player_data(api_key, name, tagline):
     puuid = get_puuid(name, tagline, api_key)
+    print("puuid:"+ puuid)
     sum_id = (get_summ_id(puuid, api_key))
-    play = (get_player_data(sum_id, api_key))
+    print("sum_id:" + sum_id['sumId'])
+    play = (get_player_data(sum_id['sumId'], api_key))
     print(sum_id)
     print(play)
-    play.update(sum)
+    play.update(sum_id)
     print(play)
     player_data = Accounts()
     player_data.summonerName = play['sumId']
