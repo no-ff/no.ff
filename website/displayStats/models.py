@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
 import jsonfield
 
 # Create your models here.
@@ -13,10 +12,7 @@ class Accounts(models.Model):
     losses = models.IntegerField()
     level = models.IntegerField()
     icon = models.IntegerField()
-    past_matches = ArrayField(
-        models.CharField(max_length=100),
-        default=list
-    )
+    past_matches = jsonfield.JSONField()
 
 class Matches(models.Model):
     match_id = models.CharField(max_length=100)
