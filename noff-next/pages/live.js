@@ -51,6 +51,7 @@ function LiveApp() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('http://127.0.0.1:8000/api/process-id/', formData)
+    axios.post('http://127.0.0.1:8000/DisplayStats/add_new_matches/', formData)
       .then(response => {
         alert('Form submitted successfully');
         const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
@@ -66,6 +67,8 @@ function LiveApp() {
         console.error('There was an error submitting the form!', error);
         setError('There was an error submitting the form!');
       });
+
+
   };
 
   return (

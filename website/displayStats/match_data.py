@@ -1,5 +1,40 @@
 import requests
 import json
+import time
+
+from .models import Matches as MatchData
+
+def handle_riot_api_error(riot_object):
+    """
+    This function handles the error codes returned by the Riot API.
+    :param riot_object: The object returned by the Riot API.
+    :return: True if the error code is handled, False otherwise.
+    """
+    if riot_object.status_code == 429:
+        print(f"The following error code has been invoked:{riot_object.status_code} sleeping for 2 minutes")
+        time.sleep(120)
+        return True
+
+    if riot_object.status_code == 400 or \
+            riot_object.status_code == 403 or \
+            riot_object.status_code == 401 or \
+            riot_object.status_code == 404 or \
+            riot_object.status_code == 405 or \
+            riot_object.status_code == 415:
+        print(f"The following error code has been invoked:{riot_object.status_code}")
+        return True
+
+    if riot_object.status_code == 500 or \
+            riot_object.status_code == 502 or \
+            riot_object.status_code == 503 or \
+            riot_object.status_code == 504:
+        print(f"The following error code has been invoked:{riot_object.status_code} sleeping for 2 minutes")
+        time.sleep(10)
+        return True
+
+    return False
+
+
 def get_puuid(name, tagline, key):
     puuid_data = requests.get(f"https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{name}/{tagline}?api_key={key}")
     # need to check errors
@@ -51,7 +86,6 @@ def decoding_runes(runes):
     outputRunes.write(json.dumps(runesDir))
 
 def get_runes(runeset):
-
     primary_keystone = (runeset['styles'][0]['style'])
     sec_keystone = (runeset['styles'][1]['style'])
     prim_runes = []
@@ -71,6 +105,19 @@ def convert_match_to_player_data(match_id, key):
     for player in players:
         player_data.append(get_match_player_data(player, game_length))
     return {match_id: player_data}
+
+
+def insert_matchdata_to_database(match_id, api_key):
+    to_insert = convert_match_to_player_data(match_id, api_key)
+    # insert to database
+    MatchData.objects.create(
+            match_id = match_id, \
+            player_data = to_insert, \
+            game_length = to_insert['match_id']['info']['gameDuration'], \
+            game_mode = to_insert['match_id']['info']['queueType'])
+
+
+
 if __name__ == "__main__":
 
     api = 'RGAPI-61b2aecf-da19-4d68-b273-bae69dd6a000'
