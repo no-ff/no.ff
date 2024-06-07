@@ -3,6 +3,7 @@ import jsonfield
 
 # Create your models here.
 class Accounts(models.Model):
+    riotID = models.CharField(max_length=100)
     summonerName = models.CharField(max_length=100)
     puuid = models.CharField(max_length=100)
     tier = models.CharField(max_length=100)

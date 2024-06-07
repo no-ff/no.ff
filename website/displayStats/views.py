@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from displayStats.models import Accounts
+from displayStats.models import Accounts, Matches
 from rest_framework import status
 
 
@@ -32,49 +32,49 @@ def load_new_match_data(request, api_key = 'RGAPI-f0816f16-3444-43d2-80d2-166c6e
 
     if not Accounts.objects.filter(puuid=puuid).exists():
         pd.write_player_data(api_key, gameName, tagline)
+        add_20_to_database(puuid, start, amount, api_key)
 
     flag = False #exists to check whether or not we have found a match that is already in the database
     while not flag:
-        req = f"https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?queue=420&start={start}&count={amount}&api_key={api_key}"  
-        matches = requests.get(req)
-        if md.handle_riot_api_error(matches):
-            #for now suppose the errors are handled
-            #this is extremely annoying
-            pass
-        matches = matches.json()
-        database_matches = Accounts.objects.get(puuid=puuid).past_matches
-        if not database_matches:
-            database_matches = []
-        for match in matches:
-            if match in database_matches:
-                flag = True
-                matches = matches[:matches.index(match)]
-                break
+        flag = add_20_to_database(puuid, start, amount, api_key)
+        start = start + amount
+    print("Successfully updated a user's data")
+
+
+def add_20_to_database(puuid, start, amount, api_key):
+    flag = False
+    req = f"https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?start={start}&count={amount}&api_key={api_key}"  
+    matches = requests.get(req)
+
+    if md.handle_riot_api_error(matches):
+        return Response({"message": matches.status_code}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    matches = matches.json()
+    print(matches)
+    database_matches = Accounts.objects.get(puuid=puuid).past_matches
+
+    if not database_matches or database_matches == None: # checks if user has ever ini
+        database_matches = []
+    for match in matches:
+        if match in database_matches:
             flag = True
+            break
+        database_matches.insert(0,match)
+        if not Matches.objects.filter(match_id=match).exists():
             md.insert_matchdata_to_database(match, api_key)
 
-        start = start + amount
-    
-
-    return Response({"message": "Match data loaded successfully"}, status=status.HTTP_200_OK)
-
-    # if any of the matches are already in the database, keep everything up to that point
-    # otherwise, get all the matches, and save the match datato database
-    # now call get 20 more matches, but starting in 20
-    # repeat until we finally find a match that is already in the database
+    # Saves the updated past_matches
+    d = Accounts.objects.get(puuid=puuid)
+    d.past_matches = database_matches
+    d.save()
+    print(f"Successfully updated the past matches for the player {puuid}")
+    return flag
 
 @api_view(['POST'])
 def load_old_match_data(request):
-    """
-    """
-    #replace with how we get the ID
-    name = request.name
-    tagline = request.tagline
+    pass
 
-    puuid = md.get_puuid(name, tagline)
 
-    matches = md.get_matchlist_by_puuid(puuid, 20)
-    # if any of the matches are already in the database, keep everything up to that point
-    # otherwise, get all the matches, and save the match datato database
-    # now call get 20 more matches, but starting in 20
-    # repeat until we finally find a match that is already in the database
+@api_view(['POST'])
+def load_matches(request):
+    pass
