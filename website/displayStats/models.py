@@ -3,7 +3,7 @@ import jsonfield
 
 # Create your models here.
 class Accounts(models.Model):
-    riotID = models.CharField(max_length=100)
+    riotID = models.CharField(max_length=100, default='')
     summonerName = models.CharField(max_length=100)
     puuid = models.CharField(max_length=100)
     tier = models.CharField(max_length=100)
@@ -18,5 +18,5 @@ class Accounts(models.Model):
 class Matches(models.Model):
     match_id = models.CharField(max_length=100)
     game_length = models.IntegerField()
-    game_mode = models.IntegerField(max_length=100)
+    game_mode = models.IntegerField()
     player_data = jsonfield.JSONField()

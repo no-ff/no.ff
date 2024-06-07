@@ -30,8 +30,20 @@ def get_player_data(summ_id, key):
 
     return player_data
 
-
-
+def get_match_list(puuid, key):
+    match_list = []
+    empty = False
+    start = 0
+    while not empty:
+        matches = requests.get(f'https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?start={start}&count=100&api_key={key}').json()
+        if len(matches) < 100:
+            match_list += matches
+            empty = True
+            return match_list
+        match_list += matches
+        start += 100
+    return match_list
+        
 def write_player_data(api_key, name, tagline):
     puuid = get_puuid(name, tagline, api_key)
     print("puuid:"+ puuid)
@@ -42,7 +54,9 @@ def write_player_data(api_key, name, tagline):
     print(play)
     play.update(sum_id)
     print(play)
+    riotid = name + "#" + tagline
     player_data = Accounts()
+    player_data.riotID = riotid
     player_data.summonerName = play['sumId']
     player_data.puuid = play['puuid']
     player_data.tier = play['rank'][0]
@@ -52,7 +66,7 @@ def write_player_data(api_key, name, tagline):
     player_data.losses = play['wr'][1]
     player_data.level = play['level']
     player_data.icon = play['icon']
-    player_data.past_matches = []
+    player_data.past_matches = get_match_list(puuid, api_key)
     player_data.save()
 """
 puuid = '_numZ7P_3tZlzeC8lkHSBsY5MIKVje1kvHNJlt7_Wp9fKEhwJss6VMAc0HfVsdFLlm6oYXwqvdE27Q'

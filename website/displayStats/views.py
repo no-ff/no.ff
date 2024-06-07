@@ -71,8 +71,15 @@ def add_20_to_database(puuid, start, amount, api_key):
     return flag
 
 @api_view(['POST'])
-def load_old_match_data(request):
-    pass
+def load_old_match_data(request, api_key):
+    #need to count how many matches are loaded before loading more, then find the next 20 to load from the db
+    loaded_data = request.counter -1
+    player_matches = Accounts.objects.get(request.riotID).past_matches
+    add_matches = player_matches[loaded_data:loaded_data+20]
+    for match in add_matches:
+        if not Matches.objects.filter(match_id=match).exists():
+            md.insert_matchdata_to_database(match, api_key)
+    
 
 
 @api_view(['POST'])
