@@ -50,7 +50,7 @@ def add_20_to_database(puuid, api_key):
                 md.insert_matchdata_to_database(match, api_key)
         start += amount
     d = Accounts.objects.get(puuid=puuid)
-    d.past_matches = database_matches
+    d.past_matches = database_matches.sort(reverse=True)
     d.save()  
 
     print(f"Successfully updated the past matches for the player {puuid}")
