@@ -16,22 +16,11 @@ function profile() {
     const { value } = e.target;
     const findUntil = '#';
     const index = value.indexOf(findUntil);
-    if (index !== -1) {
-      const gameName = value.substring(0, index);
-      const tagline = value.substring(index + 1);
-      setFormData({
-        gameName: gameName,
-        tagline: tagline,
-        id: `${gameName}#${tagline}`,
-      });
-    }
-    else {
-      setFormData({
-        gameName: value,
-        tagline: '',
-        id: value,
-      })
-    }
+    setFormData({
+      gameName: index !== -1 ? value.substring(0, index) : '',
+      tagline: index !== -1 ? value.substring(index + 1) : '',
+      id: value,
+    })
   }
 
   const submitData = (e) => {
@@ -55,24 +44,32 @@ function profile() {
   }
 
   return (
-    Object.keys(playerData).length === 0 ?
-      <div className='search-profile' style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <h1> Enter riot id</h1>
-        <form autoComplete="off" onSubmit={submitData}>
-          <RiotIdInput
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            label="Riot ID:"
-            name="riotId"
-            value={formData.id}
-            onChange={handleChange}
-          />
-          <button type='submit' className='mt-4 bg-blue-400 px-3 py-1 rounded'>Search</button>
-        </form>
-      </div>
-      : <Account 
-        initialState={playerData}
-      />
+    <div className='search-profile' style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+      <h1> Enter riot id</h1>
+      <form autoComplete="off" onSubmit={submitData}>
+        <RiotIdInput
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          label="Riot ID:"
+          name="riotId"
+          value={formData.id}
+          onChange={handleChange}
+        />
+        <button type='submit' className='mt-4 bg-blue-400 px-3 py-1 rounded'>Search</button>
+      </form>
+      {/* Display Account + Match History data if form submitted succesfully. */}
+      {Object.keys(playerData).length !== 0 && (
+        <>
+          <Account
+            initialState={playerData}
+            />
+          <div>Test</div>
+          {/* Sample structure for match display. */}
+          {/* <Match /> */}
+          {/* <Match /> */}
+        </>
+      )}
+    </div>
   )
 }
 
