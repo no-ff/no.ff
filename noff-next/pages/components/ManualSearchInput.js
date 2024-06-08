@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
-import Champ from './Champ';
-import { color, motion } from 'framer-motion';
+import ChampSelect from './ChampSelect';
 
 var data = require('./champ_data.json');
 
@@ -79,15 +78,6 @@ const ManualSearchInput = ({ label, name, onChange }) => {
     }
   };
 
-  // For champion selection 
-  function getClassName(item) {
-    let className = 'box-item';
-    if (item.champName === filteredData[selectedItemIndex]?.champName) {
-      className += ' selected';
-    }
-    return className;
-  }
-
   return (
      // A container that contains the input field and box.
     <div className="search-container mb-4" ref={inputRef}>
@@ -109,19 +99,7 @@ const ManualSearchInput = ({ label, name, onChange }) => {
         className="p-1 border rounded"
       />
       {isFocused && (
-        <div className="box">
-          {filteredData.map((item) => (
-            <motion.div
-              whileTap={{ scale: 0.9 }}
-              onClick={() => handleSelect(item)}
-              className={getClassName(item)}
-              key={item.champName}
-            >
-            {/* Content of the div will be champion name. */}
-            <Champ name={item.champName} />
-            </motion.div>
-          ))}
-        </div>
+        <ChampSelect filteredData={filteredData} selectedItemIndex={selectedItemIndex} handleSelect={handleSelect} />
       )}
     </div>
   );
