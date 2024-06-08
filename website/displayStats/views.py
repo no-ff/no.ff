@@ -82,18 +82,21 @@ def load_old_match_data(request, api_key):
     for match in add_matches:
         if not Matches.objects.filter(match_id=match).exists():
             md.insert_matchdata_to_database(match, api_key)
-    
 
-@api_view(['POST'])
-def load_matches(request):
-    pass
 
-def load_matches_from_database(start, end, puuid):
+def load_matches_from_database(start, end, puuid, api_key):
     wanted_ids = Accounts.objects.get(puuid=puuid).past_matches[start: end + 1]
     to_put = []
+    print(wanted_ids)
+    print(start, end)
     for match_id in wanted_ids:
-        to_put.append(Matches.objects.get(match_id=match_id).player_data)
+        try:
+            to_put.append(Matches.objects.get(match_id=match_id).player_data)
+        except:
+            md.insert_matchdata_to_database(match_id, api_key)
+            to_put.append(Matches.objects.get(match_id=match_id).player_data)
     return Response({"matches": to_put}, status=status.HTTP_200_OK)
+
 
 @api_view(['POST'])
 def load_player_data(request):
