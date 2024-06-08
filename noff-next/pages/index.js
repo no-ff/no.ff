@@ -4,9 +4,14 @@ import ManualApp from './manual'
 import LiveApp from './live'
 import { motion } from 'framer-motion'
 export default function Home() {
+  const scrollToLiveApp = () => {
+    document.getElementById("liveApp").scrollIntoView({ behavior: "smooth" });
+  };
 
-
-
+  const scrollToManualApp = () => {
+    document.getElementById("manualApp").scrollIntoView({ behavior: "smooth" });
+  };
+  
   const onScrollStop = callback => {
     let isScrolling;
     if (typeof window !== 'undefined') {
@@ -33,21 +38,13 @@ export default function Home() {
       // Check if the current scroll position is below or above 50%
       if (currentScrollPercentage < 0.5) {
           // Scroll to the element with ID "liveApp" smoothly
-          document.getElementById("liveApp").scrollIntoView({ behavior: "smooth" });
+          scrollToLiveApp();
       } else {
           // Scroll to the element with ID "manualApp" smoothly
-          document.getElementById("manualApp").scrollIntoView({ behavior: "smooth" });
+          scrollToManualApp();
       }
     }
   });
-
-  const scrollToLiveApp = () => {
-    document.getElementById("liveApp").scrollIntoView({ behavior: "smooth" });
-  };
-
-  const scrollToManualApp = () => {
-    document.getElementById("manualApp").scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <div>
