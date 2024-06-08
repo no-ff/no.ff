@@ -16,6 +16,9 @@ const RiotIdInput = ({ label, name, value, onChange }) => {
     setFilteredHistory(filtered);
   }
 
+  /**
+   * When user clicks on the input field.
+   */
   const handleSelect = (e) => {
     const searchValue = e.target.value;
     if (!searchValue) { // If nothing has been typed.
@@ -31,8 +34,11 @@ const RiotIdInput = ({ label, name, value, onChange }) => {
     setFilteredHistory([]);
   }
 
+  /**
+   * When user selects a dropdown item.
+   */
   const handleClick = (item) => {
-    onChange({ target: { name, value: item } });
+    onChange({ target: { value: item } });
     setFilteredHistory([]);
   };
 
