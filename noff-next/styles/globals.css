@@ -100,6 +100,30 @@ a {
   text-decoration: none;
 }
 
+.box {
+  position: absolute;
+  top: 110%;
+  right: 1%;
+  overflow: hidden; 
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  background: black;
+}
+
+.box-item {
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.box-item:hover {
+  transform: scale(1.1);
+  background-color: blue;
+}
+
+.box-item.selected {
+  transform: scale(1.1);
+  background-color: blue;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

@@ -1,4 +1,16 @@
 .image_box {
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 1%;
+    border: 1px solid white;
+}
+
+.image_box img {
+    width: 2.8rem;
+    object-fit: cover;
+}
+
+.image_box figcaption {
+    font-size: 0.4rem;
 }

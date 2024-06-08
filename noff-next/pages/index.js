@@ -50,7 +50,7 @@ export default function Home() {
   };
 
   return (
-    <div >
+    <div>
       <div id="liveApp" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
         <LiveApp />
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToManualApp} style={{ marginTop: '100px' }} className="bg-gray-600 p-1 border rounded">
@@ -59,10 +59,12 @@ export default function Home() {
       </div>
 
       <div id="manualApp" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
-        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToLiveApp} style={{ marginBottom: '100px' }} className="bg-gray-600 p-1 border rounded">
+        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToLiveApp} style={{ marginBottom: '100px'}} className="bg-gray-600 p-1 border rounded">
           Go to Live Input
         </motion.button>
-        <ManualApp/>
+        <div style={{display: 'flex', alignItems: 'flex-start', width: '100%'}}>
+          <ManualApp/>
+        </div>
       </div>
     </div>
   );

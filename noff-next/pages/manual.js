@@ -49,94 +49,89 @@ function ManualApp() {
   };
 
   return (
-    <div className="App p-4">
+    <div className="App p-10">
       <h1 className="text-2xl font-bold mb-3">Submit Team Data</h1>
       <form autocomplete="off" onSubmit={handleSubmit}>
-        <div className="flex space-x-4">
-          <div className="w-1/2">
-            <h2 className="text-xl font-semibold mb-2">Team 1</h2>
-            <ManualSearchInput
-              label="Team 1 Top:"
-              name="top1"
-              value={formData.top1}
-              onChange={handleChange}
-              className="mb-2 fixed"
-            />
-            <ManualSearchInput
-              label="Team 1 Jungle:"
-              name="jungle1"
-              value={formData.jungle1}
-              onChange={handleChange}
-              className="mb-2 fixed"
-            />
-            <ManualSearchInput
-              label="Team 1 Mid:"
-              name="mid1"
-              value={formData.mid1}
-              onChange={handleChange}
-              className="mb-2 fixed"
-            />
-            <ManualSearchInput
-              label="Team 1 Bot:"
-              name="bot1"
-              value={formData.bot1}
-              onChange={handleChange}
-              className="mb-2 fixed"
-            />
-            <ManualSearchInput
-              label="Team 1 Supp:"
-              name="supp1"
-              value={formData.supp1}
-              onChange={handleChange}
-              className="mb-2 fixed"
-            />
-          </div>
-
-          <div className="w-1/2">
-            <h2 className="text-xl font-semibold mb-2">Team 2</h2>
-            <ManualSearchInput
-              label="Team 2 Top:"
-              name="top2"
-              value={formData.top2}
-              onChange={handleChange}
-              className="mb-2 fixed"
-            />
-            <ManualSearchInput
-              label="Team 2 Jungle:"
-              name="jungle2"
-              value={formData.jungle2}
-              onChange={handleChange}
-              className="mb-2 fixed"
-            />
-            <ManualSearchInput
-              label="Team 2 Mid:"
-              name="mid2"
-              value={formData.mid2}
-              onChange={handleChange}
-              className="mb-2 fixed"
-            />
-            <ManualSearchInput
-                label="Team 2 Bot:"
-              name="bot2"
-              value={formData.bot2}
-              onChange={handleChange}
-              className="mb-2 fixed"
-            />
-            <ManualSearchInput
-              label="Team 2 Supp:"
-              name="supp2"
-              value={formData.supp2}
-              onChange={handleChange}
-              className="mb-2 fixed"
-            />
-          </div>
+        <div className="flex" style={{gap: '20px'}}>
+          <h2 className="text-xl font-semibold mb-2">Team 1</h2>
+          <ManualSearchInput
+            label="Team 1 Top:"
+            name="top1"
+            value={formData.top1}
+            onChange={handleChange}
+            className="mb-2 fixed"
+          />
+          <ManualSearchInput
+            label="Team 1 Jungle:"
+            name="jungle1"
+            value={formData.jungle1}
+            onChange={handleChange}
+            className="mb-2 fixed"
+          />
+          <ManualSearchInput
+            label="Team 1 Mid:"
+            name="mid1"
+            value={formData.mid1}
+            onChange={handleChange}
+            className="mb-2 fixed"
+          />
+          <ManualSearchInput
+            label="Team 1 Bot:"
+            name="bot1"
+            value={formData.bot1}
+            onChange={handleChange}
+            className="mb-2 fixed"
+          />
+          <ManualSearchInput
+            label="Team 1 Supp:"
+            name="supp1"
+            value={formData.supp1}
+            onChange={handleChange}
+            className="mb-2 fixed"
+          />
+        </div>
+        <div className="flex" style={{gap: '20px'}}>
+          <h2 className="text-xl font-semibold mb-2">Team 2</h2>
+          <ManualSearchInput
+            label="Team 2 Top:"
+            name="top2"
+            value={formData.top2}
+            onChange={handleChange}
+            className="mb-2 fixed"
+          />
+          <ManualSearchInput
+            label="Team 2 Jungle:"
+            name="jungle2"
+            value={formData.jungle2}
+            onChange={handleChange}
+            className="mb-2 fixed"
+          />
+          <ManualSearchInput
+            label="Team 2 Mid:"
+            name="mid2"
+            value={formData.mid2}
+            onChange={handleChange}
+            className="mb-2 fixed"
+          />
+          <ManualSearchInput
+              label="Team 2 Bot:"
+            name="bot2"
+            value={formData.bot2}
+            onChange={handleChange}
+            className="mb-2 fixed"
+          />
+          <ManualSearchInput
+            label="Team 2 Supp:"
+            name="supp2"
+            value={formData.supp2}
+            onChange={handleChange}
+            className="mb-2 fixed"
+          />
         </div>
         <button type="submit" className="mt-4 bg-blue-400 px-3 py-1 rounded">Submit</button>
       </form>
-
-
+      
       {}
-
 
       {processedData.length > 0 && (
         <div>
