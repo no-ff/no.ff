@@ -85,3 +85,10 @@ def load_old_match_data(request, api_key):
 @api_view(['POST'])
 def load_matches(request):
     pass
+
+def load_matches_from_database(start, end, puuid):
+    wanted_ids = Accounts.objects.get(puuid=puuid).past_matches[start: end + 1]
+    to_put = []
+    for match_id in wanted_ids:
+        to_put.append(Matches.objects.get(match_id=match_id).player_data)
+    return Response({"matches": to_put}, status=status.HTTP_200_OK)
