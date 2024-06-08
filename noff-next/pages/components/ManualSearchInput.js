@@ -33,10 +33,12 @@ const ManualSearchInput = ({ label, name, onChange }) => {
 
   // When a user clicks on a champion name, the input field will be set to the champion name.
   const handleSelect = (item) => {
-    setInputValue(item.champName);
-    onChange({ target: { name, value: item.champName } });
-    setFilteredData(data);
-    setIsFocused(false);
+    if (item) {
+      setInputValue(item.champName);
+      onChange({ target: { name, value: item.champName } });
+      setFilteredData(data);
+      setIsFocused(false);
+    }
   };
 
   // When the input field loses focus, the input value will be cleared.
@@ -74,15 +76,13 @@ const ManualSearchInput = ({ label, name, onChange }) => {
         e.preventDefault();
         handleSelect(filteredData[selectedItemIndex]);
         break;
-      default:
-        break;
     }
   };
 
   // For champion selection 
   function getClassName(item) {
     let className = 'box-item';
-    if (item.champName === filteredData[selectedItemIndex].champName) {
+    if (item.champName === filteredData[selectedItemIndex]?.champName) {
       className += ' selected';
     }
     return className;
