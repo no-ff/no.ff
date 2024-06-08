@@ -174,7 +174,7 @@ Champ_data = {
 
 
 def id_to_live_match_comp(GameID: str, Tagline: str) -> list[str]:
-    API_KEY = "RGAPI-59b64510-5b30-4d10-8bc1-3fb1cb1447d0"
+    API_KEY = "RGAPI-f0816f16-3444-43d2-80d2-166c6e9a4a77"
     puuid = requests.get(
         f"https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{GameID}/{Tagline}?api_key={API_KEY}")
     if puuid.status_code != 200:

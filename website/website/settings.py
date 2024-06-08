@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'prediction',
-    'displayStats'
+    'displayStats',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
