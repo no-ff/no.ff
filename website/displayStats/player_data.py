@@ -43,7 +43,7 @@ def get_match_list(puuid, key):
         match_list += matches
         start += 100
     return match_list
-        
+
 def write_player_data(api_key, name, tagline):
     puuid = get_puuid(name, tagline, api_key)
     print("puuid:"+ puuid)
@@ -70,7 +70,7 @@ def write_player_data(api_key, name, tagline):
     player_data.save()
 """
 puuid = '_numZ7P_3tZlzeC8lkHSBsY5MIKVje1kvHNJlt7_Wp9fKEhwJss6VMAc0HfVsdFLlm6oYXwqvdE27Q'
-api = 'RGAPI-5b77e04c-1d7d-4e2f-bfdf-d87372fe6500' 
+api = 'RGAPI-e3d577b6-1f0a-4842-888a-8c7ba7c24864' 
 sum_id = '1VKY_8bB6g7agYYO_pZcieSe-Npy5iuV_t7L4jaZVquOC4k'
 sum = (get_summ_id(puuid, api))
 play = (get_player_data(sum_id, api))

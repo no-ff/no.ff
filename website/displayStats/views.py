@@ -75,6 +75,8 @@ def load_old_match_data(request, api_key):
     #need to count how many matches are loaded before loading more, then find the next 20 to load from the db
     loaded_data = request.counter -1
     player_matches = Accounts.objects.get(request.riotID).past_matches
+    if (not player_matches):
+        return 
     add_matches = player_matches[loaded_data:loaded_data+20]
     for match in add_matches:
         if not Matches.objects.filter(match_id=match).exists():
@@ -92,3 +94,11 @@ def load_matches_from_database(start, end, puuid):
     for match_id in wanted_ids:
         to_put.append(Matches.objects.get(match_id=match_id).player_data)
     return Response({"matches": to_put}, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def load_player_data(request):
+    player_data = request.data
+    print(player_data)
+    sample_data = {'rank': ['EMERALD', 'IV', 21], 'wr': [34, 35], 'sumId': '1VKY_8bB6g7agYYO_pZcieSe-Npy5iuV_t7L4jaZVquOC4k',
+                    'puuid': '_numZ7P_3tZlzeC8lkHSBsY5MIKVje1kvHNJlt7_Wp9fKEhwJss6VMAc0HfVsdFLlm6oYXwqvdE27Q', 'level': 338, 'icon': 5369}
+    return Response(sample_data, status=status.HTTP_200_OK)
