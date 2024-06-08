@@ -23,16 +23,11 @@ def load_new_match_data(request, api_key = 'RGAPI-f0816f16-3444-43d2-80d2-166c6e
 
     if not Accounts.objects.filter(puuid=puuid).exists():
         pd.write_player_data(api_key, gameName, tagline)
-        add_20_to_database(puuid, start, amount, api_key)
-
-    flag = False #exists to check whether or not we have found a match that is already in the database
-    while not flag:
-        flag = add_20_to_database(puuid, start, amount, api_key)
-        start = start + amount
+    update_past_matches(puuid, start, amount, api_key)
     print("Successfully updated a user's data")
 
 
-def add_20_to_database(puuid, api_key):
+def update_past_matches(puuid, api_key):
     start = 0
     amount = 100
     database_matches = Accounts.objects.get(puuid=puuid).past_matches
@@ -85,8 +80,16 @@ def load_matches_from_database(start, end, puuid, api_key):
 
 @api_view(['POST'])
 def load_player_data(request):
+    if not Accounts.objects.filter(riotID=str(gameName + "#" + tagline)).exists():
+        pd.write_player_data(gameName, tagline)
     player_data = request.data
+    gameName = player_data.get('gameName').strip()
+    tagline = player_data.get('tagline').strip()
+
     print(player_data)
-    sample_data = {'rank': ['EMERALD', 'IV', 21], 'wr': [34, 35], 'sumId': '1VKY_8bB6g7agYYO_pZcieSe-Npy5iuV_t7L4jaZVquOC4k',
-                    'puuid': '_numZ7P_3tZlzeC8lkHSBsY5MIKVje1kvHNJlt7_Wp9fKEhwJss6VMAc0HfVsdFLlm6oYXwqvdE27Q', 'level': 338, 'icon': 5369}
+    data = Accounts.objects.get(riotID=str(gameName + "#" + tagline))
+    print(data)
+
+    sample_data = {'rank': [data.tier, data.rank, data.leaguePoints], 'wr': [data.wins, data.losses], 'sumId': data.summonerName,
+                    'puuid': data.puuid, 'level': data.level, 'icon': data.icon}
     return Response(sample_data, status=status.HTTP_200_OK)
