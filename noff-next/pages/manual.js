@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import ManualSearchInput from './components/ManualSearchInput';
 
-
 function ManualApp() {
   // useState() is a hook that takes in the initial state and returns an array with two elements.
   // The first element is the current state value and the second element is a function that allows you to update the state.

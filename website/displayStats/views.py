@@ -70,6 +70,7 @@ def add_20_to_database(puuid, start, amount, api_key):
     print(f"Successfully updated the past matches for the player {puuid}")
     return flag
 
+
 @api_view(['POST'])
 def load_old_match_data(request, api_key):
     #need to count how many matches are loaded before loading more, then find the next 20 to load from the db
@@ -82,7 +83,6 @@ def load_old_match_data(request, api_key):
         if not Matches.objects.filter(match_id=match).exists():
             md.insert_matchdata_to_database(match, api_key)
     
-
 
 @api_view(['POST'])
 def load_matches(request):

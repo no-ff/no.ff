@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import LiveSearchInput from './components/LiveSearchInput';
+import RiotIdInput from './components/RiotIdInput';
 
 function LiveApp() {
   // useState() is a hook that takes in the initial state and returns an array with two elements.
@@ -20,7 +20,6 @@ function LiveApp() {
     if (index !== -1) {
       const gameName = value.substring(0, index);
       const tagline = value.substring(index + 1);
-      console.log(gameName, tagline);
       setFormData({
         gameName: gameName,
         tagline: tagline,
@@ -34,14 +33,9 @@ function LiveApp() {
         id: value,
       })
     }
-  };
+  }
 
-
-  /**
-   * Remove duplicates from history. Use once in a while if necessary.
-   *
-   * @returns {void}
-   */
+  // Remove duplicates from history.
   const cleanHistory = () => {
     const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
     const uniqueHistory = [...new Set(history)];
@@ -51,7 +45,7 @@ function LiveApp() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('http://127.0.0.1:8000/api/process-id/', formData)
-    axios.post('http://127.0.0.1:8000/DisplayStats/add_new_matches/', formData)
+    // axios.post('http://127.0.0.1:8000/DisplayStats/add_new_matches/', formData)
       .then(response => {
         alert('Form submitted successfully');
         const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
@@ -67,15 +61,13 @@ function LiveApp() {
         console.error('There was an error submitting the form!', error);
         setError('There was an error submitting the form!');
       });
-
-
   };
 
   return (
     <div className="App">
       <h1 className="mb-4">Submit Riot ID for Live Game</h1>
       <form autoComplete="off" onSubmit={handleSubmit}>
-        <LiveSearchInput
+        <RiotIdInput
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           label="Riot ID:"

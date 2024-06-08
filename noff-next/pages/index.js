@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import ManualApp from './manual'
 import LiveApp from './live'
 import { motion } from 'framer-motion'
+
 export default function Home() {
   const scrollToLiveApp = () => {
     document.getElementById("liveApp").scrollIntoView({ behavior: "smooth" });
@@ -11,7 +12,7 @@ export default function Home() {
   const scrollToManualApp = () => {
     document.getElementById("manualApp").scrollIntoView({ behavior: "smooth" });
   };
-  
+
   const onScrollStop = callback => {
     let isScrolling;
     if (typeof window !== 'undefined') {

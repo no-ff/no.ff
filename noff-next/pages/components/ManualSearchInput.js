@@ -4,7 +4,6 @@ import ChampSelect from './ChampSelect';
 var data = require('./champ_data.json');
 
 const ManualSearchInput = ({ label, name, onChange }) => {
-
   const [filteredData, setFilteredData] = useState(data);
   const [inputValue, setInputValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
-const LiveSearchInput = ({ label, name, value, onChange }) => {
+const RiotIdInput = ({ label, name, value, onChange }) => {
   const [filteredHistory, setFilteredHistory] = useState([]);
 
   const handleSearch = (e) => {
+    onChange(e);
     const searchValue = e.target.value;
-    onChange(e); // Call onChange that was passed in.
     const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
     const filtered = history.filter(item => {
       const s = searchValue.toLowerCase();
@@ -32,7 +32,6 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
   }
 
   const handleClick = (item) => {
-    console.log("called");
     onChange({ target: { name, value: item } });
     setFilteredHistory([]);
   };
@@ -77,4 +76,4 @@ const LiveSearchInput = ({ label, name, value, onChange }) => {
   );
 };
 
-export default LiveSearchInput;
+export default RiotIdInput;
