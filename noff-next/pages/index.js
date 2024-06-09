@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import ManualApp from './manual'
 import LiveApp from './live'
 import { motion } from 'framer-motion'
+import TeamFrame from './components/TeamFrame';
 
 
 export default function Home() {
@@ -50,6 +51,7 @@ export default function Home() {
 
   return (
     <div>
+      <TeamFrame />
       <div id="liveApp" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
         <LiveApp />
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToManualApp} style={{ marginTop: '100px' }} className="gotobutton">
