@@ -1,3 +1,4 @@
+import requests
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -6,14 +7,15 @@ from rest_framework import status
 
 
 from . import match_data as md
-from. import player_data as pd
+from . import player_data as pd
 
-import requests
 
 API_KEY = 'RGAPI-e3d577b6-1f0a-4842-888a-8c7ba7c24864'
+
+
 @api_view(['POST'])
-def load_new_match_data(request):
-    #replace with how we get the ID
+def load_new_match_data(request, api_key='RGAPI-f0816f16-3444-43d2-80d2-166c6e9a4a77'):
+    # replace with how we get the ID
     form_data = request.data
     gameName = form_data.get('gameName').strip()
     tagline = form_data.get('tagline').strip()
@@ -24,25 +26,25 @@ def load_new_match_data(request):
 
     if not Accounts.objects.filter(puuid=puuid).exists():
         pd.write_player_data(API_KEY, gameName, tagline)
-    update_past_matches(puuid, start, amount, API_KEY)
+    update_past_matches(puuid)
     print("Successfully updated a user's data")
     return load_matches_from_database(0, 20, puuid, API_KEY)
 
 
 @api_view(['POST'])
 def load_old_match_data(request):
-    #need to count how many matches are loaded before loading more, then find the next 20 to load from the db
+    # need to count how many matches are loaded before loading more, then find the next 20 to load from the db
     form_data = request.data
     gameName = form_data.get('gameName').strip()
     tagline = form_data.get('tagline').strip()
     loaded_data = form_data.get('loaded').strip()
     riotID = gameName + "#" + tagline
-    
+
     return load_matches_from_database(loaded_data, loaded_data + 20, riotID, API_KEY)
 
 
 @api_view(['POST'])
-def load_player_data(request):
+def load_player_data(request, api_key='RGAPI-176c62c2-50e9-4226-a0be-970f0a99054e'):
     gameName = request.data.get('gameName')
     tagline = request.data.get('tagline')
     print(gameName, tagline)
@@ -57,37 +59,43 @@ def load_player_data(request):
     print(data)
 
     sample_data = {'rank': [data.tier, data.rank, data.leaguePoints], 'wr': [data.wins, data.losses], 'sumId': data.summonerName,
-                    'puuid': data.puuid, 'level': data.level, 'icon': data.icon}
+                   'puuid': data.puuid, 'level': data.level, 'icon': data.icon}
     return Response(sample_data, status=status.HTTP_200_OK)
 
+
 """HELPER FUNCTIONS"""
+
+
 def update_past_matches(puuid):
     start = 0
     amount = 100
     database_matches = Accounts.objects.get(puuid=puuid).past_matches
     while True:
-        req = f"https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?start={start}&count={amount}&api_key={API_KEY}"  
+        req = f"https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?start={start}&count={amount}&api_key={API_KEY}"
         matches = requests.get(req)
         # handle error (assume it is handled for now)
-        matches = matches.json(); print(matches)
-        if len(matches) == 0: break
+        matches = matches.json()
+        print(matches)
+        if len(matches) == 0:
+            break
 
         for match in matches:
-            if match in database_matches: break
-            database_matches.insert(0,match)
+            if match in database_matches:
+                break
+            database_matches.insert(0, match)
             if not Matches.objects.filter(match_id=match).exists():
                 md.insert_matchdata_to_database(match, API_KEY)
         start += amount
     d = Accounts.objects.get(puuid=puuid)
     d.past_matches = database_matches.sort(reverse=True)
-    d.save()  
+    d.save()
 
     print(f"Successfully updated the past matches for the player {puuid}")
 
 
-
 def load_matches_from_database(start, end, riotID):
-    wanted_ids = Accounts.objects.get(riotID=riotID).past_matches[start: end + 1]
+    wanted_ids = Accounts.objects.get(
+        riotID=riotID).past_matches[start: end + 1]
     to_put = []
     print(wanted_ids)
     print(start, end)

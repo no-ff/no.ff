@@ -4,6 +4,8 @@ import axios from 'axios'
 import RiotIdInput from './components/RiotIdInput';
 import Account from './components/Account';
 import { motion, useAnimationControls } from 'framer-motion';
+import styles from '../styles/RiotIdInput.module.css';
+
 function profile() {
   const [formData, setFormData] = useState({
     gameName: '',
@@ -12,6 +14,8 @@ function profile() {
   });
 
   const [playerData, setPlayerData] = useState({});
+  const [matchHistory, setMatchHistory] = useState({});
+
   const controls = useAnimationControls();
   const handleChange = (e) => {
     const { value } = e.target;
@@ -27,35 +31,35 @@ function profile() {
   const submitData = (e) => {
     if (formData.gameName === '' || formData.tagline === '') { alert('Please enter a valid riot id'); return; }
     e.preventDefault();
-    console.log(formData);
+    // Get account data.
     axios.post('http://127.0.0.1:8000/DisplayStats/load_player_data/', formData)
       .then(response => {
         const player_data = response.data;
         setPlayerData(player_data);
-        printData();
-        moveBlock();
+      }
+      )
+      .catch(error => {
+        console.error('There was an error submitting the form!', error);
+      });
+    // Get match history.
+    axios.post('http://127.0.0.1:8000/DisplayStats/add_new_matches/', formData)
+      .then(response => {
+        const matches = response.data;
+        setMatchHistory(matches);
+        console.log(matchHistory)
       }
       )
       .catch(error => {
         console.error('There was an error submitting the form!', error);
       });
   }
-  const moveBlock = () => {
-    controls.start({
-      y: "-180%",
-      transition: { duration: 1.5 }
-    });
-  }
-  const printData = () => {
-    console.log(playerData);
-  }
 
   return (
-    <div className='search-profile' style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+    <div className={styles.centered}>
       <motion.div animate={controls}>
-      <h1> Enter riot id</h1>
       <form autoComplete="off" onSubmit={submitData}>
         <RiotIdInput
+          className={styles.input}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           label="Riot ID:"
@@ -63,7 +67,7 @@ function profile() {
           value={formData.id}
           onChange={handleChange}
         />
-        <button type='submit' className='mt-4 bg-blue-400 px-3 py-1 rounded'>Search</button>
+        {/* <button type='submit' className='mt-4 bg-blue-400 px-3 py-1 rounded'>Search</button> */}
       </form>
       </motion.div>
       {/* Display Account + Match History data if form submitted succesfully. */}
@@ -71,8 +75,9 @@ function profile() {
         <>
           <Account
             initialState={playerData}
-            />
+          />
           <div>Test</div>
+
           {/* Sample structure for match display. */}
           {/* <Match /> */}
           {/* <Match /> */}

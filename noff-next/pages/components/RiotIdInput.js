@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import styles from '../../styles/RiotIdInput.module.css';
 
 const RiotIdInput = ({ label, name, value, onChange }) => {
   const [filteredHistory, setFilteredHistory] = useState([]);
@@ -44,7 +45,7 @@ const RiotIdInput = ({ label, name, value, onChange }) => {
 
   return (
     // A container that contains the input field and drop-down.
-    <div className="search-container mb-5">
+    <div className={`search-container mb-5 ${styles.input}`}>
       <label htmlFor={name} className="mr-3">{label}</label>
       <input
         whileHover={{ scale: 1.1 }}
@@ -62,15 +63,15 @@ const RiotIdInput = ({ label, name, value, onChange }) => {
         className="p-1 border rounded"
       />
       {filteredHistory.length > 0 && (
-        <div className="drop-down">
+        <div className="drop-down" style={{ display: 'flex', flexDirection: 'column' }}>
           {/* filteredHistory array is mapped over and a div is created for each item. */}
           {filteredHistory.map((item) => (
             <motion.span
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onMouseDown={() => handleClick(item)}
-              className="border rounded p-1 m-3"
-              key={item}
+              className="border rounded p-1 m-2"
+              key={item}  
             >
               {/* Content of the div will be past searched Riot ID. */}
               {item}
