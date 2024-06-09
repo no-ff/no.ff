@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import ManualSearchInput from './components/ManualSearchInput';
+import ManualSearchInput from './components/input/ManualSearchInput';
 
 function ManualApp({ setIsManualAppShifted }) {
   

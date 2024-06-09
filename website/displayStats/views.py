@@ -11,7 +11,7 @@ from . import player_data as pd
 import time
 
 
-API_KEY = 'RGAPI-90c0f317-dfb9-4c13-8731-426f08801597   '
+API_KEY = 'RGAPI-623e778f-d02a-4dd5-8ccd-858a2f439b3b'
 
 
 @api_view(['POST'])

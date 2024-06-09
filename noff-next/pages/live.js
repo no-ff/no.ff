@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import RiotIdInput from './components/RiotIdInput';
+import RiotIdInput from './components/input/RiotIdInput';
 
 function LiveApp() {
   // useState() is a hook that takes in the initial state and returns an array with two elements.

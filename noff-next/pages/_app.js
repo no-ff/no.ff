@@ -1,9 +1,6 @@
 import "@/styles/globals.css";
-
-import "@/styles/Champ.css"
-import "@/styles/TeamFrame.css"
-
-
+import "@/styles/components/Champ.css"
+import "@/styles/components/TeamFrame.css"
 
 import Navbar from "./components/Navbar";
 export default function App({ Component, pageProps }) {

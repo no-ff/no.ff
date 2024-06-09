@@ -1,0 +1,102 @@
+/* Riot Id Input */
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 25vh;
+}
+
+/* Account */
+.profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 50px;
+}
+
+.ranked-solo, .profile-info {
+    background-color: #3a3a3a;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    width: 300px;
+}
+
+.ranked-solo h2, .profile-info h3 {
+    margin-bottom: 10px;
+}
+
+.rank {
+    display: flex;
+    align-items: center;
+}
+
+.rank img {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+
+.rank-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.rank-details h3 {
+    margin: 0;
+}
+
+.rank-details p {
+    margin: 0;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+}
+
+.profile-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-details h3 {
+    margin: 0;
+}
+
+.profile-details p {
+    margin: 0;
+}
+
+.profile-details .fan {
+    background-color: #0066cc;
+    border-radius: 5px;
+    padding: 2px 5px;
+    display: inline-block;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.profile-stats button {
+    background-color: #0066cc;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.profile-stats button:hover {
+    background-color: #004a99;
+}

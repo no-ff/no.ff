@@ -16,9 +16,9 @@ function Champ({ name }) {
   }
 
   return (
-    <div className="image_box">
+    <div className='image_box'>
       <figure>
-        <img className='champ_img' src={"https://ddragon.leagueoflegends.com/cdn/14.11.1/img/champion/" + champName + ".png"} />
+        <img className='champ_img' src={'https://ddragon.leagueoflegends.com/cdn/14.11.1/img/champion/' + champName + '.png'} />
         <figcaption>{champName}</figcaption>
       </figure>
       <SearchBar champCall={setChamp} />
