@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import { motion } from 'framer-motion'
 
 function Navbar() {
     const noff = "{noff}";
@@ -15,7 +16,10 @@ function Navbar() {
     <ul className="links flex justify-space-between items-center gap">
         <li className="mx-5" onClick={() => router.push('/')}> Home </li>
         <li className="mx-5" onClick={() => router.push('/aboutus')}> About Us </li>
-        <li className="mx-5" onClick={() => router.push('/')}> Placeholder </li>
+        <motion.li className="mx-5" 
+        whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+        onClick={() => router.push('/profile')}> Statistics   
+        </motion.li>
     </ul>
     </div>
   )

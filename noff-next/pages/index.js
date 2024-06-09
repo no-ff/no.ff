@@ -53,7 +53,6 @@ export default function Home() {
 
   return (
     <div>
-      <TeamFrame />
       <div id="liveApp" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
         <LiveApp />
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToManualApp} style={{ marginTop: '100px' }} className="gotobutton">
