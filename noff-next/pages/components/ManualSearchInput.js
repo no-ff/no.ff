@@ -3,7 +3,7 @@ import ChampSelect from './ChampSelect';
 
 var data = require('./champ_data.json');
 
-const ManualSearchInput = ({ label, name, onChange }) => {
+const ManualSearchInput = ({ label, name, onChange, setIsManualAppShifted }) => {
 
   const [filteredData, setFilteredData] = useState(data);
   const [inputValue, setInputValue] = useState('');
@@ -30,38 +30,46 @@ const ManualSearchInput = ({ label, name, onChange }) => {
     }
   };
 
-  // When a user clicks on a champion name, the input field will be set to the champion name.
   const handleSelect = (item) => {
     if (item) {
       setInputValue(item.champName);
       onChange({ target: { name, value: item.champName } });
       setFilteredData(data);
       setIsFocused(false);
+      setIsManualAppShifted(false);
     }
   };
 
-  // When the input field loses focus, the input value will be cleared.
   const handleBlur = (e) => {
     if (inputRef.current && inputRef.current.contains(e.relatedTarget)) {
       return;
     }
     setIsFocused(false);
+    setIsManualAppShifted(false);
   };
 
   const handleFocus = () => {
     setIsFocused(true);
+    setIsManualAppShifted(true);
   };
 
-  // Use arrow keys to navigate through the box.
   const handleKeyDown = (e) => {
+    const windowWidth = window.innerWidth;
+    var add = 12;
+    if (windowWidth <= 1280) {
+      add = 11;
+    }
+    if (windowWidth <= 1080) {
+      add = 10;
+    }
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
-        setSelectedItemIndex(prevIndex => Math.min(prevIndex + 12, filteredData.length - 1));
+        setSelectedItemIndex(prevIndex => Math.min(prevIndex + add, filteredData.length - 1));
         break;
       case 'ArrowUp':
         e.preventDefault();
-        setSelectedItemIndex(prevIndex => Math.max(prevIndex - 12, 0));
+        setSelectedItemIndex(prevIndex => Math.max(prevIndex - add, 0));
         break;
       case 'ArrowRight':
         e.preventDefault();
@@ -81,23 +89,25 @@ const ManualSearchInput = ({ label, name, onChange }) => {
   return (
      // A container that contains the input field and box.
     <div className="search-container mb-4" ref={inputRef}>
-      <label htmlFor={name}>
-        <div className="mb-2">{label}</div>
-      </label>
-      <input
-        type="text"
-        id={name}
-        name={name}
-        value={inputValue}
-        // Typing into the input field will call handleSearch.
-        // When the handleSearch is called the event object's target will be this input element.
-        onChange={handleSearch}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        onKeyDown={handleKeyDown}
-        required
-        className="p-1 border rounded"
-      />
+      <div className="relative">
+        <label htmlFor={name}>
+          <div className="mb-2">{label}</div>
+        </label>
+        <input
+          type="text"
+          id={name}
+          name={name}
+          value={inputValue}
+          // Typing into the input field will call handleSearch.
+          // When the handleSearch is called the event object's target will be this input element.
+          onChange={handleSearch}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          onKeyDown={handleKeyDown}
+          required
+          className="p-1 border rounded"
+        />
+      </div>
       {isFocused && (
         <ChampSelect filteredData={filteredData} selectedItemIndex={selectedItemIndex} handleSelect={handleSelect} />
       )}

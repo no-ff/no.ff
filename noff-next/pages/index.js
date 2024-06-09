@@ -1,11 +1,11 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import ManualApp from './manual'
 import LiveApp from './live'
 import { motion } from 'framer-motion'
+
 export default function Home() {
 
-
+  const [isManualAppShifted, setIsManualAppShifted] = useState(false);
 
   const onScrollStop = callback => {
     let isScrolling;
@@ -58,14 +58,13 @@ export default function Home() {
         </motion.button>
       </div>
 
-      <div id="manualApp" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
-        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToLiveApp} style={{ marginBottom: '100px'}} className="bg-gray-600 p-1 border rounded">
+      <div id="manualApp" className={`manual-app ${isManualAppShifted ? 'shifted' : ''}`} style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToLiveApp} style={{ marginBottom: '100px' }} className="bg-gray-600 p-1 border rounded">
           Go to Live Input
         </motion.button>
-        <div style={{display: 'flex', alignItems: 'flex-start', width: '100%'}}>
-          <ManualApp/>
-        </div>
+        <ManualApp setIsManualAppShifted={setIsManualAppShifted} />
       </div>
+      
     </div>
   );
 
