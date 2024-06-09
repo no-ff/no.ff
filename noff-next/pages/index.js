@@ -2,24 +2,20 @@ import React, { useRef, useEffect, useState } from 'react';
 import ManualApp from './manual'
 import LiveApp from './live'
 import { motion } from 'framer-motion'
-<<<<<<< HEAD
-=======
 import TeamFrame from './components/TeamFrame';
 
->>>>>>> 4ff1ef2e62f2985169f78381865db27200fc6407
 
 export default function Home() {
+  
+  const [isManualAppShifted, setIsManualAppShifted] = useState(false);
+
   const scrollToLiveApp = () => {
     document.getElementById("liveApp").scrollIntoView({ behavior: "smooth" });
   };
 
-<<<<<<< HEAD
-  const [isManualAppShifted, setIsManualAppShifted] = useState(false);
-=======
   const scrollToManualApp = () => {
     document.getElementById("manualApp").scrollIntoView({ behavior: "smooth" });
   };
->>>>>>> 4ff1ef2e62f2985169f78381865db27200fc6407
 
   const onScrollStop = callback => {
     let isScrolling;
