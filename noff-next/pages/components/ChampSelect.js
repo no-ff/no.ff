@@ -3,7 +3,6 @@ import Champ from './Champ';
 import { color, motion } from 'framer-motion';
 
 function ChampSelect({ filteredData, selectedItemIndex, handleSelect}) {
-
   // For champion selection 
   function getClassName(item) {
     let className = 'box-item';

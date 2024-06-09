@@ -28,7 +28,7 @@ def load_new_match_data(request, api_key='RGAPI-f0816f16-3444-43d2-80d2-166c6e9a
         pd.write_player_data(API_KEY, gameName, tagline)
     update_past_matches(puuid)
     print("Successfully updated a user's data")
-    return load_matches_from_database(0, 20, puuid, API_KEY)
+    return load_matches_from_database(0, 20, puuid)
 
 
 @api_view(['POST'])
@@ -44,7 +44,7 @@ def load_old_match_data(request):
 
 
 @api_view(['POST'])
-def load_player_data(request, api_key='RGAPI-176c62c2-50e9-4226-a0be-970f0a99054e'):
+def load_player_data(request):
     gameName = request.data.get('gameName')
     tagline = request.data.get('tagline')
     print(gameName, tagline)

@@ -33,10 +33,10 @@ def react_process_manual(request):
     supp2 = form_data.get('supp2')
     champions = [top1, jungle1, mid1, bot1,
                  supp1, top2, jungle2, mid2, bot2, supp2]
-    
+
     for champion in champions:
         if (champion not in Champ_data.values()):
-            return Response({"message": "Invalid Champion Names"}, 
+            return Response({"message": "Invalid Champion Names"},
                             status=status.HTTP_400_BAD_REQUEST)
     return Response({"message": "Form processed successfully", "data": champions + percentage_predict(champions)}, status=status.HTTP_200_OK)
 
@@ -47,9 +47,9 @@ def react_process_id(request):
     gameName = form_data.get('gameName').strip()
     tagline = form_data.get('tagline').strip()
     champions = id_to_live_match_comp(gameName, tagline)
-    if champions == 'No account found':
-        return Response({"message": "No RiotID found"}, 
-                            status=status.HTTP_400_BAD_REQUEST)
+    if champions == 'No account found' or champions == 'No game found':
+        return Response({"message": "No RiotID found"},
+                        status=status.HTTP_400_BAD_REQUEST)
     return Response({"message": "Check data if game not found or account not found", "data": champions + percentage_predict(champions)}, status=status.HTTP_200_OK)
 
 
@@ -87,8 +87,6 @@ def process_manual(request):
         supp2 = request.POST.get('supp2')
         champions = [top1, jungle1, mid1, bot1,
                      supp1, top2, jungle2, mid2, bot2, supp2]
-        
-
 
         return percentage_display(request, champions)
 
