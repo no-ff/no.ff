@@ -3,15 +3,16 @@ import { useState } from 'react'
 import axios from 'axios'
 import RiotIdInput from './components/RiotIdInput';
 import Account from './components/Account';
-
+import { motion, useAnimationControls } from 'framer-motion';
 function profile() {
   const [formData, setFormData] = useState({
     gameName: '',
     tagline: '',
     id: '',
   });
-  const [playerData, setPlayerData] = useState({});
 
+  const [playerData, setPlayerData] = useState({});
+  const controls = useAnimationControls();
   const handleChange = (e) => {
     const { value } = e.target;
     const findUntil = '#';
@@ -32,19 +33,26 @@ function profile() {
         const player_data = response.data;
         setPlayerData(player_data);
         printData();
+        moveBlock();
       }
       )
       .catch(error => {
         console.error('There was an error submitting the form!', error);
       });
   }
-
+  const moveBlock = () => {
+    controls.start({
+      y: "-180%",
+      transition: { duration: 1.5 }
+    });
+  }
   const printData = () => {
     console.log(playerData);
   }
 
   return (
     <div className='search-profile' style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+      <motion.div animate={controls}>
       <h1> Enter riot id</h1>
       <form autoComplete="off" onSubmit={submitData}>
         <RiotIdInput
@@ -57,6 +65,7 @@ function profile() {
         />
         <button type='submit' className='mt-4 bg-blue-400 px-3 py-1 rounded'>Search</button>
       </form>
+      </motion.div>
       {/* Display Account + Match History data if form submitted succesfully. */}
       {Object.keys(playerData).length !== 0 && (
         <>

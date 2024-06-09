@@ -8,7 +8,6 @@ function Account({ initialState }) {
   const [state, setState] = useState(
     initialState
   );
-
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '40px'}}>
       <div>
