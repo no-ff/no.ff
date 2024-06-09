@@ -36,13 +36,7 @@ function profile() {
       .then(response => {
         const player_data = response.data;
         setPlayerData(player_data);
-      }
-      )
-      .catch(error => {
-        console.error('There was an error submitting the form!', error);
-      });
-    // Get match history.
-    axios.post('http://127.0.0.1:8000/DisplayStats/add_new_matches/', formData)
+        axios.post('http://127.0.0.1:8000/DisplayStats/add_new_matches/', formData)
       .then(response => {
         const matches = response.data;
         console.log(matches);
@@ -53,6 +47,14 @@ function profile() {
       .catch(error => {
         console.error('There was an error submitting the form!', error);
       });
+      }
+      )
+      .catch(error => {
+        console.error('There was an error submitting the form !!', error);
+      });
+    // Get match history.
+
+    
   }
 
   return (

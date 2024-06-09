@@ -25,6 +25,7 @@ def load_new_match_data(request):
     amount = 20
     start = 0
 
+
     # update_past_matches(puuid)
     print("Successfully updated a user's data")
     print(gameName+"#"+tagline)
