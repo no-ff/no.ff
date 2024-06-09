@@ -5,6 +5,7 @@ import RiotIdInput from './components/RiotIdInput';
 import Account from './components/Account';
 import { motion, useAnimationControls } from 'framer-motion';
 import styles from '../styles/RiotIdInput.module.css';
+import Match from './components/Match';
 
 function profile() {
   const [formData, setFormData] = useState({
@@ -39,9 +40,7 @@ function profile() {
         axios.post('http://127.0.0.1:8000/DisplayStats/add_new_matches/', formData)
       .then(response => {
         const matches = response.data;
-        console.log(matches);
         setMatchHistory(matches);
-        console.log(matchHistory)
       }
       )
       .catch(error => {
@@ -55,6 +54,10 @@ function profile() {
     // Get match history.
 
     
+  }
+  const test = () => {
+    console.log(playerData);
+   
   }
 
   return (
@@ -72,16 +75,15 @@ function profile() {
         />
         <button type='submit' className='mt-4 bg-blue-400 px-3 py-1 rounded'>Search</button>
       </form>
+      <button onClick={test}>test me</button>
       </motion.div>
       {/* Display Account + Match History data if form submitted succesfully. */}
-      {Object.keys(playerData).length !== 0 && (
+      {Object.keys(matchHistory).length !== 0 && (
         <>
           <Account
-            initialState={playerData}
+            state={playerData}
           />
-          <div>Test</div>
-
-          {/* Sample structure for match display. */}
+          <Match initialState={matchHistory}/>
           {/* <Match /> */}
           {/* <Match /> */}
         </>
