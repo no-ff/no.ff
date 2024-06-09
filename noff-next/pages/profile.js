@@ -45,6 +45,7 @@ function profile() {
     axios.post('http://127.0.0.1:8000/DisplayStats/add_new_matches/', formData)
       .then(response => {
         const matches = response.data;
+        console.log(matches);
         setMatchHistory(matches);
         console.log(matchHistory)
       }
