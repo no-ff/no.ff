@@ -2,10 +2,24 @@ import React, { useRef, useEffect, useState } from 'react';
 import ManualApp from './manual'
 import LiveApp from './live'
 import { motion } from 'framer-motion'
+<<<<<<< HEAD
+=======
+import TeamFrame from './components/TeamFrame';
+
+>>>>>>> 4ff1ef2e62f2985169f78381865db27200fc6407
 
 export default function Home() {
+  const scrollToLiveApp = () => {
+    document.getElementById("liveApp").scrollIntoView({ behavior: "smooth" });
+  };
 
+<<<<<<< HEAD
   const [isManualAppShifted, setIsManualAppShifted] = useState(false);
+=======
+  const scrollToManualApp = () => {
+    document.getElementById("manualApp").scrollIntoView({ behavior: "smooth" });
+  };
+>>>>>>> 4ff1ef2e62f2985169f78381865db27200fc6407
 
   const onScrollStop = callback => {
     let isScrolling;
@@ -33,33 +47,26 @@ export default function Home() {
       // Check if the current scroll position is below or above 50%
       if (currentScrollPercentage < 0.5) {
           // Scroll to the element with ID "liveApp" smoothly
-          document.getElementById("liveApp").scrollIntoView({ behavior: "smooth" });
+          scrollToLiveApp();
       } else {
           // Scroll to the element with ID "manualApp" smoothly
-          document.getElementById("manualApp").scrollIntoView({ behavior: "smooth" });
+          scrollToManualApp();
       }
     }
   });
 
-  const scrollToLiveApp = () => {
-    document.getElementById("liveApp").scrollIntoView({ behavior: "smooth" });
-  };
-
-  const scrollToManualApp = () => {
-    document.getElementById("manualApp").scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <div>
+      <TeamFrame />
       <div id="liveApp" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
         <LiveApp />
-        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToManualApp} style={{ marginTop: '100px' }} className="bg-gray-600 p-1 border rounded">
+        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToManualApp} style={{ marginTop: '100px' }} className="gotobutton">
           Go to Manual Input
         </motion.button>
       </div>
 
       <div id="manualApp" className={`manual-app ${isManualAppShifted ? 'shifted' : ''}`} style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToLiveApp} style={{ marginBottom: '100px' }} className="bg-gray-600 p-1 border rounded">
+        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToLiveApp} style={{ marginBottom: '100px'}} className="gotobutton">
           Go to Live Input
         </motion.button>
         <ManualApp setIsManualAppShifted={setIsManualAppShifted} />

@@ -3,6 +3,7 @@ import axios from 'axios';
 import ManualSearchInput from './components/ManualSearchInput';
 
 function ManualApp({ setIsManualAppShifted }) {
+  
   const [formData, setFormData] = useState({
     top1: '',
     jungle1: '',

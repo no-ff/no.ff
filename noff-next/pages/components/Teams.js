@@ -1,5 +1,6 @@
 import React from "react";
 import Champ from "./Champ.js";
+import "@/styles/Teams.css";
 
 function Teams() {
   return (
