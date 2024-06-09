@@ -26,8 +26,6 @@ function profile() {
       tagline: index !== -1 ? value.substring(index + 1) : '',
       id: value,
     })
-    // console.log(index !== -1 ? value.substring(0, index) : '')
-    // console.log(formData)
   }
 
   const submitData = (e) => {
@@ -57,9 +55,9 @@ function profile() {
         console.error('There was an error submitting the form !!', error);
       });
   }
+
   const test = () => {
     console.log(playerData);
-   
   }
 
   return (
@@ -84,10 +82,10 @@ function profile() {
       {Object.keys(matchHistory).length !== 0 && (
         <>
           <Account
-            initialState={{ ...playerData, ...formData }}
+            props={{ ...playerData, ...formData }}
           />
           {/* Sample structure for match display. */}
-          <Match initialState={matchHistory}/>
+          <Match props={matchHistory}/>
           {/* <Match /> */}
           {/* <Match /> */}
         </>
