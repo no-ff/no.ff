@@ -42,6 +42,9 @@ def load_old_match_data(request, api_key):
 
 @api_view(['POST'])
 def load_player_data(request):
+    gameName = request.data.get('gameName')
+    tagline = request.data.get('tagline')
+    print(gameName, tagline)
     if not Accounts.objects.filter(riotID=str(gameName + "#" + tagline)).exists():
         pd.write_player_data(gameName, tagline)
     player_data = request.data
