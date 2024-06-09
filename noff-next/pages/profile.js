@@ -5,6 +5,7 @@ import RiotIdInput from './components/input/RiotIdInput';
 import Account from './components/Account';
 import { motion, useAnimationControls } from 'framer-motion';
 import styles from '../styles/components/Statistics.module.css';
+import Match from './components/Match';
 
 function profile() {
   const [formData, setFormData] = useState({
@@ -56,6 +57,10 @@ function profile() {
         console.error('There was an error submitting the form !!', error);
       });
   }
+  const test = () => {
+    console.log(playerData);
+   
+  }
 
   return (
     <div>
@@ -76,12 +81,13 @@ function profile() {
         </motion.div>
       </div>
       {/* Display Account + Match History data if form submitted succesfully. */}
-      {Object.keys(playerData).length !== 0 && (
+      {Object.keys(matchHistory).length !== 0 && (
         <>
           <Account
             initialState={{ ...playerData, ...formData }}
           />
           {/* Sample structure for match display. */}
+          <Match initialState={matchHistory}/>
           {/* <Match /> */}
           {/* <Match /> */}
         </>

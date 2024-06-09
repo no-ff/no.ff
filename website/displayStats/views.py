@@ -58,11 +58,9 @@ def load_player_data(request):
     tagline = player_data.get('tagline').strip()
 
     data = Accounts.objects.get(riotID=str(gameName + "#" + tagline))
-    print(data.past_matches)
 
     sample_data = {'rank': [data.tier, data.rank, data.leaguePoints], 'wr': [data.wins, data.losses], 'sumId': data.summonerName,
                    'puuid': data.puuid, 'level': data.level, 'icon': data.icon}
-    print(sample_data)
     return Response(sample_data, status=status.HTTP_200_OK)
 
 
@@ -107,3 +105,4 @@ def load_matches_from_database(start, riotID):
             to_put.append(Matches.objects.get(match_id=match_id).player_data)
     return Response({"matches": to_put}, status=status.HTTP_200_OK)
 
+    

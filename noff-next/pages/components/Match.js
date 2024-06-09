@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 
-function Match({ initialState }) {
-  const [state, setState] = useState({
-    initialState
-  });
+function Match(props) {
+// use props instead of state
+
 
   return (
     <div>
-      
+      hi
     </div>
   )
 }
