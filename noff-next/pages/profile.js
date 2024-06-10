@@ -28,7 +28,7 @@ function profile() {
     })
   }
 
-  const submitData = (e) => {
+  const handleSubmit = (e) => {
     if (formData.gameName === '' || formData.tagline === '') { alert('Please enter a valid riot id'); return; }
     e.preventDefault();
     // Get account data.
@@ -60,22 +60,19 @@ function profile() {
   }
 
   return (
-    <div>
-      <div className={styles.centered}>
-        <motion.div animate={controls}>
-          <form autoComplete="off" onSubmit={submitData}>
-            <RiotIdInput
-              className={styles.input}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              label="Riot ID:"
-              name="riotId"
-              value={formData.id}
-              onChange={handleChange}
-            />
-            <button type='submit' className='mt-4 bg-blue-400 px-3 py-1 rounded'>Search</button>
-          </form>
-        </motion.div>
+    <div style={{height: '100vh'}}>
+      <div className={styles.centered} style={{paddingTop: '20vh'}}>
+        <form autoComplete="off" onSubmit={handleSubmit}>
+          <RiotIdInput
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            label="Riot ID:"
+            name="riotId"
+            value={formData.id}
+            onChange={handleChange}
+          />
+          <button type="submit" className="mt-4 bg-blue-400 px-3 py-1 rounded">Submit</button>
+        </form>
       </div>
       {/* Display Account + Match History data if form submitted succesfully. */}
       {Object.keys(matchHistory).length !== 0 && Object.keys(playerData).length !== 0 && (

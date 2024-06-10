@@ -3,7 +3,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 25vh;
+}
+
+.drop-down {
+    position: absolute;
+    z-index: 1; /* Ensures the dropdown appears above other content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #251e22;
+    /* Add other styles as needed */
+}
+
+.drop-down > :first-child {
+    margin-top: 20px; /* Adjust as needed */
+}
+
+.drop-down > :last-child {
+    margin-bottom: 20px; /* Adjust as needed */
 }
 
 /* Account */
