@@ -54,6 +54,7 @@ function ManualApp({ setIsManualAppShifted }) {
   return (
     <div className="App">
       <h1 className="text-xl font-bold mb-3">Submit Team Data</h1>
+      <div>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <div className="flex space-x-20">
           <div className="w-1/2">
@@ -145,6 +146,7 @@ function ManualApp({ setIsManualAppShifted }) {
         </div>
         <button type="submit" className="mt-3 bg-blue-400 px-3 py-1 rounded">Submit</button>
       </form>
+      </div>
       
       {processedData.length > 0 && (
         

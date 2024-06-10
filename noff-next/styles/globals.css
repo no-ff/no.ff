@@ -116,59 +116,9 @@ a {
 .manual-app.shifted .box {
   transform: translateX(20rem);
 }
-
-.box {
-  position: absolute;
-  top: 7rem;
-  right: 5rem;
-  overflow: hidden; 
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-}
-
-.box-item {
-  transition: transform 0.1s ease, background-color 0.1s ease;
-}
-
-.box-item:hover {
-  transform: scale(1.1);
-  background-color: blue;
-}
-
-.box-item.selected {
-  transform: scale(1.1);
-  background-color: blue;
-}
-
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
-  }
-}
-
-@media screen and (max-width: 1280px) {
-  .manual-app.shifted {
-    transform: translateX(-18rem);
-  }
-  .manual-app.shifted .box {
-    transform: translateX(18rem);
-  }
-  .box {
-    right: 2rem;
-    grid-template-columns: repeat(11, 1fr);
-  }
-}
-
-@media screen and (max-width: 1080px) {
-  .manual-app.shifted {
-    transform: translateX(-15rem);
-  }
-  .manual-app.shifted .box {
-    transform: translateX(15rem);
-  }
-  .box {
-    right: 0rem;
-    grid-template-columns: repeat(10, 1fr);
   }
 }
 

@@ -88,7 +88,7 @@ const ManualSearchInput = ({ label, name, onChange, setIsManualAppShifted }) => 
 
   return (
      // A container that contains the input field and box.
-    <div className="search-container mb-4" ref={inputRef}>
+    <div className="search-container flex-auto" ref={inputRef}>
       <div className="relative">
         <label htmlFor={name}>
           <div className="mb-2">{label}</div>
