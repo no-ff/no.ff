@@ -5,16 +5,8 @@ import styles from '@/styles/components/Statistics.module.css'
  * Displays account information.
  */
 function Account(props) {
+  props.state['rank'][0] = props.state['rank'][0].charAt(0).toUpperCase() + props.state['rank'][0].slice(1).toLowerCase();
 
-
-  /**  React only calls useState() once during the first render. useEffect will continously update the state if props changes.
-  useEffect(() => {
-    const newState = { ...props };
-    // console.log(newState)
-    newState['rank'][0] = newState['rank'][0].charAt(0).toUpperCase() + newState['rank'][0].slice(1).toLowerCase();
-    setState(newState);
-  }, [props]);
-*/
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '40px' }}>
       <div className={styles.profile}>
