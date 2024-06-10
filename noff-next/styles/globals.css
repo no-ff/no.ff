@@ -110,12 +110,13 @@ a {
 }
 
 .manual-app.shifted {
-  transform: translateX(-20rem);
+  transform: translateX(-10rem);
 }
 
 .manual-app.shifted .box {
   transform: translateX(20rem);
 }
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -134,15 +135,17 @@ a {
 table {
   margin-left: auto;
   margin-right: auto;
-  border-collapse: separate;
+  border-collapse: collapse;
   border-spacing: 0;
   transition: 2s ease-in-out;
+  border: 1px solid rgba(var(--foreground-rgb), 0.1);
 }
 
 table th,
 table td {
   text-align: left;
-  border-bottom: 1px solid rgba(var(--foreground-rgb), 0.1);
+  border: 1px solid rgba(var(--foreground-rgb), 0.1);
+  padding: 10px;
 }
 
 .winrate-bar {
@@ -155,7 +158,7 @@ table td {
 
 .winrate-bar-fill {
   height: 1.2rem;
-  background: linear-gradient(to right, #721ad1 0%, #216ff7 100%); 
+  background: linear-gradient(to right, #721ad1 0%, #216ff7 100%);
   animation: fill 1s ease-in-out forwards;
 }
 
