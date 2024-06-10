@@ -36,7 +36,8 @@ function profile() {
     axios.post('http://127.0.0.1:8000/DisplayStats/load_player_data/', formData)
       .then(response => {
         const player_data = response.data;
-        setPlayerData({...player_data, ...formData});
+        setPlayerData(player_data);
+        console.log(player_data); // LOG
         // Get match history.
         axios.post('http://127.0.0.1:8000/DisplayStats/add_new_matches/', formData)
           .then(response => {
@@ -77,7 +78,7 @@ function profile() {
       {/* Display Account + Match History data if form submitted succesfully. */}
       {Object.keys(matchHistory).length !== 0 && Object.keys(playerData).length !== 0 && (
         <>
-          <Account props={playerData} />
+          <Account state={playerData} />
           {matchHistory.map((item) => {
             return <Match props={item} /> // item will be object containing match id, game length, and type.
           }
