@@ -24,7 +24,7 @@ const ManualSearchInput = ({ label, name, onChange, setIsManualAppShifted }) => 
         return searchItem && fullName.startsWith(searchItem) && fullName !== searchItem;
       });
       setFilteredData(filtered);
-    } 
+    }
     else {
       setFilteredData(data);
     }
@@ -55,13 +55,7 @@ const ManualSearchInput = ({ label, name, onChange, setIsManualAppShifted }) => 
 
   const handleKeyDown = (e) => {
     const windowWidth = window.innerWidth;
-    var add = 12;
-    if (windowWidth <= 1280) {
-      add = 11;
-    }
-    if (windowWidth <= 1080) {
-      add = 10;
-    }
+    var add = 6;
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
