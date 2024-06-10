@@ -32,17 +32,16 @@ function profile() {
     if (formData.gameName === '' || formData.tagline === '') { alert('Please enter a valid riot id'); return; }
     e.preventDefault();
     // Get account data.
-    console.log(formData)
+    // console.log(formData) // LOG
     axios.post('http://127.0.0.1:8000/DisplayStats/load_player_data/', formData)
       .then(response => {
         const player_data = response.data;
-        setPlayerData(player_data);
-        console.log(player_data) // LOG STATEMENT
+        setPlayerData({...player_data, ...formData});
         // Get match history.
         axios.post('http://127.0.0.1:8000/DisplayStats/add_new_matches/', formData)
           .then(response => {
-            const matches = response.data;
-            // console.log(matches);
+            const matches = response.data['matches'];
+            console.log(matches); // LOG
             setMatchHistory(matches);
           }
           )
@@ -79,15 +78,14 @@ function profile() {
         </motion.div>
       </div>
       {/* Display Account + Match History data if form submitted succesfully. */}
-      {Object.keys(matchHistory).length !== 0 && (
+      {Object.keys(matchHistory).length !== 0 && Object.keys(playerData).length !== 0 && (
         <>
-          <Account
-            props={{ ...playerData, ...formData }}
-          />
-          {/* Sample structure for match display. */}
-          <Match props={matchHistory}/>
-          {/* <Match /> */}
-          {/* <Match /> */}
+          <Account props={playerData} />
+          {matchHistory.map((item) => {
+            return <Match props={item} /> // item will be object containing match id, game length, and type.
+          }
+          )
+          }
         </>
       )}
     </div>
