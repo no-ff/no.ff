@@ -11,7 +11,7 @@ from . import player_data as pd
 import time
 
 
-API_KEY = 'RGAPI-623e778f-d02a-4dd5-8ccd-858a2f439b3b'
+API_KEY = 'RGAPI-bdba9a43-33b7-4588-b84c-a66fa3d8909b'
 
 
 @api_view(['POST'])
@@ -59,7 +59,7 @@ def load_player_data(request):
 
     data = Accounts.objects.get(riotID=str(gameName + "#" + tagline))
 
-    sample_data = {'rank': [data.tier, data.rank, data.leaguePoints], 'wr': [data.wins, data.losses], 'sumId': data.summonerName,
+    sample_data = {'gameName': gameName, 'tagline': tagline, 'rank': [data.tier, data.rank, data.leaguePoints], 'wr': [data.wins, data.losses], 'sumId': data.summonerName,
                    'puuid': data.puuid, 'level': data.level, 'icon': data.icon}
     return Response(sample_data, status=status.HTTP_200_OK)
 

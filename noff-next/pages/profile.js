@@ -28,21 +28,21 @@ function profile() {
     })
   }
 
-  const submitData = (e) => {
+  const handleSubmit = (e) => {
     if (formData.gameName === '' || formData.tagline === '') { alert('Please enter a valid riot id'); return; }
     e.preventDefault();
     // Get account data.
-    console.log(formData)
+    // console.log(formData) // LOG
     axios.post('http://127.0.0.1:8000/DisplayStats/load_player_data/', formData)
       .then(response => {
         const player_data = response.data;
         setPlayerData(player_data);
-        console.log(player_data) // LOG STATEMENT
+        console.log(player_data); // LOG
         // Get match history.
         axios.post('http://127.0.0.1:8000/DisplayStats/add_new_matches/', formData)
           .then(response => {
-            const matches = response.data;
-            // console.log(matches);
+            const matches = response.data['matches'];
+            console.log(matches); // LOG
             setMatchHistory(matches);
           }
           )
@@ -61,33 +61,29 @@ function profile() {
   }
 
   return (
-    <div>
-      <div className={styles.centered}>
-        <motion.div animate={controls}>
-          <form autoComplete="off" onSubmit={submitData}>
-            <RiotIdInput
-              className={styles.input}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              label="Riot ID:"
-              name="riotId"
-              value={formData.id}
-              onChange={handleChange}
-            />
-            <button type='submit' className='mt-4 bg-blue-400 px-3 py-1 rounded'>Search</button>
-          </form>
-        </motion.div>
+    <div style={{height: '100vh'}}>
+      <div className={styles.centered} style={{paddingTop: '20vh'}}>
+        <form autoComplete="off" onSubmit={handleSubmit}>
+          <RiotIdInput
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            label="Riot ID:"
+            name="riotId"
+            value={formData.id}
+            onChange={handleChange}
+          />
+          <button type="submit" className="mt-4 bg-blue-400 px-3 py-1 rounded">Submit</button>
+        </form>
       </div>
       {/* Display Account + Match History data if form submitted succesfully. */}
-      {Object.keys(matchHistory).length !== 0 && (
+      {Object.keys(matchHistory).length !== 0 && Object.keys(playerData).length !== 0 && (
         <>
-          <Account
-            props={{ ...playerData, ...formData }}
-          />
-          {/* Sample structure for match display. */}
-          <Match props={matchHistory}/>
-          {/* <Match /> */}
-          {/* <Match /> */}
+          <Account state={playerData} />
+          {matchHistory.map((item) => {
+            return <Match props={item} /> // item will be object containing match id, game length, and type.
+          }
+          )
+          }
         </>
       )}
     </div>

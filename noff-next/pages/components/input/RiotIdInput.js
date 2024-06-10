@@ -45,12 +45,12 @@ const RiotIdInput = ({ label, name, value, onChange }) => {
 
   return (
     // A container that contains the input field and drop-down.
-    <div className={`search-container mb-5 ${styles.input}`}>
-      <label htmlFor={name} className="mr-3">{label}</label>
+    <div className={`search-container mb-5 relative`}>
+      <label htmlFor={name} className='mr-3'>{label}</label>
       <input
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        type="text"
+        type='text'
         id={name}
         name={name}
         value={value}
@@ -60,17 +60,17 @@ const RiotIdInput = ({ label, name, value, onChange }) => {
         onSelect={handleSelect}
         onBlur={handleBlur}
         required
-        className="p-1 border rounded"
+        className='p-1 border rounded w-full'
       />
       {filteredHistory.length > 0 && (
-        <div className="drop-down" style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className={`${styles['drop-down']} w-full`}>
           {/* filteredHistory array is mapped over and a div is created for each item. */}
           {filteredHistory.map((item) => (
             <motion.span
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onMouseDown={() => handleClick(item)}
-              className="border rounded p-1 m-2"
+              className='border rounded p-1 m-2 text-center'
               key={item}  
             >
               {/* Content of the div will be past searched Riot ID. */}

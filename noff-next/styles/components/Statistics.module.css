@@ -3,7 +3,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 25vh;
+}
+
+.drop-down {
+    position: absolute;
+    z-index: 1; /* Ensures the dropdown appears above other content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #251e22;
+    /* Add other styles as needed */
+}
+
+.drop-down > :first-child {
+    margin-top: 20px; /* Adjust as needed */
+}
+
+.drop-down > :last-child {
+    margin-bottom: 20px; /* Adjust as needed */
 }
 
 /* Account */
@@ -14,7 +31,8 @@
     margin-top: 50px;
 }
 
-.ranked-solo, .profile-info {
+.ranked-solo,
+.profile-info {
     background-color: #3a3a3a;
     padding: 20px;
     border-radius: 10px;
@@ -22,7 +40,8 @@
     width: 300px;
 }
 
-.ranked-solo h2, .profile-info h3 {
+.ranked-solo h2,
+.profile-info h3 {
     margin-bottom: 10px;
 }
 
@@ -99,4 +118,42 @@
 
 .profile-stats button:hover {
     background-color: #004a99;
+}
+
+/* Match */
+.matchContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.matchTable {
+    border-collapse: collapse;
+}
+
+.matchTable th,
+.matchTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.matchTable tbody tr td:first-child {
+    max-width: 20px; /* Adjust as needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.matchTable tr:nth-child(even) {
+    background-color: #251e22;
+}
+
+.matchTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #656c73;
+    color: white;
 }
