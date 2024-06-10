@@ -11,8 +11,7 @@ function Match({ props }) {
     setState(newState);
     const newMatch = Object.values(newState)[0];
     setMatch(newMatch);
-    console.log(newMatch)
-  }, [props]);
+   }, [props]);
 
   const team1 = match.slice(0, 5);
   const team2 = match.slice(5, 10);

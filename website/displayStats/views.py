@@ -64,6 +64,14 @@ def load_player_data(request):
     return Response(sample_data, status=status.HTTP_200_OK)
 
 
+@api_view(['POST'])
+def show_more_matches(request):
+    receiving_data = request.data
+    data = load_matches_from_database(receiving_data.get('length'), receiving_data.get('riotID'))
+    print(data)
+    return data
+
+
 """HELPER FUNCTIONS"""
 
 

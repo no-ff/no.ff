@@ -56,8 +56,22 @@ function profile() {
       });
   }
 
-  const test = () => {
-    console.log(playerData);
+  const showMore = () => {
+    console.log(matchHistory.length);
+    const inp_data = {length: matchHistory.length, riotID: formData.id}
+    console.log(inp_data)
+    axios.post('http://127.0.0.1:8000/DisplayStats/show_more_matches/', inp_data)
+    .then(response => {
+      const matches = response.data;
+      console.log(matches); // LOG
+      console.log(matchHistory);
+      setMatchHistory([...matchHistory, ...matches['matches']]);
+    })
+    .catch(error => {
+      console.error('There was an error submitting the form !!', error);
+    }
+    )
+
   }
 
   return (
@@ -80,10 +94,12 @@ function profile() {
         <>
           <Account state={playerData} />
           {matchHistory.map((item) => {
-            return <Match props={item} /> // item will be object containing match id, game length, and type.
+            return <Match props={item} /> 
+            // item will be object containing match id, game length, and type.
           }
           )
           }
+          <button onClick={showMore}>Show More</button>
         </>
       )}
     </div>

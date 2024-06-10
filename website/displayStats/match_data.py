@@ -25,6 +25,7 @@ def handle_riot_api_error(riot_object):
             riot_object.status_code == 502 or \
             riot_object.status_code == 503 or \
             riot_object.status_code == 504:
+            
         return True
 
     return False
