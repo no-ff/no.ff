@@ -119,7 +119,7 @@ a {
 
 .box {
   position: absolute;
-  top: 7.5rem;
+  top: 7rem;
   right: 5rem;
   overflow: hidden; 
   display: grid;
@@ -170,6 +170,43 @@ a {
     right: 0rem;
     grid-template-columns: repeat(10, 1fr);
   }
+}
+
+@keyframes fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--end-width, 100%);
+  }
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  transition: 2s ease-in-out;
+}
+
+table th,
+table td {
+  text-align: left;
+  border-bottom: 1px solid rgba(var(--foreground-rgb), 0.1);
+}
+
+.winrate-bar {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: lightblue;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.winrate-bar-fill {
+  height: 1.2rem;
+  background: linear-gradient(to right, #721ad1 0%, #216ff7 100%); 
+  animation: fill 1s ease-in-out forwards;
 }
 
 @tailwind base;
