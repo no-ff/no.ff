@@ -4,14 +4,12 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from displayStats.models import Accounts, Matches
 from rest_framework import status
+from apiKey import API_KEY
 
 
 from . import match_data as md
 from . import player_data as pd
 import time
-
-
-API_KEY = 'RGAPI-bdba9a43-33b7-4588-b84c-a66fa3d8909b'
 
 
 @api_view(['POST'])
@@ -24,7 +22,6 @@ def load_new_match_data(request):
     puuid = md.get_puuid(gameName, tagline, API_KEY)
     amount = 20
     start = 0
-
 
     # update_past_matches(puuid)
     print("Successfully updated a user's data")
@@ -67,7 +64,8 @@ def load_player_data(request):
 @api_view(['POST'])
 def show_more_matches(request):
     receiving_data = request.data
-    data = load_matches_from_database(receiving_data.get('length'), receiving_data.get('riotID'))
+    data = load_matches_from_database(
+        receiving_data.get('length'), receiving_data.get('riotID'))
     print(data)
     return data
 
@@ -102,7 +100,8 @@ def update_past_matches(puuid):
 
 
 def load_matches_from_database(start, riotID):
-    wanted_ids = Accounts.objects.get(riotID=riotID).past_matches[start:start+20]
+    wanted_ids = Accounts.objects.get(
+        riotID=riotID).past_matches[start:start+20]
     to_put = []
     print(wanted_ids)
     for match_id in wanted_ids:
@@ -112,5 +111,3 @@ def load_matches_from_database(start, riotID):
             md.insert_matchdata_to_database(match_id, API_KEY)
             to_put.append(Matches.objects.get(match_id=match_id).player_data)
     return Response({"matches": to_put}, status=status.HTTP_200_OK)
-
-    

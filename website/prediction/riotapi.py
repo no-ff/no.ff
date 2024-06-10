@@ -1,6 +1,7 @@
 import requests
 import json
 from prediction.roleprediction import predict_role
+from apiKey import API_KEY
 
 Champ_data = {
     "266": "Aatrox",
@@ -174,7 +175,7 @@ Champ_data = {
 
 
 def id_to_live_match_comp(GameID: str, Tagline: str) -> list[str]:
-    API_KEY = "RGAPI-176c62c2-50e9-4226-a0be-970f0a99054e"
+    # API_KEY = 'RGAPI-fbf94f63-030e-4f79-bee6-39158de8a3bc'
     puuid = requests.get(
         f"https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{GameID}/{Tagline}?api_key={API_KEY}")
     if puuid.status_code != 200:
