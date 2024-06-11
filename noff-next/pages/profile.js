@@ -37,6 +37,11 @@ function profile() {
       .then(response => {
         const player_data = response.data;
         setPlayerData(player_data);
+        const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
+        if (!history.includes(formData.id)) {
+          history.push(formData.id);
+        }
+        localStorage.setItem('searchHistory', JSON.stringify(history));
         console.log(player_data); // LOG
         // Get match history.
         axios.post('http://127.0.0.1:8000/DisplayStats/add_new_matches/', formData)
