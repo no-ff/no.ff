@@ -4,14 +4,13 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from displayStats.models import Accounts, Matches
 from rest_framework import status
-from apiKey import API_KEY
 
 
 from . import match_data as md
 from . import player_data as pd
 import time
 
-
+API_KEY = 'RGAPI-a70f505f-41bd-4300-bf5b-f617150725ed'
 @api_view(['POST'])
 def load_new_match_data(request):
     # replace with how we get the ID
