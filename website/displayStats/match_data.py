@@ -62,12 +62,12 @@ def get_match_player_data(player_json, game_length):
     player_data['damage'] = player_json['totalDamageDealtToChampions']
     player_data['damageTaken'] = player_json['totalDamageTaken']
     player_data['items'] = [player_json['item0'], player_json['item1'], player_json['item2'], player_json['item3'], player_json['item4'], player_json['item5'], player_json['item6']]
-    player_data['runes'] = get_runes(player_json['perks'])
+    player_data['runes'] = decode_acutal_runes(get_runes(player_json['perks']))
     player_data['spells'] = [player_json['summoner1Id'], player_json['summoner2Id']]
     player_data['win'] = player_json['win']
     return player_data
 
-def decoding_runes(runes):
+def decoding_runes():
     runeFile = open("runesReforged.json", "r")
     runeFile = json.load(runeFile)
     runesDir = {}
@@ -80,6 +80,84 @@ def decoding_runes(runes):
     print(runesDir)
     outputRunes = open("runes.json", "w")
     outputRunes.write(json.dumps(runesDir))
+
+def decode_acutal_runes(runes):
+    print(runes)
+    runeFile = {
+    8100: "Domination",
+    8112: "Electrocute",
+    8128: "Dark Harvest",
+    9923: "Hail of Blades",
+    8126: "Cheap Shot",
+    8139: "Taste of Blood",
+    8143: "Sudden Impact",
+    8136: "Zombie Ward",
+    8120: "Ghost Poro",
+    8138: "Eyeball Collection",
+    8135: "Treasure Hunter",
+    8105: "Relentless Hunter",
+    8106: "Ultimate Hunter",
+    8300: "Inspiration",
+    8351: "Glacial Augment",
+    8360: "Unsealed Spellbook",
+    8369: "First Strike",
+    8306: "Hextech Flashtraption",
+    8304: "Magical Footwear",
+    8321: "Cash Back",
+    8313: "Triple Tonic",
+    8352: "Time Warp Tonic",
+    8345: "Biscuit Delivery",
+    8347: "Cosmic Insight",
+    8410: "Approach Velocity",
+    8316: "Jack Of All Trades",
+    8000: "Precision",
+    8005: "Press the Attack",
+    8021: "Fleet Footwork",
+    8010: "Conqueror",
+    9101: "Absorb Life",
+    9111: "Triumph",
+    8009: "Presence of Mind",
+    9104: "Legend: Alacrity",
+    9105: "Legend: Haste",
+    9103: "Legend: Bloodline",
+    8014: "Coup de Grace",
+    8017: "Cut Down",
+    8299: "Last Stand",
+    8400: "Resolve",
+    8437: "Grasp of the Undying",
+    8439: "Aftershock",
+    8465: "Guardian",
+    8446: "Demolish",
+    8463: "Font of Life",
+    8401: "Shield Bash",
+    8429: "Conditioning",
+    8444: "Second Wind",
+    8473: "Bone Plating",
+    8451: "Overgrowth",
+    8453: "Revitalize",
+    8242: "Unflinching",
+    8200: "Sorcery",
+    8214: "Summon Aery",
+    8229: "Arcane Comet",
+    8230: "Phase Rush",
+    8224: "Nullifying Orb",
+    8226: "Manaflow Band",
+    8275: "Nimbus Cloak",
+    8210: "Transcendence",
+    8234: "Celerity",
+    8233: "Absolute Focus",
+    8237: "Scorch",
+    8232: "Waterwalking",
+    8236: "Gathering Storm"
+}
+
+    decoded_runes = {}
+    for key in runes:
+        decoded_runes[runeFile[key]] = []
+        for rune in runes[key]:
+            decoded_runes[runeFile[key]].append(runeFile[(rune)])
+    return decoded_runes
+
 
 def get_runes(runeset):
     primary_keystone = (runeset['styles'][0]['style'])
@@ -116,11 +194,3 @@ def insert_matchdata_to_database(match_id, api_key):
             game_mode = to_insert['game_mode'])
 
 
-
-if __name__ == "__main__":
-
-    api = 'RGAPI-61b2aecf-da19-4d68-b273-bae69dd6a000'
-    match = 'NA1_5012873300'
-    match_data = requests.get(f'https://americas.api.riotgames.com/lol/match/v5/matches/{match}?api_key={api}').json()
-    players = convert_match_to_player_data(match, api)
-    print(players)
