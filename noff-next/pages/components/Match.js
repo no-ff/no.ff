@@ -15,17 +15,10 @@ function Match(props) {
 */
 
 
-  const gameLength = props.match.game_length
-  const gameMode = props.match.game_mode
-  delete props.match.game_length
-  delete props.match.game_mode
-  var key = '';
-  for (var matchKey in props.match) {
-    key = matchKey;
-  }
 
-  const team1 = props.match[key].slice(0, 5);
-  const team2 = props.match[key].slice(5, 10);
+
+  const team1 = props.match['match'].slice(0, 5);
+  const team2 = props.match['match'].slice(5, 10);
 
   const renderTable = (team) => (
     <table className={styles.matchTable}>

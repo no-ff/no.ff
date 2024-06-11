@@ -6,6 +6,7 @@ import Account from './components/Account';
 import { motion, useAnimationControls } from 'framer-motion';
 import styles from '../styles/components/Statistics.module.css';
 import Match from './components/Match';
+import MatchOuter from './components/MatchOuter';
 
 function profile() {
   const [formData, setFormData] = useState({
@@ -99,7 +100,7 @@ function profile() {
         <>
           <Account state={playerData} />
           {matchHistory.map((item) => {
-            return <Match match={item} /> 
+            return <MatchOuter match={item} player={formData['id']} />
             // item will be object containing match id, game length, and type.
           }
           )

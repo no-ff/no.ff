@@ -53,7 +53,7 @@ def get_match_data(match_id, key):
 def get_match_player_data(player_json, game_length):
     """For each player, need sums, items, kda, cs (cs per m), runes, rank, champ, wards damage, player name, """
     player_data = {}
-    player_data['username'] = player_json['summonerName']
+    player_data['riotId'] = player_json['riotIdGameName'] + "#" + player_json['riotIdTagline'] 
     player_data['champion'] = player_json['championName']
     player_data['kda'] = f"{player_json['kills']}/{player_json['deaths']}/{player_json['assists']}"
     player_data['cs'] = player_json['totalMinionsKilled'] + player_json['neutralMinionsKilled']
@@ -101,7 +101,7 @@ def convert_match_to_player_data(match_id, key):
     player_data = []
     for player in players:
         player_data.append(get_match_player_data(player, game_length))
-    return {match_id: player_data, "game_length": game_length, "game_mode": 420}
+    return {'match': player_data, "game_length": game_length, "game_mode": 420}
 
 
 def insert_matchdata_to_database(match_id, api_key):
