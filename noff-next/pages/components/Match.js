@@ -1,27 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import styles from '@/styles/components/Statistics.module.css'
 
-function Match({ props }) {
-  const [state, setState] = useState(props);
-  const [match, setMatch] = useState([]);
+function Match(props) {
+
 
   // React only calls useState() once during the first render. useEffect will continously update the state if props changes.
+  /** 
   useEffect(() => {
     const newState = { ...props };
     setState(newState);
     const newMatch = Object.values(newState)[0];
     setMatch(newMatch);
    }, [props]);
+*/
 
-  const team1 = match.slice(0, 5);
-  const team2 = match.slice(5, 10);
+
+  const gameLength = props.match.game_length
+  const gameMode = props.match.game_mode
+  delete props.match.game_length
+  delete props.match.game_mode
+  var key = '';
+  for (var matchKey in props.match) {
+    key = matchKey;
+  }
+
+  const team1 = props.match[key].slice(0, 5);
+  const team2 = props.match[key].slice(5, 10);
 
   const renderTable = (team) => (
     <table className={styles.matchTable}>
       <thead>
         <tr>
+          <th>Champ </th>
           <th>Username</th>
-          <th>Champion</th>
           <th>KDA</th>
           <th>CS</th>
           <th>CS/min</th>
@@ -34,8 +45,8 @@ function Match({ props }) {
       <tbody>
         {team.map((player, index) => (
           <tr key={index}>
+            <td><img src={'https://ddragon.leagueoflegends.com/cdn/14.11.1/img/champion/'+player.champion+'.png'}></img></td>
             <td title={player.username}>{player.username}</td>
-            <td>{player.champion}</td>
             <td>{player.kda}</td>
             <td>{player.cs}</td>
             <td>{player.cs_per_min}</td>

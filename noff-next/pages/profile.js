@@ -99,7 +99,7 @@ function profile() {
         <>
           <Account state={playerData} />
           {matchHistory.map((item) => {
-            return <Match props={item} /> 
+            return <Match match={item} /> 
             // item will be object containing match id, game length, and type.
           }
           )
