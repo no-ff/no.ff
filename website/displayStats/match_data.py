@@ -91,6 +91,7 @@ def get_runes(runeset):
     for x in runeset['styles'][1]['selections']:
         sec_runes.append(x['perk'])
     new_runes = {primary_keystone: prim_runes, sec_keystone: sec_runes}
+    print(new_runes)
     return new_runes
 
 def convert_match_to_player_data(match_id, key):

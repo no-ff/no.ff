@@ -39,7 +39,7 @@ function Match(props) {
         {team.map((player, index) => (
           <tr key={index}>
             <td><img src={'https://ddragon.leagueoflegends.com/cdn/14.11.1/img/champion/'+player.champion+'.png'}></img></td>
-            <td title={player.username}>{player.username}</td>
+            <td title={player.riotId}>{player.riotId}</td>
             <td>{player.kda}</td>
             <td>{player.cs}</td>
             <td>{player.cs_per_min}</td>
