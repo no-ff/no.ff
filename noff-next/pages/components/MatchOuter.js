@@ -17,10 +17,12 @@ function MatchOuter(props) {
     }
     console.log(playerData)
   return (
-      <div className={playerData.win ? 'match-block bg-blue-300' : 'match-block bg-red-300'} >
+    <div>
+      <div className={playerData.win ? 'match-block bg-gradient-to-r from-[#005A82] to-[#091428] rounded-md' : 'match-block bg-gradient-to-r from-[#450a0a] to-[#7f1d1d] bg-opacity-30 rounded-md'} >
         <Accessories playerData={playerData}/>        
         <button onClick={handleClick}> Show full match </button>
-      {showMore ? <Match match={props.match}/> : null}
+    </div>
+    {showMore ? <Match match={props.match}/> : null}
     </div>
   )
 }

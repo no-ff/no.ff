@@ -10,9 +10,8 @@ function Navbar() {
     style={{position: 'fixed'}}
     className="navbar flex  justify-between items-center p-4 bg-gray-800 text-white w-full"
     >
-    <h1>{String(noff)}
-      <title>{noff}</title>
-    </h1>
+    <title>no.ff</title>
+    <h1>{ String(noff) }</h1>
     <ul className="links flex justify-space-between items-center gap">
         <li className="mx-5" onClick={() => router.push('/')}> Home </li>
         <li className="mx-5" onClick={() => router.push('/aboutus')}> About Us </li>

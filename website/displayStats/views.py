@@ -10,7 +10,7 @@ from . import match_data as md
 from . import player_data as pd
 import time
 
-API_KEY = 'RGAPI-a70f505f-41bd-4300-bf5b-f617150725ed'
+API_KEY = 'RGAPI-ec53e04b-fc92-424d-a001-f4a8be8ad57c'
 @api_view(['POST'])
 def load_new_match_data(request):
     # replace with how we get the ID
