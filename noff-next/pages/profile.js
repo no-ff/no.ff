@@ -97,16 +97,18 @@ function profile() {
       </div>
       {/* Display Account + Match History data if form submitted succesfully. */}
       {Object.keys(matchHistory).length !== 0 && Object.keys(playerData).length !== 0 && (
-        <>
+        <div>
           <Account state={playerData} />
-          {matchHistory.map((item) => {
-            return <MatchOuter match={item} player={formData['id']} />
-            // item will be object containing match id, game length, and type.
-          }
-          )
-          }
-          <button onClick={showMore}>Show More</button>
-        </>
+          <div className='account-matches>'>
+            {matchHistory.map((item) => {
+              return <MatchOuter match={item} player={formData['id']} />
+              // item will be object containing match id, game length, and type.
+            }
+            )
+            }
+            <button onClick={showMore}>Show More</button>
+          </div>
+        </div>
       )}
     </div>
   )

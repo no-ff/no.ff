@@ -1,0 +1,43 @@
+.match-block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #e5e5e5;
+    margin: 1rem;
+    padding: 2rem;
+    
+}
+
+.accessories{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+.champ{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;    margin: 0 auto;
+}
+.runes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.runes img, .items img{
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 1rem;
+
+}

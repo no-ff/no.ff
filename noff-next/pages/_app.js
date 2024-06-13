@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import "@/styles/components/Champ.css"
 import "@/styles/components/TeamFrame.css"
-
+import "@/styles/components/Accessories.css"
 import Navbar from "./components/Navbar";
 export default function App({ Component, pageProps }) {
   return <div>

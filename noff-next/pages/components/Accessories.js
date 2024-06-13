@@ -17,7 +17,7 @@ function Accessories(props) {
     if (secondaryPath === 'Inspiration') secondaryPath = 'Whimsy'
 
   return (
-   <div>
+   <div className='accessories'>
         <div className='champ'>
             <img src={'https://ddragon.leagueoflegends.com/cdn/14.11.1/img/champion/'+props.playerData['champion']+'.png'}></img>
         </div>
@@ -34,11 +34,10 @@ function Accessories(props) {
             ))}
         </dl>
         <dl className='runes'>
-            <dt> <img src={'https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/' + primaryPath + '/'+ keystone + '/' +keystone + '.png'}></img></dt>
-            <dt> <img src={'https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/' + map[secondaryPath] + '_'+ [secondaryPath] +'.png'}></img></dt>
+            <dd> <img src={'https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/' + primaryPath + '/'+ keystone + '/' +keystone + '.png'}></img></dd>
+            <dd> <img src={'https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/' + map[secondaryPath] + '_'+ [secondaryPath] +'.png'}></img></dd>
 
         </dl>
-
 
    </div> 
   )
