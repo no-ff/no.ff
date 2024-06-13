@@ -19,7 +19,7 @@ function MatchOuter(props) {
   return (
     <div>
       <div className={playerData.win ? 'match-block bg-gradient-to-r from-[#005A82] to-[#091428] rounded-md' : 'match-block bg-gradient-to-r from-[#450a0a] to-[#7f1d1d] bg-opacity-30 rounded-md'} >
-        <Accessories playerData={playerData}/>        
+        <Accessories playerData={playerData} matchData={props.match}/>        
         <button onClick={handleClick}> Show full match </button>
     </div>
     {showMore ? <Match match={props.match}/> : null}

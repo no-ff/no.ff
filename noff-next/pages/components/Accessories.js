@@ -15,7 +15,24 @@ function Accessories(props) {
     var map ={'Domination': 7200, 'Inspiration': 7203, 'Precision': 7201, 'Resolve': 7204, 'Sorcery': 7202}
 
     if (secondaryPath === 'Inspiration') secondaryPath = 'Whimsy'
-
+  console.log(props.matchData);
+  const team1 = props.matchData['match'].slice(0, 5)
+  const team2 = props.matchData['match'].slice(5, 10)
+  const team1Names = team1.map((player) => player['riotId'])
+  const newTeam1Names = []
+  for (var i = 0; i < team1Names.length; i++){
+    const arr = team1Names[i].split('#')
+    newTeam1Names.push(arr[0])
+  }
+  const team2Names = team2.map((player) => player['riotId'])
+  const newTeam2Names = []
+  for (var i = 0; i < team2Names.length; i++){
+        const arr = team2Names[i].split('#')
+        newTeam2Names.push(arr[0])
+    }
+  const team1Kda = team1.map((player) => player['kda'])
+  const team2Kda = team2.map((player) => player['kda'])
+  
   return (
    <div className='accessories'>
         <div className='gameinfo'>
@@ -69,33 +86,25 @@ function Accessories(props) {
             </div>
         </div>
         <div className='players'>
-            <div className='team'>
-                <p>albert</p>
-                <p>albert</p>
-                <p>albert</p>
-                <p>albert</p>
-                <p>albert</p>
+            <div className='team1-names'>
+                {newTeam1Names.map((name) => (
+                    <p>{name}</p>
+                ))}
             </div>
-            <div className='team'>
-                <p>0/10/0</p>
-                <p>0/10/0</p>
-                <p>0/10/0</p>
-                <p>0/10/0</p>
-                <p>0/10/0</p>
+            <div className='team1-kda'>
+                {team1Kda.map((kda)=>(
+                    <p> {kda}</p>
+                ))}
             </div>
-            <div className='team'>
-                <p>albert</p>
-                <p>albert</p>
-                <p>albert</p>
-                <p>albert</p>
-                <p>albert</p>
+            <div className='team2-names'>
+                {newTeam2Names.map((name) => (
+                    <p>{name}</p>
+                ))}
             </div>
-            <div className='team'>
-                <p>0/10/0</p>
-                <p>0/10/0</p>
-                <p>0/10/0</p>
-                <p>0/10/0</p>
-                <p>0/10/0</p>
+            <div className='team2-kda'>
+                {team2Kda.map((kda)=>(
+                    <p> {kda}</p>
+                ))}
             </div>
         </div>
 
