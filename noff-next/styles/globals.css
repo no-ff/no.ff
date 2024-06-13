@@ -106,7 +106,29 @@ table td {
 }
 
 
+.active {
+  color: #0AC8B9; 
+  font-weight: bold; 
+  border-bottom: 2px solid #0AC8B9;
+}
+.big-round-input {
+  width: 600px; /* Adjust width as needed */
+  height: 50px; /* Adjust height as needed */
+  border-top-left-radius: 20px; /* Half of the height to make it round */
+  border-top-right-radius: 20px; /* Half of the height to make it round */
 
+  padding: 10px; /* Add padding for content inside the input */
+  font-size: 18px; /* Adjust font size as needed */
+  /* Add any other styles you want */
+}
+.big-round-button {
+  width: 100px; /* Adjust width as needed */
+  height: 53px; /* Adjust height as needed */
+
+  padding: 5px; /* Add padding for content inside the input */
+  font-size: 18px; /* Adjust font size as needed */
+  background-color: #216ff7
+}
 
 
 @tailwind base;

@@ -92,7 +92,7 @@ function profile() {
             value={formData.id}
             onChange={handleChange}
           />
-          <button type="submit" className="mt-4 bg-blue-400 px-3 py-1 rounded">Submit</button>
+          <button type="submit" className="big-round-button">Submit</button>
         </form>
       </div>
       {/* Display Account + Match History data if form submitted succesfully. */}

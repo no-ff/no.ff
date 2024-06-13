@@ -60,7 +60,7 @@ const RiotIdInput = ({ label, name, value, onChange }) => {
         onSelect={handleSelect}
         onBlur={handleBlur}
         required
-        className='p-1 border rounded w-full'
+        className='big-round-input p-1 border w-full'
       />
       {filteredHistory.length > 0 && (
         <div className={`${styles['drop-down']} w-full`}>
