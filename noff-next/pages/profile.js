@@ -104,7 +104,6 @@ function profile() {
               <div className='account-matches>'>
                 {matchHistory.map((item) => {
                   return <MatchOuter match={item} player={formData['id']} />
-                  // item will be object containing match id, game length, and type.
                 })
                 }
                 <button onClick={showMore}>Show More</button>

@@ -10,11 +10,13 @@ export default function Home() {
   const [isManualAppShifted, setIsManualAppShifted] = useState(false);
 
   const scrollToLiveApp = () => {
-    document.getElementById("liveApp").scrollIntoView({ behavior: "smooth" });
+    const element = document.getElementById("liveApp");
+    if (element) element.scrollIntoView({ behavior: "smooth" });
   };
-
+  
   const scrollToManualApp = () => {
-    document.getElementById("manualApp").scrollIntoView({ behavior: "smooth" });
+    const element = document.getElementById("manualApp");
+    if (element) element.scrollIntoView({ behavior: "smooth" });
   };
 
   const onScrollStop = callback => {
@@ -42,10 +44,8 @@ export default function Home() {
       console.log(currentScrollPercentage)
       // Check if the current scroll position is below or above 50%
       if (currentScrollPercentage < 0.5) {
-          // Scroll to the element with ID "liveApp" smoothly
           scrollToLiveApp();
       } else {
-          // Scroll to the element with ID "manualApp" smoothly
           scrollToManualApp();
       }
     }
