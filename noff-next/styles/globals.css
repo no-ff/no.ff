@@ -7,7 +7,6 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  background-color: ;
 }
 
 .navbar h1 {
@@ -16,16 +15,31 @@
   font-weight: 600;
 }
 
+.submit {
+  color: black;
+  background-color: #e4c95d;
+}
+
 .gotobutton {
   color: black;
-  background-color: rgb(216, 185, 57);
+  background-color: #e4c95d;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-outline:focus {
+  outline: none;
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: #010A13;
+  background-color: #2f3134;
 }
 
 a {
@@ -51,6 +65,7 @@ a {
   from {
     width: 0;
   }
+
   to {
     width: var(--end-width, 100%);
   }
@@ -93,11 +108,13 @@ table td {
   justify-content: center;
   align-items: center;
 }
-.side-by-side{
+
+.side-by-side {
   width: 25%;
   background-color: red;
 }
-.account-matches{
+
+.account-matches {
   width: 60%;
   background-color: blue;
   margin: 10px;
@@ -107,26 +124,38 @@ table td {
 
 
 .active {
-  color: #0AC8B9; 
-  font-weight: bold; 
+  color: #0AC8B9;
+  font-weight: bold;
   border-bottom: 2px solid #0AC8B9;
 }
-.big-round-input {
-  width: 600px; /* Adjust width as needed */
-  height: 50px; /* Adjust height as needed */
-  border-top-left-radius: 20px; /* Half of the height to make it round */
-  border-top-right-radius: 20px; /* Half of the height to make it round */
 
-  padding: 10px; /* Add padding for content inside the input */
-  font-size: 18px; /* Adjust font size as needed */
+.big-round-input {
+  width: 600px;
+  /* Adjust width as needed */
+  height: 50px;
+  /* Adjust height as needed */
+  border-top-left-radius: 20px;
+  /* Half of the height to make it round */
+  border-top-right-radius: 20px;
+  /* Half of the height to make it round */
+
+  padding: 10px;
+  /* Add padding for content inside the input */
+  font-size: 18px;
+  /* Adjust font size as needed */
   /* Add any other styles you want */
 }
-.big-round-button {
-  width: 100px; /* Adjust width as needed */
-  height: 53px; /* Adjust height as needed */
 
-  padding: 5px; /* Add padding for content inside the input */
-  font-size: 18px; /* Adjust font size as needed */
+.big-round-button {
+  width: 100px;
+  /* Adjust width as needed */
+  height: 53px;
+  /* Adjust height as needed */
+
+  padding: 5px;
+  /* Add padding for content inside the input */
+  font-size: 18px;
+  /* Adjust font size as needed */
   background-color: #216ff7
 }
 

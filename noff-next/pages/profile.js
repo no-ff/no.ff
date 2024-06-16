@@ -4,7 +4,6 @@ import axios from 'axios'
 import RiotIdInput from './components/input/RiotIdInput';
 import Account from './components/Account';
 import { motion, useAnimationControls } from 'framer-motion';
-import styles from '../styles/components/Statistics.module.css';
 import Match from './components/Match';
 import MatchOuter from './components/MatchOuter';
 
@@ -64,30 +63,30 @@ function profile() {
 
   const showMore = () => {
     console.log(matchHistory.length);
-    const inp_data = {length: matchHistory.length, riotID: formData.id}
+    const inp_data = { length: matchHistory.length, riotID: formData.id }
     console.log(inp_data)
     axios.post('http://127.0.0.1:8000/DisplayStats/show_more_matches/', inp_data)
-    .then(response => {
-      const matches = response.data;
-      console.log(matches); // LOG
-      console.log(matchHistory);
-      setMatchHistory([...matchHistory, ...matches['matches']]);
-    })
-    .catch(error => {
-      console.error('There was an error submitting the form !!', error);
-    }
-    )
+      .then(response => {
+        const matches = response.data;
+        console.log(matches); // LOG
+        console.log(matchHistory);
+        setMatchHistory([...matchHistory, ...matches['matches']]);
+      })
+      .catch(error => {
+        console.error('There was an error submitting the form !!', error);
+      }
+      )
 
   }
 
   return (
-    <div style={{height: '100vh'}}>
-      <div className={styles.centered} style={{paddingTop: '20vh'}}>
+    <div style={{ height: '100vh' }}>
+      <div className="center" style={{ paddingTop: '20vh' }}>
         <form autoComplete="off" onSubmit={handleSubmit}>
           <RiotIdInput
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            label="Riot ID:"
+            label={<><span>Riot ID:</span><br /></>}
             name="riotId"
             value={formData.id}
             onChange={handleChange}
@@ -100,17 +99,17 @@ function profile() {
         <div>
           <Account state={playerData} />
           <div className='flexbox-outer'>
-              <div className='side-by-side'></div>
-              <div className='account-matches>'>
-                {matchHistory.map((item) => {
-                  return <MatchOuter match={item} player={formData['id']} />
-                })
-                }
-                <button onClick={showMore}>Show More</button>
-              </div>
-              <div className='side-by-side'></div>
+            <div className='side-by-side'></div>
+            <div className='account-matches>'>
+              {matchHistory.map((item) => {
+                return <MatchOuter match={item} player={formData['id']} />
+              })
+              }
+              <button onClick={showMore}>Show More</button>
+            </div>
+            <div className='side-by-side'></div>
           </div>
-          
+
         </div>
       )}
     </div>

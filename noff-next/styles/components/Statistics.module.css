@@ -11,16 +11,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #251e22;
-    /* Add other styles as needed */
+    width: 100%;
+    background-color: #87abff;
+    background-color: #87abff;
 }
 
 .drop-down > :first-child {
-    margin-top: 20px; /* Adjust as needed */
+    margin-top: 7px; 
 }
 
 .drop-down > :last-child {
-    margin-bottom: 20px; /* Adjust as needed */
+    margin-bottom: 7px;
 }
 
 /* Account */

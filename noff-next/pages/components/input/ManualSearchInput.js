@@ -81,8 +81,7 @@ const ManualSearchInput = ({ label, name, onChange, setIsManualAppShifted }) => 
   };
 
   return (
-     // A container that contains the input field and box.
-    <div className="search-container flex-auto" ref={inputRef}>
+    <div className="search-container flex-auto mb-2" ref={inputRef}>
       <div className="relative">
         <label htmlFor={name}>
           <div className="mb-2">{label}</div>
@@ -99,7 +98,7 @@ const ManualSearchInput = ({ label, name, onChange, setIsManualAppShifted }) => 
           onFocus={handleFocus}
           onKeyDown={handleKeyDown}
           required
-          className="p-1 border rounded"
+          className="p-1 rounded no-outline"
         />
       </div>
       {isFocused && (

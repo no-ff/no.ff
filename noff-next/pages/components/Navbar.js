@@ -12,8 +12,7 @@ function Navbar() {
     };
 
     return (
-        <div style={{ position: 'fixed' }} className="navbar flex justify-between items-center p-4 bg-gray-800 text-white w-full">
-            <title>no.ff</title>
+        <div style={{ position: 'fixed', zIndex: 10 }} className="navbar flex justify-between items-center p-4 bg-gray-800 text-white w-full">            <title>no.ff</title>
             <h1>{String(noff)}</h1>
             <ul className="links flex justify-space-between items-center gap">
                 <motion.li className={`${isActive('/')} mx-5 `} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => router.push('/')}> Home </motion.li>

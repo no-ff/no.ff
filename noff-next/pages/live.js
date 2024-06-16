@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import RiotIdInput from './components/input/RiotIdInput';
-import styles from '../styles/components/Statistics.module.css';
+import { motion } from 'framer-motion'
 
 function LiveApp() {
   // useState() is a hook that takes in the initial state and returns an array with two elements.
@@ -55,8 +55,8 @@ function LiveApp() {
 
   return (
     <div className="App">
-      <h1 className="mb-4">Submit Riot ID for Live Game</h1>
-      <div className={styles.centered}>
+      <h1 className="text-1xl mb-5">Get a live game composition prediction.</h1>
+      <div>
         <form autoComplete="off" onSubmit={handleSubmit}>
           <RiotIdInput
             whileHover={{ scale: 1.1 }}
@@ -66,7 +66,16 @@ function LiveApp() {
             value={formData.id}
             onChange={handleChange}
           />
-          <button type="submit" className="mt-4 bg-blue-400 px-3 py-1 rounded">Submit</button>
+          <motion.button
+            type="submit"
+            whileHover={{
+              backgroundColor: "#b89e33", // Change to the color you want
+              transition: { duration: 0.2 }
+            }}
+            className="submit mt-4 px-2 py-1"
+          >
+            Submit
+          </motion.button>
         </form>
       </div>
       {processedData.length > 0 && (
