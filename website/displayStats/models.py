@@ -17,6 +17,8 @@ class Accounts(models.Model):
 
 class Matches(models.Model):
     match_id = models.CharField(max_length=100)
-    game_length = models.IntegerField()
-    game_mode = models.IntegerField()
+    game_length = models.CharField(max_length=100)
+    game_mode = models.CharField(max_length=100)
     player_data = jsonfield.JSONField()
+    game_time = models.CharField(max_length=100)
+

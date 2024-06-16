@@ -10,7 +10,7 @@ from . import match_data as md
 from . import player_data as pd
 import time
 
-API_KEY = 'RGAPI-ec53e04b-fc92-424d-a001-f4a8be8ad57c'
+API_KEY = 'RGAPI-60b79ac5-94d1-4220-88df-2f16ff852783'
 @api_view(['POST'])
 def load_new_match_data(request):
     # replace with how we get the ID
@@ -52,7 +52,7 @@ def load_player_data(request):
     player_data = request.data
     gameName = player_data.get('gameName').strip()
     tagline = player_data.get('tagline').strip()
-
+    
     data = Accounts.objects.get(riotID=str(gameName + "#" + tagline))
 
     sample_data = {'gameName': gameName, 'tagline': tagline, 'rank': [data.tier, data.rank, data.leaguePoints], 'wr': [data.wins, data.losses], 'sumId': data.summonerName,

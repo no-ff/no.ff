@@ -36,11 +36,10 @@ function Accessories(props) {
   return (
    <div className='accessories'>
         <div className='gameinfo'>
-            <p>06/13/2024</p>
-            <p>ranked solo duo</p>
+            <p>{props.matchData['time']}</p>
+            <p>{props.matchData['game_mode']} </p>
             <p>------</p>
-            <p>Victory</p>
-            <p>game duration</p>
+            <p>{props.matchData['game_length']}</p>
         </div>
 
         <div className='middle'>
@@ -57,8 +56,8 @@ function Accessories(props) {
                 </div>
                 <div className='runessContainer'>
                     <dl className='runes    '>
-                        <dd> <img src={'https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/' + primaryPath + '/'+ keystone + '/' +keystone + '.png'}></img></dd>
-                        <dd> <img src={'https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/' + map[secondaryPath] + '_'+ [secondaryPath] +'.png'}></img></dd>
+                        <dd> <img src={'https://ddragon.leagueoflegends.com/cdn/14.12.1/img/spell/Summoner' + props.playerData['spells'][0] + '.png'}></img></dd>
+                        <dd> <img src={'https://ddragon.leagueoflegends.com/cdn/14.12.1/img/spell/Summoner' + props.playerData['spells'][1] +'.png'}></img></dd>
 
                     </dl>
                 </div>
@@ -79,9 +78,9 @@ function Accessories(props) {
                 
                 </div>
             <div className='data'>
-                <p>kill parti 50%</p>
-                <p>CS/MIN 5.4</p>
-                <p>other info</p>
+                <p>{props.playerData['kda']}</p>
+                <p>CS: {props.playerData['cs']} (divide time here for cs/min pls) </p>
+                <p>kills</p>
                 <p>some more other</p>
             </div>
         </div>
