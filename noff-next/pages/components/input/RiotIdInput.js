@@ -47,19 +47,16 @@ const RiotIdInput = ({ label, name, value, onChange }) => {
     <div className={`search-container mb-1 relative`}>
       <label htmlFor={name} className='mr-3'>{label}</label>
       <input
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
         type='text'
         id={name}
         name={name}
         value={value}
-        // Typing into the input field will call handleSearch.
-        // When the handleSearch is called the event object's target will be this input element.
+        // Typing into the input field will call handleSearch. When the handleSearch is called the event object's target will be this input element.
         onChange={handleSearch}
         onSelect={handleSelect}
         onBlur={handleBlur}
         required
-        className='p-1 w-full rounded no-outline'
+        className='p-1 rounded no-outline'
       />
       {filteredHistory.length > 0 && (
         <div className={`${styles['drop-down']}`}>
@@ -70,7 +67,7 @@ const RiotIdInput = ({ label, name, value, onChange }) => {
               whileTap={{ scale: 0.9 }}
               onMouseDown={() => handleClick(item)}
               className='border rounded m-1 text-center'
-              key={item}  
+              key={item}
             >
               {/* Content of the div will be past searched Riot ID. */}
               {item}

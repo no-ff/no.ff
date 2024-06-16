@@ -76,7 +76,6 @@ function profile() {
         console.error('There was an error submitting the form !!', error);
       }
       )
-
   }
 
   return (
@@ -84,14 +83,21 @@ function profile() {
       <div className="center" style={{ paddingTop: '20vh' }}>
         <form autoComplete="off" onSubmit={handleSubmit}>
           <RiotIdInput
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
             label={<><span>Riot ID:</span><br /></>}
             name="riotId"
             value={formData.id}
             onChange={handleChange}
           />
-          <button type="submit" className="big-round-button">Submit</button>
+          <motion.button
+            type="submit"
+            whileHover={{
+              backgroundColor: "#b89e33", // Change to the color you want
+              transition: { duration: 0.2 }
+            }}
+            className="submit mt-4 px-2 py-1"
+          >
+            Submit
+          </motion.button>
         </form>
       </div>
       {/* Display Account + Match History data if form submitted succesfully. */}
