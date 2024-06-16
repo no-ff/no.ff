@@ -56,7 +56,7 @@ const RiotIdInput = ({ label, name, value, onChange }) => {
         onSelect={handleSelect}
         onBlur={handleBlur}
         required
-        className='p-1 rounded no-outline'
+        className='p-1 w-full rounded no-outline'
       />
       {filteredHistory.length > 0 && (
         <div className={`${styles['drop-down']}`}>
