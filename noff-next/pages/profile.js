@@ -3,8 +3,6 @@ import { useState } from 'react'
 import axios from 'axios'
 import RiotIdInput from './components/input/RiotIdInput';
 import Account from './components/Account';
-import { motion, useAnimationControls } from 'framer-motion';
-import Match from './components/Match';
 import MatchOuter from './components/MatchOuter';
 
 function profile() {
@@ -15,8 +13,7 @@ function profile() {
   });
   const [playerData, setPlayerData] = useState({});
   const [matchHistory, setMatchHistory] = useState({});
-  const controls = useAnimationControls();
-
+  const [lockInId, setLockInId] = useState('');
   const handleChange = (e) => {
     const { value } = e.target;
     const findUntil = '#';
@@ -29,9 +26,12 @@ function profile() {
   }
 
   const handleSubmit = (e) => {
+    setLockInId(formData.id);
+    setMatchHistory({});
+    setPlayerData({});
     if (formData.gameName === '' || formData.tagline === '') { alert('Please enter a valid riot id'); return; }
     e.preventDefault();
-    // Get account data.
+      // Get account data.
     // console.log(formData) // LOG
     axios.post('http://127.0.0.1:8000/DisplayStats/load_player_data/', formData)
       .then(response => {
@@ -42,12 +42,10 @@ function profile() {
           history.push(formData.id);
         }
         localStorage.setItem('searchHistory', JSON.stringify(history));
-        console.log(player_data); // LOG
         // Get match history.
         axios.post('http://127.0.0.1:8000/DisplayStats/add_new_matches/', formData)
           .then(response => {
             const matches = response.data['matches'];
-            console.log(matches); // LOG
             setMatchHistory(matches);
           }
           )
@@ -62,14 +60,10 @@ function profile() {
   }
 
   const showMore = () => {
-    console.log(matchHistory.length);
     const inp_data = { length: matchHistory.length, riotID: formData.id }
-    console.log(inp_data)
     axios.post('http://127.0.0.1:8000/DisplayStats/show_more_matches/', inp_data)
       .then(response => {
         const matches = response.data;
-        console.log(matches); // LOG
-        console.log(matchHistory);
         setMatchHistory([...matchHistory, ...matches['matches']]);
       })
       .catch(error => {
@@ -88,7 +82,7 @@ function profile() {
             value={formData.id}
             onChange={handleChange}
           />
-          <motion.button
+          <button
             type="submit"
             whileHover={{
               backgroundColor: "#b89e33", // Change to the color you want
@@ -97,7 +91,7 @@ function profile() {
             className="submit mt-4 px-2 py-1"
           >
             Submit
-          </motion.button>
+          </button>
         </form>
       </div>
       {/* Display Account + Match History data if form submitted succesfully. */}
@@ -108,7 +102,7 @@ function profile() {
             <div className='side-by-side'></div>
             <div className='account-matches>'>
               {matchHistory.map((item) => {
-                return <MatchOuter match={item} player={formData['id']} />
+                return <MatchOuter match={item} player={lockInId} />
               })
               }
               <button onClick={showMore}>Show More</button>
