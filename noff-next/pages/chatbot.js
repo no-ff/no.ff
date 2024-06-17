@@ -20,7 +20,7 @@ const Chatbot = () => {
     }
     setLoading(true);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    const prompt = "Question" + inputText + "\nContext: league of legends (use this website https://leagueoflegends.fandom.com/wiki/League_of_Legends_Wiki)" + "\nAnswer: (be concise, clear, and restrict to <50 words)";
+    const prompt = "Question: " + inputText + "\nContext: league of legends (use this website https://leagueoflegends.fandom.com/wiki/League_of_Legends_Wiki)" + "\nAnswer: (be concise, clear, and restrict to <50 words)";
     const result = await model.generateContent([prompt]);
     setResult(result.response.text());
     setLoading(false);
