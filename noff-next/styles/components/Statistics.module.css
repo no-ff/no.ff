@@ -12,8 +12,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    background-color: #87abff;
-    background-color: #87abff;
+    background-color: rgba(0, 0, 0, 0.75);
 }
 
 .drop-down > :first-child {
