@@ -9,9 +9,8 @@ function Accessories(props) {
             var primaryPath = path;
         }
     }
-    // const keystone = props.playerData['runes'][primaryPath][0].replace(/\s/g, '')
-    const keystone = "hi"   
-    var map ={'Domination': 7200, 'Inspiration': 7203, 'Precision': 7201, 'Resolve': 7204, 'Sorcery': 7202}
+    const keystone = props.playerData['runes'][primaryPath][0].replace(/\s/g, '')
+    var map ={'Domination': 7200, 'Whimsy': 7203, 'Precision': 7201, 'Resolve': 7204, 'Sorcery': 7202}
 
     if (secondaryPath === 'Inspiration') secondaryPath = 'Whimsy'
   console.log(props.matchData);
