@@ -22,11 +22,24 @@ function ManualApp({ setIsManualAppShifted }) {
 
   const [winrate, setWinrate] = useState(processedData[10]);
   const [key, setKey] = useState(0);
+  const [showModal, setShowModal] = useState(false); 
 
   useEffect(() => {
     setWinrate(processedData[10]);
     setKey(prevKey => prevKey + 1);
   }, [processedData[10]]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setShowModal(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,11 +52,17 @@ function ManualApp({ setIsManualAppShifted }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const values = Object.values(formData);
+    if (new Set(values).size !== values.length) {
+      alert('Please enter unique champions for each role!');
+      return;
+    }
     axios.post('http://127.0.0.1:8000/api/process-manual/', formData)
       .then(response => {
-        alert('Form submitted successfully');
+        // alert('Form submitted successfully');
         setProcessedData(response.data.data);
         setError('');
+        setShowModal(true);
       })
       .catch(error => {
         console.error('There was an error submitting the form!', error);
@@ -147,10 +166,16 @@ function ManualApp({ setIsManualAppShifted }) {
         </form>
       </div>
 
-      {processedData.length > 0 && (
-        <div className="py-8">
-          <div className="px-10 py-2 bg-gray-900" style={{ borderRadius: "var(--border-radius)", boxShadow: "0 0 10px rgba(var(--foreground-rgb), 0.1)" }}>
-            <div className="mb-3">
+      {showModal && processedData.length > 0 && (
+        <div style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 1001,
+        }}>
+          <div className="px-10 pt-5 pb-10 bg-gray-900" style={{ borderRadius: '10px'}}>
+            <div className="mb-5">
               <div className="flex justify-center p-3">
                 <h1 className="font-semibold">Team 1 strength against Team 2: </h1>
               </div>
@@ -162,7 +187,7 @@ function ManualApp({ setIsManualAppShifted }) {
             </div>
             <table>
               <thead>
-                <tr className="flex space-x-4">
+                <tr>
                   <th className="py-2">Team</th>
                   <th className="py-2">Top</th>
                   <th className="py-2">Jungle</th>
@@ -173,29 +198,40 @@ function ManualApp({ setIsManualAppShifted }) {
                 </tr>
               </thead>
               <tbody>
-                <tr className="flex space-x-4">
+                <tr>
                   <td className="font-bold py-1">1</td>
                   <td className="py-1">{processedData[0]}</td>
                   <td className="py-1">{processedData[1]}</td>
                   <td className="py-1">{processedData[2]}</td>
                   <td className="py-1">{processedData[3]}</td>
                   <td className="py-1">{processedData[4]}</td>
-                  <td className="py-1 px-2 font-bold text-blue-300">{processedData[10]}%</td>
+                  <td className={`py-1 px-2 font-bold manual-app ${processedData[10] > 50 ? 'text-blue-300' : 'text-red-300'}`}>{processedData[10]}%</td>
                 </tr>
-                <tr className="flex space-x-4">
+                <tr>
                   <td className="font-bold py-1">2</td>
                   <td className="py-1">{processedData[5]}</td>
                   <td className="py-1">{processedData[6]}</td>
                   <td className="py-1">{processedData[7]}</td>
                   <td className="py-1">{processedData[8]}</td>
                   <td className="py-1">{processedData[9]}</td>
-                  <td className="py-1 px-2 font-bold text-blue-300">{processedData[11]}%</td>
+                  <td className={`py-1 px-2 font-bold manual-app ${processedData[11] > 50 ? 'text-blue-300' : 'text-red-300'}`}>{processedData[11]}%</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <br></br>
         </div>
+      )}
+
+      {showModal && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          zIndex: 1000,
+        }} onClick={() => setShowModal(false)} />
       )}
 
     </div>

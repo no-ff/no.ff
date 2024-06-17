@@ -1,27 +1,21 @@
 import React from 'react'
-import SearchBar from './SearchBar'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Champ({ name }) {
   const [champName, setChampName] = useState(name);
 
-  const setChamp = (name) => {
-    if (name == 'FiddleSticks') {
-      name = 'Fiddlesticks';
-    }
-    if (name == 'MonkeyKing') {
-      name == 'Wukong';
-    }
-    setChampName(name);
-  }
+  useEffect(() => {
+    if (name === 'Wukong') {
+      setChampName('MonkeyKing');
+    } 
+  });
 
   return (
-    <div className='image_box'>
+    <div className='image_box '>
       <figure>
         <img className='champ_img' src={'https://ddragon.leagueoflegends.com/cdn/14.11.1/img/champion/' + champName + '.png'} />
         <figcaption>{champName}</figcaption>
       </figure>
-      <SearchBar champCall={setChamp} />
     </div>
   )
 }

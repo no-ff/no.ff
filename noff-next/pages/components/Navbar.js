@@ -19,6 +19,7 @@ function Navbar() {
         <motion.li className={`${isActive('/')} mx-5 cursor-pointer`} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => router.push('/')}> Home </motion.li>
         <motion.li className={`${isActive('/aboutus')} mx-5 cursor-pointer`} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => router.push('/aboutus')}> About Us </motion.li>
         <motion.li className={`${isActive('/profile')} mx-5 cursor-pointer`} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => router.push('/profile')}> Statistics </motion.li>
+        <motion.li className={`${isActive('/chatbot')} mx-5 cursor-pointer`} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => router.push('/chatbot')}> AI Assistant</motion.li>
       </ul>
     </div>
   );

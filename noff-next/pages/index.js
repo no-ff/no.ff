@@ -2,8 +2,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import ManualApp from './manual'
 import LiveApp from './live'
 import { motion } from 'framer-motion'
-import TeamFrame from './components/TeamFrame';
-
 
 export default function Home() {
 

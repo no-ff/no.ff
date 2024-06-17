@@ -77,21 +77,20 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
   transition: 2s ease-in-out;
-  border: 1px solid rgba(var(--foreground-rgb), 0.1);
 }
 
 table th,
 table td {
   text-align: left;
-  border: 1px solid rgba(var(--foreground-rgb), 0.1);
-  padding: 10px;
+  border: 1px solid grey;
+  padding: 1rem;
 }
 
 .winrate-bar {
   margin-left: auto;
   margin-right: auto;
   background-color: lightblue;
-  border-radius: 0.5rem;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -100,8 +99,6 @@ table td {
   background: linear-gradient(to right, #721ad1 0%, #216ff7 100%);
   animation: fill 1s ease-in-out forwards;
 }
-
-
 
 .flexbox-outer {
   display: flex;
