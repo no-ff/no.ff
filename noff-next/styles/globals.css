@@ -156,6 +156,62 @@ table td {
   background-color: #216ff7
 }
 
+.card{
+  position: relative;
+  background-color: white;
+  border-radius: 10px;
+  width: 60%;
+  height: 52%;
+  padding: 20px;
+  margin-top:40px;
+  text-align: justify;
+}
+
+.bg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+}
+.about_us_bg{
+  background-image: url("https://displays.riotgames.com/static/content-original-championillustrations-group-slashes-9828cf13cecf88fb9f21ee17afa6874e.jpg");
+}
+.about_h2{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2rem;
+}
+.about_h1{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.2rem;
+}
+.about_p{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+}
+.credits_layout{
+  width:1130px;
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.credits{
+  width: 100%;
+  padding: 78px 0px;
+  background-color: gray;
+}
+.about img{
+  background-color: white;
+  height: 420px;
+  width: 420px;
+}
+.credits_text{
+  width: 550px;
+}
 
 @tailwind base;
 @tailwind components;
