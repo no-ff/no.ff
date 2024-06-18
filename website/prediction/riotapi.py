@@ -1,7 +1,6 @@
 import requests
 import json
 from prediction.roleprediction import predict_role
-from apiKey import API_KEY
 
 Champ_data = {
     "266": "Aatrox",
@@ -172,6 +171,7 @@ Champ_data = {
     "142": "Zoe",
     "143": "Zyra"
 }
+API_KEY = 'RGAPI-eedfcc15-9a25-4b68-8f71-7cc6b7aa32af'
 
 
 def id_to_live_match_comp(GameID: str, Tagline: str) -> list[str]:

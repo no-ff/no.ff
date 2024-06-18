@@ -5,6 +5,7 @@ from displayStats.models import Accounts
 def get_puuid(gamename, tag, key):
     player = requests.get(f'https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{gamename}/{tag}?api_key={key}')
     player = player.json()
+    print("please: ", player)
     return player['puuid']
 
 
@@ -15,6 +16,8 @@ def get_summ_id(puuid, key):
 
 
 def get_player_data(summ_id, key):
+    #list of match ids
+    # rank, wr, role, champs, total games, icon, 
     player_data = {}
     summ_data = requests.get(f'https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/{summ_id}?api_key={key}').json()
     x=0
@@ -23,8 +26,10 @@ def get_player_data(summ_id, key):
         if types['queueType'] == 'RANKED_SOLO_5x5':
             break
         x+=1
+
     player_data['rank'] = [(summ_data[int(x)])['tier'], (summ_data[int(x)])['rank'], (summ_data[int(x)])['leaguePoints']]
     player_data['wr'] = [summ_data[x]['wins'], summ_data[x]['losses']]
+
     return player_data
 
 
@@ -49,9 +54,11 @@ def write_player_data(api_key, name, tagline):
     sum_id = (get_summ_id(puuid, api_key))
     print("sum_id:" + sum_id['sumId'])
     play = (get_player_data(sum_id['sumId'], api_key))
+    print(sum_id)
+    print(play)
     play.update(sum_id)
+    print(play)
     riotid = name + "#" + tagline
-    print(riotid)
     player_data = Accounts()
     player_data.riotID = riotid
     player_data.summonerName = play['sumId']

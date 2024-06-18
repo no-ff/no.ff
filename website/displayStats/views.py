@@ -66,8 +66,6 @@ def show_more_matches(request):
 
 
 """HELPER FUNCTIONS"""
-
-
 def update_past_matches(puuid):
     start = 0
     amount = 100
