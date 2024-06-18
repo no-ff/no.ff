@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
 import Match from './Match';
-import Items from './Accessories';
 import Accessories from './Accessories';
 
 
@@ -15,7 +14,6 @@ function MatchOuter(props) {
     const handleClick = () => {
         setShowMore(!showMore);
     }
-    console.log(playerData)
   return (
     <div>
       <div className={playerData.win ? 'match-block bg-gradient-to-r from-[#005A82] to-[#091428] rounded-md' : 'match-block bg-gradient-to-r from-[#450a0a] to-[#7f1d1d] bg-opacity-30 rounded-md'} >
