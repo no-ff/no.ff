@@ -4,7 +4,8 @@ from displayStats.models import Accounts
 
 def get_puuid(gamename, tag, key):
     player = requests.get(f'https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{gamename}/{tag}?api_key={key}')
-    player = json.loads(player.text)
+    player = player.json()
+    print("please: ", player)
     return player['puuid']
 
 

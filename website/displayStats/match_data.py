@@ -71,6 +71,7 @@ def decode_sums(sumId):
 def get_match_player_data(player_json, game_length):
     """For each player, need sums, items, kda, cs (cs per m), runes, rank, champ, wards damage, player name, """
     player_data = {}
+    print(player_json)
     player_data['riotId'] = player_json['riotIdGameName'] + "#" + player_json['riotIdTagline'] 
     player_data['champion'] = player_json['championName']
     player_data['kda'] = f"{player_json['kills']}/{player_json['deaths']}/{player_json['assists']}"
@@ -206,6 +207,9 @@ def convert_match_to_player_data(match_id, key):
     # game_mode = match_data['info']['queueType']
     player_data = []
     kills = 0
+    print("")
+    print(players)
+    print("")
     for player in players:
         player_data.append(get_match_player_data(player, game_length))
         kills += player['kills']

@@ -4,13 +4,14 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from displayStats.models import Accounts, Matches
 from rest_framework import status
+from displayStats.player_data import get_match_list
 
 
 from . import match_data as md
 from . import player_data as pd
 import time
 
-API_KEY = 'RGAPI-e8c89080-5871-4e06-96fd-a77bc26f97e5' 
+API_KEY = 'RGAPI-eedfcc15-9a25-4b68-8f71-7cc6b7aa32af' 
 @api_view(['POST'])
 def load_new_match_data(request):
     # replace with how we get the ID
@@ -75,25 +76,12 @@ def show_more_matches(request):
 def update_past_matches(puuid):
     start = 0
     amount = 100
-    database_matches = Accounts.objects.get(puuid=puuid).past_matches
-    while True:
-        req = f"https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?start={start}&count={amount}&api_key={API_KEY}"
-        matches = requests.get(req)
-        # handle error (assume it is handled for now)
-        matches = matches.json()
-        if len(matches) == 0:
-            break
-
-        for match in matches:
-            if match in database_matches:
-                break
-            database_matches.insert(0, match)
-            if not Matches.objects.filter(match_id=match).exists():
-                md.insert_matchdata_to_database(match, API_KEY)
-        start += amount
-    d = Accounts.objects.get(puuid=puuid)
-    d.past_matches = database_matches.sort(reverse=True)
-    d.save()
+    database_row = Accounts.objects.get(puuid=puuid)
+    database_matches = database_row.past_matches
+    newer_matches = get_match_list(puuid, API_KEY)
+    new = sorted(list(set(database_matches + newer_matches)))
+    database_row.past_matches = new
+    database_row.save()
 
     print(f"Successfully updated the past matches for the player {puuid}")
 
