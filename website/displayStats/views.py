@@ -16,15 +16,23 @@ def load_new_match_data(request):
     form_data = request.data
     gameName = form_data.get('gameName')
     tagline = form_data.get('tagline')
+    data = load_matches_from_database(0, gameName+"#"+tagline)
+    return data
+
+#should be used for the update button
+@api_view(['POST'])
+def update_button(request):
+    # replace with how we get the ID
+    form_data = request.data
+    gameName = form_data.get('gameName')
+    tagline = form_data.get('tagline')
     puuid = md.get_puuid(gameName, tagline, API_KEY)
     print("Username:", gameName+"#"+tagline)
     print("Puuid:", puuid)
     update_past_matches(puuid)
     print("Successfully updated a user's data")
     data = load_matches_from_database(0, gameName+"#"+tagline)
-    return data
-
-
+    return data 
 @api_view(['POST'])
 def load_old_match_data(request):
     # need to count how many matches are loaded before loading more, then find the next 20 to load from the db

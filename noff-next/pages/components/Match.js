@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from '@/styles/components/Statistics.module.css'
-
+import { useRouter } from 'next/router'
 function Match(props) {
 
 
@@ -14,8 +14,12 @@ function Match(props) {
    }, [props]);
 */
 
+  const router = useRouter();
+  const toNewPlayer = (riotId) => () => {
+    var parseName = riotId.replace("#", "%23")
+    router.push(parseName);
 
-
+  }
 
   const team1 = props.match['match'].slice(0, 5);
   const team2 = props.match['match'].slice(5, 10);
@@ -39,7 +43,7 @@ function Match(props) {
         {team.map((player, index) => (
           <tr key={index}>
             <td><img src={'https://ddragon.leagueoflegends.com/cdn/14.11.1/img/champion/'+player.champion+'.png'}></img></td>
-            <td title={player.riotId}>{player.riotId}</td>
+            <td title={player.riotId}> <button onClick={toNewPlayer(player.riotId)}>{player.riotId}</button></td>
             <td>{player.kda}</td>
             <td>{player.cs}</td>
             <td>{player.cs_per_min}</td>
