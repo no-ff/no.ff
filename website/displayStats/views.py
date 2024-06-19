@@ -8,7 +8,7 @@ from rest_framework import status
 from . import match_data as md
 from . import player_data as pd
 
-API_KEY = 'RGAPI-eedfcc15-9a25-4b68-8f71-7cc6b7aa32af'
+API_KEY = 'RGAPI-fdcc63ca-062b-4a60-a54e-56bc02f4a7cb'
 
 @api_view(['POST'])
 def load_new_match_data(request):

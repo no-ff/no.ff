@@ -7,6 +7,27 @@ import styles from '@/styles/components/Statistics.module.css'
 function Account(props) {
   props.state['rank'][0] = props.state['rank'][0].charAt(0).toUpperCase() + props.state['rank'][0].slice(1).toLowerCase();
 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [remainingTime, setRemainingTime] = useState(0);
+
+  const handleClick = () => {
+    //props.update()
+    setIsButtonDisabled(true);
+    setRemainingTime(120);
+
+    const interval = setInterval(() => {
+      setRemainingTime(prevTime => prevTime - 1);
+    }, 1000);
+
+    setTimeout(() => {
+      clearInterval(interval);
+      setIsButtonDisabled(false);
+      setRemainingTime(0);
+    }, 120000);
+  };
+
+
+  
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '40px' }}>
       <div className={styles.profile}>
@@ -19,7 +40,11 @@ function Account(props) {
             </div>
           </div>
           <div className={styles['profile-stats']}>
-            <button>Update</button>
+          <div>
+            <button disabled={isButtonDisabled} onClick={handleClick} style={{ backgroundColor: isButtonDisabled ? 'grey' : 'blue' }}>
+              {isButtonDisabled ? `Next update available in ${remainingTime} seconds` : 'Update'}
+            </button>
+          </div>
           </div>
         </div>
         <div className={styles['ranked-solo']}>

@@ -9,6 +9,7 @@ function Accessories(props) {
             var primaryPath = path;
         }
     }
+    console.log(first)
     const keystone = props.playerData['runes'][primaryPath][0].replace(/\s/g, '')
     var map ={'Domination': 7200, 'Whimsy': 7203, 'Precision': 7201, 'Resolve': 7204, 'Sorcery': 7202}
 
