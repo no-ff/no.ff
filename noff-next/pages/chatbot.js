@@ -7,7 +7,8 @@ const Chatbot = () => {
   const [inputText, setInputText] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState("");
-  const genAI = new GoogleGenerativeAI("AIzaSyAMgmz9UwYgipbjlYvTM-Djp5D4qo5UWgg");
+  # Use your own API key
+  const genAI = new GoogleGenerativeAI("");
 
   const handleInputChange = (event) => {
     setInputText(event.target.value);
