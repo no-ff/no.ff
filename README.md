@@ -15,5 +15,6 @@ python manage.py runserver
 To run the Nextjs server, execute: 
 ```sh
 cd noff-next
+npm install next
 npm run dev
 ```
