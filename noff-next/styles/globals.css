@@ -158,13 +158,13 @@ table td {
 
 .card{
   position: relative;
-  background-color: white;
+  background-color: #F5EDED;
   border-radius: 10px;
   width: 60%;
   height: 52%;
   padding: 20px;
   margin-top:40px;
-  text-align: justify;
+  text-align: center;
 }
 
 .bg{
@@ -176,33 +176,49 @@ table td {
 .about_us_bg{
   background-image: url("https://displays.riotgames.com/static/content-original-championillustrations-group-slashes-9828cf13cecf88fb9f21ee17afa6874e.jpg");
 }
+.about_h3{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2.5rem;
+  color:#F5EDED;
+}
 .about_h2{
   font-family: 'Courier New', Courier, monospace;
   font-size: 2rem;
+  color:#173B45;
 }
 .about_h1{
   font-family: 'Courier New', Courier, monospace;
   font-size: 1.2rem;
+  color:#173B45;
 }
 .about_p{
   font-family: 'Courier New', Courier, monospace;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  color:#173B45;
 }
 .credits_layout{
-  width:1130px;
+  width:1000px;
+  height: 180px;
   max-width: 95%;
   margin: 0 auto;
   padding: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   background-color: white;
   display: flex;
   align-items: center;
+  border-radius: 15px;
   justify-content: space-around;
 }
 .credits{
-  width: 100%;
-  padding: 78px 0px;
-  background-color: gray;
+  float:right;
+  width: 65%;
+  height: 500px;
+  padding: 50px 0px;
+  overflow-y:scroll;
+  background-color: #F5EDED;
+}
+.credits_section{
+  justify-content: space-around;
 }
 .about img{
   background-color: white;
@@ -210,8 +226,44 @@ table td {
   width: 420px;
 }
 .credits_text{
-  width: 550px;
+  border-radius: 10px;
+  width: 75%;
+  padding: 10px;
+  background-color: #E2DAD6;
 }
+.credits_title{
+  float:left;
+  width:35%;
+  height:500px;
+  background-color: #6482AD;
+  display: flex;
+  align-items: center;
+  padding: 50px;
+}
+.credits_title_card{
+  height: 220px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: #7FA1C3;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
+}
+
+
+.oscar{
+
+}
+.eddy{
+
+}
+
+
 
 @tailwind base;
 @tailwind components;
