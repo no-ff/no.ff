@@ -52,7 +52,7 @@ export default function Home() {
   return (
     <div>
       <div id='liveApp' className='flex items-center justify-center flex-col text-left h-screen'>
-        <div>
+        <div className="frame">
           <LiveApp />
         </div>
         <motion.button

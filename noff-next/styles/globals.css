@@ -39,8 +39,9 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  font-family: 'Courier New', Courier, monospace;
   background-color: #2f3134;
-  color: white;
+  color: black;
 }
 
 a {
@@ -70,6 +71,22 @@ a {
   to {
     width: var(--end-width, 100%);
   }
+}
+
+#liveApp{
+  background-image: url("https://steamuserimages-a.akamaihd.net/ugc/2010328424759555731/7167A3ECE235D7D7E9CDD5E866E9C556F20C22BD/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false");
+  background-position: center;
+  background-size:cover;
+
+}
+#manualApp{
+  background: linear-gradient(to top right,#14475c,#6b96be);
+}
+
+.frame{
+  background-color: #F5EDED;
+  padding: 25px;
+  border-radius: 10px;
 }
 
 table {
@@ -235,7 +252,7 @@ table td {
   float:left;
   width:35%;
   height:500px;
-  background-color: #6482AD;
+  background-image: linear-gradient(to top right,#14475c,#6b96be);
   display: flex;
   align-items: center;
   padding: 50px;
@@ -244,7 +261,7 @@ table td {
   height: 220px;
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  background-color: #7FA1C3;
+  background-color: #6b96be;
   max-width: 90%;
   margin: 0 auto;
   padding: 10px;
@@ -255,13 +272,6 @@ table td {
   justify-content: space-around;
 }
 
-
-.oscar{
-
-}
-.eddy{
-
-}
 
 
 

@@ -72,12 +72,12 @@ function ManualApp({ setIsManualAppShifted }) {
   };
 
   return (
-    <div className="App">
+    <div className="App frame">
       <div>
         <form autoComplete="off" onSubmit={handleSubmit}>
           <div className="flex space-x-20">
             <div className="w-1/2">
-              <h2 className="text-lg font-semibold mb-2">Team 1</h2>
+              <h2 className="text-lg font-semibold mb-2">TEAM 1</h2>
               <ManualSearchInput
                 label="Top:"
                 name="top1"
@@ -115,7 +115,7 @@ function ManualApp({ setIsManualAppShifted }) {
               />
             </div>
             <div className="w-1/2">
-              <h2 className="text-lg font-semibold mb-2">Team 2</h2>
+              <h2 className="text-lg font-semibold mb-2">TEAM 2</h2>
               <ManualSearchInput
                 label="Top:"
                 name="top2"
