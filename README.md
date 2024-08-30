@@ -5,7 +5,6 @@ Winrate prediction model and statistics lookup for the popular MOBA League of Le
 
 Unfortunately, due to numerous in-game changes and updates to the API, this project only works with data received before Patch 14.10.
 That being said, the Winrate prediction model and League Chatbot are still fully functional.
-## Running the Project
 # 📊 No.ff - League of Legends Statistical Analyzer
 
 No.ff is an advanced tool designed for League of Legends enthusiasts who want to dive deep into game data. With capabilities ranging from data analysis to AI-based predictions, No.ff offers a comprehensive suite of features for players and analysts alike.
